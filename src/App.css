@@ -1,42 +1,68 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  /* Cairo Font Weights */
+  --font-cairo: 'Cairo', sans-serif;
+  --font-cairo-light: 300;
+  --font-cairo-regular: 400;
+  --font-cairo-medium: 500;
+  --font-cairo-semibold: 600;
+  --font-cairo-bold: 700;
+  --font-cairo-extrabold: 800;
+  --font-cairo-black: 900;
+
+  /* Amiri Font Weights */
+  --font-amiri: 'Amiri', serif;
+  --font-amiri-regular: 400;
+  --font-amiri-bold: 700;
+  --font-amiri-extrabold: 800;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Ensuring full height of the body */
+html,
+body {
+  height: 100%;
+  font-family: var(--font-cairo);
+  font-weight: var(--font-cairo-regular);
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Prevent body overflow */
+body {
+  overflow-x: hidden;
+  background-color: #fff;
+  /* You can change this to your preferred color */
 }
 
-.card {
-  padding: 2em;
+h1 {
+  font-family: var(--font-cairo);
+  font-weight: var(--font-cairo-extrabold);
 }
 
-.read-the-docs {
-  color: #888;
+h2,
+h3 {
+  font-family: var(--font-cairo);
+  font-weight: var(--font-cairo-bold);
+}
+
+
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  /* Ensures links adopt the text color */
+}
+
+button {
+  cursor: pointer;
 }

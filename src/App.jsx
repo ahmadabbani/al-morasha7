@@ -1,35 +1,78 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./components/Profile";
+import Header from "./components/Header";
+import AdminDashboard from "./components/AdminDashboard";
+import AdminRegister from "./components/AdminRegister";
+import AdminLogin from "./components/AdminLogin";
+import Admin from "./components/Admin";
+import ProtectedAdmin from "./components/ProtectedAdmin";
+import Home from "./components/Home";
+import VerifyEmail from "./components/VerifyEmail";
+import AdminBlogDashboard from "./components/AdminBlogDashboard";
+import ResendVerification from "./components/ResendVerification";
 function App() {
-  const [count, setCount] = useState(0)
-
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      {!isAdminRoute && <Header />}
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        {/* <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/verify" element={<VerifyEmail />} /> */}
+
+        {/* Protected Routes */}
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        {/* Admin Routes */}
+        <Route path="/admin" element={<Admin />}>
+          <Route
+            index
+            element={
+              <ProtectedAdmin>
+                <AdminDashboard />
+              </ProtectedAdmin>
+            }
+          />
+          <Route
+            path="admin-blog-dashboard"
+            element={
+              <ProtectedAdmin>
+                <AdminBlogDashboard />
+              </ProtectedAdmin>
+            }
+          />
+          {/* <Route path="admin-register" element={<AdminRegister />} />
+          <Route path="admin-login" element={<AdminLogin />} /> */}
+        </Route>
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,199 @@
+.about-wrapper {
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    background-image: url('/images/guide.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    direction: rtl;
+}
+
+.about-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.about-container {
+    position: relative;
+    z-index: 1;
+}
+
+.about-main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.about-features {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+}
+
+.about-box {
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.about-box:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.about-icon-wrapper {
+    display: inline-flex;
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: #202d61;
+    margin-bottom: 1rem;
+    width: fit-content;
+    /* Add this */
+    align-items: center;
+    /* Add this for better icon centering */
+    justify-content: center;
+    /* Add this for better icon centering */
+}
+
+.about-icon-wrapper-purple {
+    background-color: #202d61;
+}
+
+.about-icon-wrapper-green {
+    background-color: #202d61;
+}
+
+.about-icon {
+    width: 2rem;
+    height: 2rem;
+    color: #FFFFFF;
+}
+
+.about-icon-wrapper-purple .about-icon {
+    color: #FFFFFF;
+}
+
+.about-icon-wrapper-green .about-icon {
+    color: #FFFFFF;
+}
+
+.about-box-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #202d61;
+    margin-bottom: 1rem;
+}
+
+.about-box-text {
+    color: #fdfdfd;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    font-size: 1.025rem;
+}
+
+.about-additional {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 4rem;
+}
+
+.about-additional-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #202d61;
+    margin-bottom: 1.5rem;
+}
+
+.about-additional-content {
+    line-height: 1.6;
+    letter-spacing: 1px;
+    font-size: 1.05rem;
+}
+
+.about-additional-content p {
+    margin-bottom: 0.75rem;
+    color: #fdfdfd;
+}
+
+.about-cta {
+    text-align: center;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.5), rgb(212, 33, 39));
+    backdrop-filter: blur(6px);
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.about-cta-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.about-cta-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.about-cta-link {
+    color: inherit;
+    /* keeps the same color as parent text */
+    text-decoration: underline;
+    /* adds the line under the text */
+    text-underline-offset: 10px;
+    font-weight: inherit;
+    /* keeps the same font weight */
+    display: inline-block;
+    font-weight: 900;
+    transition: transform 0.3s ease;
+}
+
+.about-cta-link:hover {
+    color: inherit;
+    /* maintains color on hover */
+    transform: translateY(-2px);
+    /* subtle hover effect */
+}
+
+.check-icon {
+    margin-left: 8px;
+    color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+    .about-features {
+        margin-bottom: 2rem;
+    }
+
+    .about-wrapper {
+        padding: 2rem 1rem;
+    }
+
+    .about-main-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .about-box {
+        margin-bottom: 1.5rem;
+    }
+
+    .about-additional {
+        margin-bottom: 3rem;
+    }
+}

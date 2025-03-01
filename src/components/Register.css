@@ -1,0 +1,186 @@
+/* General Reset and Container Styling */
+.register-container {
+    padding: 80px 0 40px 0;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    direction: rtl;
+    /* Right-to-left for Arabic */
+
+}
+
+/* Heading Styling */
+.register-heading {
+    color: #202d61;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* Form Styling */
+.register-form {
+    background: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(44, 62, 80, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Input Group Spacing */
+.register-input-group {
+    position: relative;
+}
+
+/* Label Styling */
+.register-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #202d61;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Icon Styling */
+.icon {
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* Smooth transition for color and movement */
+}
+
+/* Input and Select Styling */
+.form-input,
+.register-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Remove Default Input Behaviors */
+.form-input:focus,
+.register-select:focus {
+    outline: none;
+    border-color: #d42127;
+    box-shadow: 0 0 8px rgba(212, 33, 39, 0.2);
+}
+
+/* Placeholder Styling */
+.form-input::placeholder {
+    color: #aaa;
+
+}
+
+/* Select Styling */
+.register-select {
+    appearance: none;
+    /* Remove default arrow */
+    padding-right: 30px;
+    /* Space for custom arrow if added later */
+}
+
+/* Submit Button Styling */
+.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #d42127;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:disabled {
+    cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #b31b21;
+    transform: translateY(-2px);
+}
+
+.submit-btn:hover:not(:disabled) .icon {
+    transform: translate(5px, -2.5px);
+    /* Icon moves right and up on hover */
+}
+
+.submit-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Spinner Styling (Simple Example) */
+.register-spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #fff;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Price Styling */
+.register-price {
+    text-align: center;
+    color: #d42127;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+/* Legal Statement Styling */
+.register-legal {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Complementary Colors and Hover Effects */
+.form-input:hover,
+.register-select:hover {
+    border-color: #a0a0a0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .register-heading {
+        font-size: 2rem;
+    }
+
+    .register-label {
+        font-size: 1rem;
+    }
+
+    .submit-btn {
+        font-size: 1.1rem;
+    }
+}

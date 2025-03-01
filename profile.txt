@@ -1,0 +1,41 @@
+import { useAuth } from "../components/AuthContext";
+import BookingCalendar from "./BookingCalendar";
+import LogoutButton from "./LogoutButton";
+import "./Profile.css";
+const Profile = () => {
+  const { user } = useAuth();
+  if (!user) return <p>جار التحميل...</p>;
+  return (
+    <div className="user-profile-container">
+      <header className="user-profile-header">
+        <h1 className="user-profile-greeting">مرحبا {user?.name}</h1>
+        <LogoutButton />
+      </header>
+
+      {user?.isPayed ? (
+        <div className="user-profile-content">
+          <h2 className="user-profile-content-title">محتوى مدفوع</h2>
+          <p className="user-profile-content-description">
+            استمتع بالمحتوى الحصري الذي تم إعداده خصيصاً لك.
+          </p>
+        </div>
+      ) : (
+        <div className="user-profile-content">
+          <h2 className="user-profile-content-title">محتوى مقفل</h2>
+          <p className="user-profile-content-description">
+            بمجرد الدفع، ستتمكن من الوصول إلى المحتوى هنا.
+          </p>
+        </div>
+      )}
+
+      <div className="user-profile-general-info">
+        <p className="user-profile-info-text">معلومات عامة للجميع</p>
+        <BookingCalendar
+          userId={user?.id}
+          className="user-profile-booking-calendar"
+        />
+      </div>
+    </div>
+  );
+};
+export default Profile;

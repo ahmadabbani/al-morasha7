@@ -1,0 +1,144 @@
+/* General Reset and Container Styling */
+.contact-us {
+    padding: 40px 0;
+    direction: rtl;
+    /* Right-to-left for Arabic */
+}
+
+/* Title Styling */
+.contact-title {
+    color: #202d61;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* Form Styling */
+.contact-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Label Styling */
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #202d61;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Icon Styling */
+.icon {
+    color: #FFFFFF;
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* Add transform transition */
+}
+
+/* Input Styling */
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Remove Default Input Behaviors */
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #d42127;
+    box-shadow: 0 0 8px rgba(212, 33, 39, 0.2);
+}
+
+/* Placeholder Styling */
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #aaa;
+}
+
+/* Textarea Specific Styling */
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Submit Button Styling */
+.contactus-submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 50%;
+    margin: auto;
+    padding: 12px 20px;
+    background-color: #d42127;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.contactus-submit-btn:hover {
+    background-color: #b31b21;
+    transform: translateY(-2px);
+}
+
+.contactus-submit-btn:hover .icon {
+    transform: translate(5px, -2.5px);
+}
+
+.contactus-submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Complementary Colors and Hover Effects */
+.form-input:hover,
+.form-textarea:hover {
+    border-color: #a0a0a0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .contact-title {
+        font-size: 2rem;
+    }
+
+    .form-label {
+        font-size: 1rem;
+    }
+
+    .contactus-submit-btn {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 620px) {
+    .contact-form {
+        max-width: 450px;
+    }
+}
+
+@media (max-width: 490px) {
+    .contact-form {
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 375px) {
+    .contact-form {
+        max-width: 290px;
+    }
+}

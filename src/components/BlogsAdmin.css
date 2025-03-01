@@ -1,0 +1,150 @@
+.blogs-admin {
+    padding: 40px 0;
+    direction: rtl;
+    font-family: 'Arial', sans-serif;
+}
+
+.blogs-admin-title {
+    color: #202d61;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.blogs-admin-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.blogs-admin-label {
+    display: block;
+    color: #202d61;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.blogs-admin-input,
+.blogs-admin-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blogs-admin-input:focus,
+.blogs-admin-textarea:focus {
+    outline: none;
+    border-color: #d42127;
+    box-shadow: 0 0 6px rgba(212, 33, 39, 0.2);
+}
+
+.blogs-admin-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.blogs-admin-dropzone {
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.blogs-admin-upload-area {
+    cursor: pointer;
+}
+
+.blogs-admin-upload-area:hover {
+    border-color: #d42127;
+}
+
+.blogs-admin-upload-icon {
+    color: #d42127;
+    margin-bottom: 10px;
+}
+
+.blogs-admin-upload-area p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.blogs-admin-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.blogs-admin-preview-img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+}
+
+.blogs-admin-remove-btn {
+    padding: 6px 12px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.blogs-admin-remove-btn:hover {
+    background-color: #c82333;
+}
+
+.blogs-admin-submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    background-color: #0b8d46;
+    color: #FFFFFF;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.blogs-admin-submit-btn:hover:not(:disabled) {
+    background-color: #097038;
+    transform: translateY(-2px);
+}
+
+.blogs-admin-submit-btn:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+.blogs-admin-spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #fff;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,88 @@
+.resend-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 45px;
+    background-color: #FFFFFF;
+    color: #202d61;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.resend-title {
+    margin-bottom: 15px;
+}
+
+.resend-success {
+    color: #0b8d46;
+}
+
+.resend-message {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.resend-form-group {
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.resend-label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.resend-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d42127;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+}
+
+.resend-input:focus {
+    border-color: #0b8d46;
+    box-shadow: 0 0 5px rgba(11, 141, 70, 0.5);
+}
+
+.resend-submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #0b8d46;
+    color: #ffffff;
+    transition: background 0.3s ease;
+}
+
+.resend-submit-btn:hover {
+    background-color: #0a7a3d;
+}
+
+.resend-submit-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.resend-close-btn,
+.resend-cancel-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #d42127;
+    color: #ffffff;
+    transition: background 0.3s ease;
+}
+
+.resend-close-btn:hover,
+.resend-cancel-btn:hover {
+    background-color: #b71d22;
+}

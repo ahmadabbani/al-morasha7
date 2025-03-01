@@ -1,0 +1,317 @@
+/*User Profile */
+/* UserProfile.css */
+:root {
+    --lebanese-red: #d42127;
+    --lebanese-light-red: #db3036;
+    --light-gray: #f8f9fa;
+    --medium-gray: #e9ecef;
+}
+
+.user-profile-container {
+    padding: 2.5rem 0;
+    margin-top: 70px;
+    /* Same as header height */
+}
+
+/* Welcome Widget */
+.user-profile-welcome-widget {
+    background: linear-gradient(135deg, var(--lebanese-red), var(--lebanese-light-red));
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-welcome-widget .card-body {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+.user-profile-avatar-icon {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem;
+    border-radius: 50%;
+}
+
+/* Info Widget */
+.user-profile-info-widget {
+    background: white;
+    border: 1px solid var(--medium-gray);
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.user-profile-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.user-profile-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: var(--light-gray);
+    border-radius: 0.5rem;
+}
+
+.user-profile-status.confirmed svg {
+    color: #155724;
+}
+
+.user-profile-status.pending svg {
+    color: #856404;
+}
+
+.user-profile-no-booking svg {
+    color: #6c757d;
+}
+
+.user-profile-booking svg {
+    color: var(--lebanese-red);
+}
+
+.guide-title {
+    color: #202d61;
+}
+
+/* Booking Status */
+.user-profile-booking {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-profile-booking.date-passed {
+    color: var(--lebanese-red);
+}
+
+.user-profile-date-status {
+    background: var(--lebanese-red);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.user-profile-no-booking {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6c757d;
+}
+
+/* Status Indicators */
+.user-profile-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+.user-profile-status.confirmed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.user-profile-status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* Content Section Cards */
+.user-profile-payment-section,
+.user-profile-public-section {
+    border-radius: 1rem;
+    border: 1px solid var(--medium-gray);
+    height: 100%;
+}
+
+.user-profile-payment-section h3,
+h4,
+p {
+    color: #202d61;
+}
+
+.user-profile-public-section h3,
+h4,
+p,
+span {
+    color: #202d61;
+}
+
+.user-profile-placeholder-content {
+    text-align: center;
+    padding: 2rem;
+}
+
+.user-profile-unpaid-notice {
+    text-align: center;
+    padding: 2rem;
+    color: var(--lebanese-red);
+}
+
+.user-profile-btn {
+    background: var(--lebanese-red);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.user-profile-btn:hover {
+    background: var(--lebanese-light-red);
+}
+
+/* Resource Items */
+.user-profile-resources {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.user-profile-resource-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: var(--light-gray);
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.user-profile-resource-item:hover {
+    background: var(--medium-gray);
+}
+
+/* Calendar Wrapper */
+.user-profile-calendar-wrapper {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 1rem;
+    border: 1px solid var(--medium-gray);
+}
+
+/* Calendar DatePicker */
+.profile-container {
+    position: relative;
+    text-align: center;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+/* DatePicker Styles */
+.profile-datepicker {
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    width: fit-content;
+}
+
+.profile-datepicker .mantine-DatePicker-day {
+    font-weight: bold;
+    color: black;
+    transition: background-color 0.3s;
+}
+
+.profile-datepicker .mantine-DatePicker-day.mantine-DatePicker-daySelected:hover {
+    background-color: #bae7ff !important;
+}
+
+.profile-datepicker .mantine-DatePicker-day[data-disabled="true"] {
+    font-weight: normal !important;
+
+}
+
+
+/* Time Slots Grid */
+.profile-time-grid {
+    gap: 8px;
+    width: 50%;
+    margin: auto;
+}
+
+.profile-time-col {
+    padding: 4px;
+}
+
+/* Time Slot Styles */
+.profile-time-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+}
+
+.profile-time-slot:hover {
+    background-color: #e6f7ff;
+    border-color: #91d5ff;
+}
+
+.profile-time-slot-disabled {
+    background-color: #f5f5f5;
+    color: gray;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.profile-time-slot-disabled:hover {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+.profile-time-slot-selected {
+    background-color: #bae7ff;
+    border-color: #1890ff;
+}
+
+.profile-time-slot-admin-disabled {
+    background-color: #f8afba !important;
+    /* Light red for admin-disabled slots */
+}
+
+.profile-time-slot-admin {
+    cursor: pointer !important;
+}
+
+.profile-time-slot-admin.profile-time-slot-disabled {
+    opacity: 0.7;
+    cursor: pointer !important;
+}
+
+.profile-time-slot-admin:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
+/* Button Styles */
+.profile-confirm-button {
+    background-color: #1890ff;
+    border: none;
+    border-radius: 4px;
+
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.profile-confirm-button:hover {
+    background-color: #40a9ff;
+}
