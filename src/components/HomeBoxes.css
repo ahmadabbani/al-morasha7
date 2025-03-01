@@ -17,6 +17,7 @@
 
 .home-box-item {
     background-color: #d42127;
+    backdrop-filter: blur(10px);
     padding: 2rem 1.5rem;
     text-align: center;
     transition: all 0.3s ease;

@@ -69,7 +69,7 @@
 
 @media (max-width: 768px) {
     .home-container {
-        height: 70vh;
+        height: 90vh;
     }
 
     .home-content {
@@ -92,7 +92,7 @@
 
 @media (max-width: 480px) {
     .home-container {
-        height: 55vh;
+        height: 65vh;
     }
 
     .home-content {
@@ -114,4 +114,14 @@
     }
 }
 
-@media (max-width: 375px) {}
+@media (max-width: 440px) {
+    .home-container {
+        height: 70vh;
+    }
+}
+
+@media (max-width: 375px) {
+    .home-container {
+        height: 75vh;
+    }
+}

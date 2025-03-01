@@ -1,7 +1,7 @@
 .about-wrapper {
     min-height: 100vh;
     padding: 4rem 2rem;
-    background-image: url('/images/guide.jpg');
+    background-image: url('/images/guide2.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -12,7 +12,7 @@
 .about-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .about-container {
