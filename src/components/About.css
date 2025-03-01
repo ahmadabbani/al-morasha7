@@ -24,6 +24,7 @@
     font-size: 2.5rem;
     font-weight: 700;
     color: #ffffff;
+    line-height: 1.4;
     text-align: center;
     margin-bottom: 4rem;
 }
@@ -113,6 +114,7 @@
 .about-additional-title {
     font-size: 1.5rem;
     font-weight: 700;
+    line-height: 1.4;
     color: #202d61;
     margin-bottom: 1.5rem;
 }
