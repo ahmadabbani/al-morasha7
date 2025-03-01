@@ -37,7 +37,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API_URL}/users/login`,
+        `${import.meta.env.VITE_REACT_APP_API_URL}/users/auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

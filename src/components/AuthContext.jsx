@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
     const fetchUser = async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_REACT_APP_API_URL}/users/me`,
+          `${import.meta.env.VITE_REACT_APP_API_URL}/users/auth/me`,
           {
             credentials: "include",
           }

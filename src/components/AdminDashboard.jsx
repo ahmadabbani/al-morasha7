@@ -89,7 +89,9 @@ const AdminDashboard = () => {
   const fetchUsers = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API_URL}/admin/acceptSession`,
+        `${
+          import.meta.env.VITE_REACT_APP_API_URL
+        }/admin/adminAction/acceptSession`,
         {
           credentials: "include",
         }
@@ -121,7 +123,9 @@ const AdminDashboard = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API_URL}/admin/acceptSession`,
+        `${
+          import.meta.env.VITE_REACT_APP_API_URL
+        }/admin/adminAction/acceptSession`,
         {
           method: "PUT",
           headers: {
@@ -159,7 +163,9 @@ const AdminDashboard = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API_URL}/admin/rejectSession`,
+        `${
+          import.meta.env.VITE_REACT_APP_API_URL
+        }/admin/adminAction/rejectSession`,
         {
           method: "PUT",
           headers: {
@@ -200,7 +206,7 @@ const AdminDashboard = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API_URL}/admin/isPayed`,
+        `${import.meta.env.VITE_REACT_APP_API_URL}/admin/adminAction/isPayed`,
         {
           method: "PUT",
           headers: {

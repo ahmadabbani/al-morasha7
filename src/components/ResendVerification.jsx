@@ -19,7 +19,9 @@ const ResendVerification = ({ email = "", onClose }) => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API_URL}/users/resend-verification`,
+        `${
+          import.meta.env.VITE_REACT_APP_API_URL
+        }/users/auth/resend-verification`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

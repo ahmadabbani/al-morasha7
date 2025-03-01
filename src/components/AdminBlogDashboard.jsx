@@ -42,7 +42,9 @@ const AdminBlogDashboard = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API_URL}/admin/createBlog`,
+        `${
+          import.meta.env.VITE_REACT_APP_API_URL
+        }/admin/adminAction/createBlog`,
         {
           method: "POST",
           body: blogData, // FormData handles multipart/form-data automatically

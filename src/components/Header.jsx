@@ -38,7 +38,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API_URL}/users/logout`,
+        `${import.meta.env.VITE_REACT_APP_API_URL}/users/auth/logout`,
         {
           method: "POST",
           credentials: "include",

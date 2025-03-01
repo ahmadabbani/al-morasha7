@@ -11,7 +11,7 @@ const Blogs = () => {
     const fetchBlogs = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_APP_API_URL}/admin/blogs`
+          `${import.meta.env.VITE_REACT_APP_API_URL}/admin/adminAction/blogs`
         );
         const data = await response.json();
         if (!response.ok)

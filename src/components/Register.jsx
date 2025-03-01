@@ -94,7 +94,7 @@ const Register = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API_URL}/users/register`,
+        `${import.meta.env.VITE_REACT_APP_API_URL}/users/auth/register`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
