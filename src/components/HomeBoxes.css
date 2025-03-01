@@ -95,10 +95,3 @@
         height: 65% !important;
     }
 }
-
-@media (max-width: 375px) {
-    .home-box-container {
-        margin-top: 0px;
-        padding-top: 2rem;
-    }
-}
