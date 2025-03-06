@@ -26,7 +26,7 @@ export default function BookingCalendar({
   userId = "",
   updateUsersList = () => {},
 }) {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const isAdmin = user?.isAdmin;
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -123,7 +123,12 @@ export default function BookingCalendar({
       if (!response.ok) {
         throw new Error(data.error);
       }
-
+      // Update user state with session_date and session_time (matching Profile usage)
+      setUser((prevUser) => ({
+        ...prevUser,
+        session_date: bookingDate, // Use underscore to match user.session_date
+        session_time: bookingTime, // Use underscore to match user.session_time
+      }));
       toast.success("تم حجز الموعد بنجاح");
 
       // Reset selection

@@ -1,11 +1,10 @@
-import pool from "../utils/db.js";
-
+import pool from "../../utils/db.js"; // Adjusted path: one level up from auth/ to root
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 import dotenv from "dotenv";
 import crypto from "crypto";
-import { sendVerificationEmail } from "../utils/emailService.js";
+import { sendVerificationEmail } from "../../utils/emailService.js"; // Adjusted path: one level up
 
 dotenv.config();
 
@@ -15,7 +14,7 @@ const allowedOrigins = [
   "https://al-morasha7.vercel.app", // Production frontend URL
 ];
 
-// Error and success messages from all files
+// Error and success messages
 const errors = {
   METHOD_NOT_ALLOWED: "الطريقة غير مسموح بها",
   FIELDS_REQUIRED: "جميع الحقول مطلوبة",
@@ -40,6 +39,7 @@ const success = {
 export default async function handler(req, res) {
   console.log("CORS middleware running, req.url:", req.url);
   console.log("Origin:", req.headers.origin);
+  console.log("Dynamic endpoint:", req.query.endpoint);
 
   // STEP 1: Handle CORS first - Apply CORS headers
   const origin = req.headers.origin;
@@ -57,17 +57,19 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // STEP 3: Now handle the actual endpoints by HTTP method and URL path
+  // STEP 3: Now handle the actual endpoints by HTTP method and dynamic endpoint
 
   // Handle POST requests
   if (req.method === "POST") {
-    if (req.url.includes("/auth/login") || req.url.endsWith("/auth/login")) {
+    const endpoint = req.query.endpoint;
+
+    if (endpoint === "login") {
       // --- Login Logic ---
       const { emailOrPhone, password } = req.body;
 
       // Basic validation
       if (!emailOrPhone || !password) {
-        return res.status(400).json({ error: "جميع الحقول مطلوبة" });
+        return res.status(400).json({ error: errors.FIELDS_REQUIRED });
       }
 
       try {
@@ -78,7 +80,7 @@ export default async function handler(req, res) {
           const user = await client.query(
             `SELECT id, name, email, password, phone, status, district, role, "isAdmin", "isPayed", is_verified,
              session_date::date as session_date,
-                  to_char(session_time, 'HH24:MI') as session_time 
+             to_char(session_time, 'HH24:MI') as session_time 
            FROM users WHERE email = $1 OR phone = $1`,
             [emailOrPhone]
           );
@@ -158,10 +160,7 @@ export default async function handler(req, res) {
           details: error.message,
         });
       }
-    } else if (
-      req.url.includes("/auth/register") ||
-      req.url.endsWith("/auth/register")
-    ) {
+    } else if (endpoint === "register") {
       // --- Register Logic ---
       const { name, phone, email, district, role, password } = req.body;
 
@@ -243,10 +242,7 @@ export default async function handler(req, res) {
           details: error.message,
         });
       }
-    } else if (
-      req.url.includes("/auth/logout") ||
-      req.url.endsWith("/auth/logout")
-    ) {
+    } else if (endpoint === "logout") {
       // --- Logout Logic ---
       // Clear the token cookie
       res.setHeader(
@@ -261,10 +257,7 @@ export default async function handler(req, res) {
       );
 
       return res.status(200).json({ message: "تم تسجيل الخروج بنجاح" });
-    } else if (
-      req.url.includes("/auth/resend-verification") ||
-      req.url.endsWith("/auth/resend-verification")
-    ) {
+    } else if (endpoint === "resend-verification") {
       // --- Resend Verification Logic ---
       const { email } = req.body;
 
@@ -335,13 +328,15 @@ export default async function handler(req, res) {
         });
       }
     } else {
-      return res.status(405).json({ error: errors.METHOD_NOT_ALLOWED });
+      return res.status(404).json({ error: "Endpoint not found" });
     }
   }
 
   // Handle GET requests
   if (req.method === "GET") {
-    if (req.url.includes("/auth/me") || req.url.endsWith("/auth/me")) {
+    const endpoint = req.query.endpoint;
+
+    if (endpoint === "me") {
       // --- Me Logic ---
       const token = req.cookies.token;
 
@@ -369,15 +364,17 @@ export default async function handler(req, res) {
         return res.status(401).json({ error: "جلسة غير صالحة" });
       }
     } else {
-      return res.status(405).json({ error: errors.METHOD_NOT_ALLOWED });
+      return res.status(404).json({ error: "Endpoint not found" });
     }
   }
 
   // Handle PUT requests
   if (req.method === "PUT") {
-    if (req.url.includes("/auth/verify")) {
+    const endpoint = req.query.endpoint;
+
+    if (endpoint === "verify") {
       // --- Verify Logic ---
-      const token = req.query.token;
+      const token = req.query.token; // Note: this assumes token is passed as a query param (e.g., /auth/verify?token=xyz)
 
       if (!token) {
         return res.status(400).json({ error: errors.TOKEN_REQUIRED });
@@ -425,7 +422,7 @@ export default async function handler(req, res) {
         });
       }
     } else {
-      return res.status(405).json({ error: errors.METHOD_NOT_ALLOWED });
+      return res.status(404).json({ error: "Endpoint not found" });
     }
   }
 

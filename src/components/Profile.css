@@ -76,6 +76,7 @@
 
 .guide-title {
     color: #202d61;
+    text-align: center;
 }
 
 /* Booking Status */
@@ -126,11 +127,27 @@
 }
 
 /* Content Section Cards */
-.user-profile-payment-section,
+.user-profile-payment-section {
+    border-radius: 1rem;
+    border: 1px solid var(--medium-gray);
+    height: 100%;
+}
+
 .user-profile-public-section {
     border-radius: 1rem;
     border: 1px solid var(--medium-gray);
     height: 100%;
+    padding: 0;
+    /* Remove default padding from card itself */
+}
+
+.user-profile-public-image {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    /* Ensures the image fills the space while maintaining aspect ratio */
+    border-radius: 0.875rem;
+    /* Slightly less than 1rem to account for card border */
 }
 
 .user-profile-payment-section h3,
@@ -157,19 +174,81 @@ span {
     color: var(--lebanese-red);
 }
 
+.user-profile-unpaid-notice .user-profile-guide-price {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--lebanese-red);
+}
+
 .user-profile-btn {
     background: var(--lebanese-red);
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
-    margin-top: 1rem;
+
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .user-profile-btn:hover {
     background: var(--lebanese-light-red);
+}
+
+.user-profile-book-date-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    /* Space between text and arrow */
+    margin-top: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* Space above the button */
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: 1px solid #202d61;
+    /* Matches your color scheme */
+    border-radius: 0.5rem;
+    color: #202d61;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-profile-book-date-btn:hover {
+    background-color: #202d61;
+    color: white;
+}
+
+.user-profile-bookbtn-scroll {
+    color: #202d61;
+    transition: 0.3s ease;
+}
+
+.user-profile-book-date-btn:hover .user-profile-bookbtn-scroll {
+    color: white;
+}
+
+.user-profile-arrow-down {
+    animation: bounce 1.5s infinite;
+    /* Infinite bounce animation */
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        /* Starting and ending position */
+    }
+
+    50% {
+        transform: translateY(0.5rem);
+        /* Move down 0.5rem at midpoint */
+    }
 }
 
 /* Resource Items */
@@ -213,13 +292,16 @@ span {
 
 /* DatePicker Styles */
 .profile-datepicker {
+    display: inline-flex;
+    justify-content: center;
     border-radius: 25px;
     margin-left: auto;
     margin-right: auto;
     padding: 1rem;
     background-color: #fff;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-    width: fit-content;
+    max-width: 320px;
+    width: 320px;
 }
 
 .profile-datepicker .mantine-DatePicker-day {
@@ -304,14 +386,14 @@ span {
 
 /* Button Styles */
 .profile-confirm-button {
-    background-color: #1890ff;
-    border: none;
+    background-color: white;
+    border: 2px solid #202d61;
     border-radius: 4px;
-
     font-weight: bold;
-    transition: background-color 0.3s;
+    transition: transform 0.3s;
 }
 
 .profile-confirm-button:hover {
-    background-color: #40a9ff;
+    transform: translateY(-2px);
+    background-color: white;
 }

@@ -12,6 +12,7 @@ import {
   Clock,
   BookOpen,
   AlertCircle,
+  ArrowDown,
 } from "lucide-react";
 import dayjs from "dayjs";
 import { Card, Container, Row, Col } from "react-bootstrap";
@@ -32,7 +33,7 @@ const Profile = () => {
       <Card className="user-profile-welcome-widget mb-4">
         <Card.Body>
           <User size={43} className="user-profile-avatar-icon" />
-          <h2>Welcome, {user.name}</h2>
+          <h2> {user.name} ,مرحبًا</h2>
         </Card.Body>
       </Card>
 
@@ -73,14 +74,15 @@ const Profile = () => {
                   </span>
                   {checkDateStatus(user.session_date) && (
                     <span className="user-profile-date-status">
-                      date passed
+                      الوقت قد مضى
                     </span>
                   )}
+                  <span>الموعد المحجوز</span>
                 </>
               ) : (
                 <span className="user-profile-no-booking">
                   <Calendar size={22} color=" #202d61" strokeWidth={2} />
-                  User hasn't booked a date yet
+                  لم تقم بحجز موعد بعد
                 </span>
               )}
             </div>
@@ -90,18 +92,18 @@ const Profile = () => {
                 user.status ? (
                   <span className="user-profile-status confirmed">
                     <CheckCircle size={22} />
-                    Session Confirmed
+                    تم تأكيد الموعد
                   </span>
                 ) : (
                   <span className="user-profile-status pending">
                     <Clock size={22} />
-                    Waiting Confirmation
+                    تأكيد الموعد قيد الانتظار
                   </span>
                 )
               ) : (
                 <span className="user-profile-no-booking">
                   <Calendar size={22} color=" #202d61" strokeWidth={2} />
-                  Please book a session first
+                  الرجاء حجز موعد أولاً
                 </span>
               )}
             </div>
@@ -116,20 +118,39 @@ const Profile = () => {
             <Card.Body>
               {user.isPayed ? (
                 <>
-                  <h3 className="guide-title">Guide Book Access</h3>
+                  <h3 className="guide-title">الدليل الشامل</h3>
                   <div className="user-profile-placeholder-content">
-                    <BookOpen size={24} color=" #202d61" />
-                    <h4>Your Guide Book</h4>
-                    <p>Access your comprehensive guide and materials here.</p>
-                    <button className="user-profile-btn">Download Guide</button>
+                    <BookOpen size={24} color="#202d61" />
+                    <h4> الدليل الخاص بك</h4>
+                    <p>يمكنك الوصول إلى دليلك الشامل من هنا.</p>
+                    <button className="user-profile-btn">تنزيل الدليل</button>
                   </div>
                 </>
               ) : (
                 <div className="user-profile-unpaid-notice">
-                  <AlertCircle size={32} color=" #202d61" />
-                  <h3>Payment Required</h3>
-                  <p>Please complete your payment to access the guide book</p>
-                  <button className="user-profile-btn">Make Payment</button>
+                  <AlertCircle size={32} color="#202d61" />
+                  <h3>الدفع مطلوب</h3>
+                  <p>
+                    يرجى حجز موعد جلسة أولاً أدناه إذا لم تقم بحجزها بعد. وبعد
+                    قبول الجلسة وانتهائها، يمكنك الدفع هنا
+                    <span className="user-profile-guide-price">
+                      $السعر: 999
+                    </span>
+                  </p>
+                  <button className="user-profile-btn">إجراء الدفع</button>
+                  <button
+                    className="user-profile-book-date-btn"
+                    onClick={() =>
+                      document
+                        .querySelector(".user-profile-calendar-wrapper")
+                        .scrollIntoView({ behavior: "smooth" })
+                    }
+                  >
+                    <span className="user-profile-bookbtn-scroll">
+                      احجز موعدًا هنا
+                    </span>
+                    <ArrowDown size={18} className="user-profile-arrow-down" />
+                  </button>
                 </div>
               )}
             </Card.Body>
@@ -138,22 +159,12 @@ const Profile = () => {
 
         <Col md={6}>
           <Card className="user-profile-public-section h-100">
-            <Card.Body>
-              <h3 className="guide-title">Public Resources</h3>
-              <div className="user-profile-resources">
-                <div className="user-profile-resource-item">
-                  <BookOpen size={20} color=" #202d61" />
-                  <span>Getting Started Guide</span>
-                </div>
-                <div className="user-profile-resource-item">
-                  <BookOpen size={20} color=" #202d61" />
-                  <span>FAQ Document</span>
-                </div>
-                <div className="user-profile-resource-item">
-                  <BookOpen size={20} color=" #202d61" />
-                  <span>Community Guidelines</span>
-                </div>
-              </div>
+            <Card.Body className="p-2">
+              <img
+                src="/images/cover-book.png"
+                alt="Public Resource"
+                className="user-profile-public-image"
+              />
             </Card.Body>
           </Card>
         </Col>
