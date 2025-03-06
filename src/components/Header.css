@@ -69,6 +69,10 @@
     color: white;
 }
 
+.header-container:not(.header-scrolled):not(.header-not-home) .header-nav-links-open .header-nav-link {
+    color: #202d61;
+}
+
 /* Transparent header hamburger color */
 .header-container:not(.header-scrolled):not(.header-not-home) .header-hamburger {
     color: white;
@@ -106,6 +110,9 @@
     background-color: #d42127;
     color: white !important;
     border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.5rem 1.5rem;
     font-size: 1rem;
     border-radius: 4px;
@@ -140,6 +147,7 @@
 
     .header-nav {
         justify-content: space-between;
+
         /* Ensure logo stays left, hamburger right */
         flex-wrap: wrap;
         gap: 1rem;
@@ -147,7 +155,7 @@
     }
 
     .header-nav-links.header-nav-links-open .header-nav-link {
-        color: #202d61 !important;
+        color: #202d61;
         /* Blue color for links in mobile menu */
     }
 

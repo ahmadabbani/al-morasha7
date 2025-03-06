@@ -23,7 +23,7 @@ const VerifyEmail = () => {
         const response = await fetch(
           `${
             import.meta.env.VITE_REACT_APP_API_URL
-          }/users/auth/Verify?token=${token}`,
+          }/users/auth/verify?token=${token}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
