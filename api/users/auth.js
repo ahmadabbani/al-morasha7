@@ -12,7 +12,7 @@ dotenv.config();
 // Unified allowed origins for CORS
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  // "https://al-morasha7.vercel.app", // Production frontend URL
+  "https://al-morasha7.vercel.app", // Production frontend URL
 ];
 
 // Error and success messages from all files
