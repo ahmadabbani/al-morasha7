@@ -3,6 +3,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Link as ScrollLink } from "react-scroll";
 import { FaBars } from "react-icons/fa";
 import { useAuth } from "../components/AuthContext";
@@ -58,7 +59,10 @@ const Header = () => {
   };
 
   return (
-    <header
+    <motion.header
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: "linear" }}
       className={`header-container ${scrolled ? "header-scrolled" : ""} ${
         !isHome ? "header-not-home" : ""
       }`}
@@ -100,7 +104,7 @@ const Header = () => {
                 duration={0}
                 className="header-nav-link"
               >
-                من نحن
+                عن البرنامج
               </ScrollLink>
               <ScrollLink
                 to="contact"
@@ -110,40 +114,52 @@ const Header = () => {
                 className="header-nav-link"
                 onClick={() => setIsMenuOpen(false)}
               >
-                اتصل بنا
+                تواصل معنا
               </ScrollLink>
             </>
           )}
-          {/*<Link to="/register" className="header-nav-link" onClick={() => setIsMenuOpen(false)}>
-          تسجيل
-        </Link> */}
+          <LinkToExternal
+            to="/register"
+            className="header-nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            تسجيل جديد
+          </LinkToExternal>
           {/* Conditional links */}
-          {/* {!loading && (
-          <div className="header-auth-links">
-            {user ? (
-              <>
-                {!user.isAdmin && (
-                  <Link to="/profile" className="header-nav-link" onClick={() => setIsMenuOpen(false)}>
-                    حسابي
-                  </Link>
-                )}
-                <button
-                  onClick={() => {
+          {!loading && (
+            <div className="header-auth-links">
+              {user ? (
+                <>
+                  {!user.isAdmin && (
+                    <LinkToExternal
+                      to="/profile"
+                      className="header-nav-link"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      حسابي
+                    </LinkToExternal>
+                  )}
+                  <button
+                    onClick={() => {
                       handleLogout();
                       setIsMenuOpen(false);
                     }}
-                  className="header-nav-link header-logout-button"
+                    className="header-nav-link header-logout-button"
+                  >
+                    تسجيل الخروج
+                  </button>
+                </>
+              ) : (
+                <LinkToExternal
+                  to="/login"
+                  className="header-nav-link header-login-button"
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  تسجيل الخروج
-                </button>
-              </>
-            ) : (
-              <Link to="/login" className="header-nav-link header-login-button" onClick={() => setIsMenuOpen(false)}>
-                تسجيل الدخول
-              </Link>
-            )}
-          </div>
-        )} */}
+                  تسجيل الدخول
+                </LinkToExternal>
+              )}
+            </div>
+          )}
         </div>
         <LinkToExternal to="/" className="header-logo-container">
           <img
@@ -163,7 +179,7 @@ const Header = () => {
           <FaBars />
         </button>
       </nav>
-    </header>
+    </motion.header>
   );
 };
 

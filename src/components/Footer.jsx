@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   FaInstagram,
@@ -7,12 +7,23 @@ import {
   FaTiktok,
   FaWhatsapp,
 } from "react-icons/fa";
+import { motion, useInView } from "framer-motion";
+
 import { Link as ScrollLink } from "react-scroll";
 import "./Footer.css"; // Separate CSS file
 
 const Footer = () => {
+  const refFooter = useRef(null);
+  const inView7 = useInView(refFooter, { once: true });
+
   return (
-    <footer className="footer-container">
+    <motion.footer
+      ref={refFooter}
+      initial={{ y: 100, opacity: 0 }}
+      animate={inView7 ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
+      transition={{ duration: 0.8 }}
+      className="footer-container"
+    >
       <div className="container">
         <div className="row align-items-center">
           {/* Left - Logo */}
@@ -94,7 +105,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

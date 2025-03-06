@@ -34,6 +34,7 @@ const Login = () => {
       setLoading(false);
       return;
     }
+    const url = `${import.meta.env.VITE_REACT_APP_API_URL}/users/auth/login`;
 
     try {
       const response = await fetch(
@@ -45,6 +46,7 @@ const Login = () => {
           credentials: "include", // Include cookies in the request
         }
       );
+      console.log("Fetching from:", url);
 
       const data = await response.json();
 

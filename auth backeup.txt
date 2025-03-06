@@ -1,5 +1,4 @@
 import pool from "../utils/db.js";
-
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
@@ -40,9 +39,10 @@ const success = {
 export default async function handler(req, res) {
   console.log("CORS middleware running, req.url:", req.url);
   console.log("Origin:", req.headers.origin);
-
-  // STEP 1: Handle CORS first - Apply CORS headers
+  // Get the origin from the request
   const origin = req.headers.origin;
+
+  // Set CORS headers conditionally
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   } else {
@@ -52,16 +52,17 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // STEP 2: Handle preflight (OPTIONS) request before anything else
+  // Handle preflight (OPTIONS) request
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
 
-  // STEP 3: Now handle the actual endpoints by HTTP method and URL path
-
   // Handle POST requests
   if (req.method === "POST") {
-    if (req.url.includes("/auth/login") || req.url.endsWith("/auth/login")) {
+    if (
+      req.url.includes("/api/users/auth/login") ||
+      req.url.endsWith("/auth/login")
+    ) {
       // --- Login Logic ---
       const { emailOrPhone, password } = req.body;
 
@@ -158,10 +159,7 @@ export default async function handler(req, res) {
           details: error.message,
         });
       }
-    } else if (
-      req.url.includes("/auth/register") ||
-      req.url.endsWith("/auth/register")
-    ) {
+    } else if (req.url === "/api/users/auth/register") {
       // --- Register Logic ---
       const { name, phone, email, district, role, password } = req.body;
 
@@ -243,10 +241,7 @@ export default async function handler(req, res) {
           details: error.message,
         });
       }
-    } else if (
-      req.url.includes("/auth/logout") ||
-      req.url.endsWith("/auth/logout")
-    ) {
+    } else if (req.url === "/api/users/auth/logout") {
       // --- Logout Logic ---
       // Clear the token cookie
       res.setHeader(
@@ -261,10 +256,7 @@ export default async function handler(req, res) {
       );
 
       return res.status(200).json({ message: "تم تسجيل الخروج بنجاح" });
-    } else if (
-      req.url.includes("/auth/resend-verification") ||
-      req.url.endsWith("/auth/resend-verification")
-    ) {
+    } else if (req.url === "/api/users/auth/resend-verification") {
       // --- Resend Verification Logic ---
       const { email } = req.body;
 
@@ -341,7 +333,10 @@ export default async function handler(req, res) {
 
   // Handle GET requests
   if (req.method === "GET") {
-    if (req.url.includes("/auth/me") || req.url.endsWith("/auth/me")) {
+    if (
+      req.url.includes("/api/users/auth/me") ||
+      req.url.endsWith("/auth/me")
+    ) {
       // --- Me Logic ---
       const token = req.cookies.token;
 
@@ -375,7 +370,7 @@ export default async function handler(req, res) {
 
   // Handle PUT requests
   if (req.method === "PUT") {
-    if (req.url.includes("/auth/verify")) {
+    if (req.url.startsWith("/api/users/auth/verify")) {
       // --- Verify Logic ---
       const token = req.query.token;
 

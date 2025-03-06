@@ -36,9 +36,9 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/verify" element={<VerifyEmail />} /> */}
+        <Route path="/verify" element={<VerifyEmail />} />
 
         {/* Protected Routes */}
         <Route
@@ -67,8 +67,8 @@ function App() {
               </ProtectedAdmin>
             }
           />
-          {/* <Route path="admin-register" element={<AdminRegister />} />
-          <Route path="admin-login" element={<AdminLogin />} /> */}
+          <Route path="admin-register" element={<AdminRegister />} />
+          <Route path="admin-login" element={<AdminLogin />} />
         </Route>
       </Routes>
     </>

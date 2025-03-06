@@ -1,10 +1,23 @@
 import React from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+
 import "./ContactUs.css";
 import { Mail, MessageSquare, PenSquare, Send, User } from "lucide-react";
 
 const ContactUs = () => {
+  const refContact = useRef(null);
+  const inView6 = useInView(refContact, { once: true });
+
   return (
-    <section className="contact-us container my-5" id="contact">
+    <motion.section
+      ref={refContact}
+      initial={{ opacity: 0, y: 200 }}
+      animate={inView6 ? { y: 0, opacity: 1 } : { y: 200, opacity: 0 }}
+      transition={{ duration: 0.8 }}
+      className="contact-us container my-5"
+      id="contact"
+    >
       <h2 className="contact-title">تواصل معنا</h2>
       <form className="contact-form">
         <div className="row">
@@ -75,7 +88,7 @@ const ContactUs = () => {
           إرسال
         </button>
       </form>
-    </section>
+    </motion.section>
   );
 };
 

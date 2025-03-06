@@ -1,7 +1,7 @@
 .home-box-container {
     width: 100%;
     position: relative;
-    margin-top: -80px;
+    margin-top: -40px;
     padding: 0 2rem;
     direction: rtl;
 }
@@ -77,7 +77,7 @@
     }
 
     .home-box-container {
-        margin-top: -50px;
+        margin-top: -20px;
         padding: 0 1rem;
     }
 

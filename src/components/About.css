@@ -1,7 +1,7 @@
 .about-wrapper {
     min-height: 100vh;
     padding: 4rem 2rem;
-    background-image: url('/images/guide2.jpg');
+    background-image: url('/images/flag3.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -103,6 +103,125 @@
     font-size: 1.025rem;
 }
 
+.read-more {
+    margin-top: auto;
+    /* Pushes it to the bottom of the flex column */
+    align-self: flex-end;
+    /* Aligns it to the left */
+    background: none;
+    border: none;
+    color: #202d61;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0;
+    transition: color 0.1s ease;
+}
+
+.read-more .arrow-icon {
+    margin-right: 5px;
+    transition: transform 0.3s ease;
+}
+
+.read-more:hover {
+    color: #FFFFFF;
+    /* Changes text to white on hover */
+}
+
+.read-more:hover .arrow-icon {
+    transform: translateX(-5px);
+    /* Moves arrow right on hover */
+}
+
+.about-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent backdrop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.about-modal {
+    background-color: #FFFFFF;
+    /* White background */
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 600px;
+    width: 90%;
+    /* Responsive width */
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    z-index: 1001;
+}
+
+.about-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #202d61;
+
+}
+
+.about-modal-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #202d61;
+    font-weight: 600;
+    /* Dark blue text */
+}
+
+.about-modal-text span {
+    font-weight: 700;
+}
+
+.about-modal-register {
+    color: #202d61;
+    font-weight: bold;
+    display: inline-block;
+    border-bottom: 2px solid #202d61;
+    padding-bottom: 3px;
+    transition: transform 0.3s;
+}
+
+.about-modal-register:hover {
+    transform: translateY(-2px);
+}
+
+.about-modal-link {
+    color: #202d61;
+    text-decoration: none;
+}
+
+.about-modal-link span {
+    color: #d42127;
+    font-weight: 600;
+}
+
+.about-modal-link:hover span {
+    text-decoration: underline;
+}
+
+.about-modal-logo,
+.about-modal-image {
+    margin-top: 1rem;
+    max-width: 100%;
+    height: auto;
+}
+
 .about-additional {
     background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(8px);
@@ -161,7 +280,7 @@
     font-weight: inherit;
     /* keeps the same font weight */
     display: inline-block;
-    font-weight: 900;
+
     transition: transform 0.3s ease;
 }
 
