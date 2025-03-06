@@ -147,6 +147,11 @@ const About = () => {
                   <Link to="/register" className="about-modal-register">
                     تسجل الآن
                   </Link>
+                  <img
+                    src="/images/cover-book.png"
+                    alt="Guide"
+                    className="about-modal-image"
+                  />
                 </div>
               )}
               {selectedBox === 2 && (
