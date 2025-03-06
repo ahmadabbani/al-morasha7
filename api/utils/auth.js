@@ -3,10 +3,11 @@ import pool from "./db.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
+
 // Allowed origins (update with your domains)
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  // Production url
+  "https://al-morasha7.vercel.app", // Production frontend URL
 ];
 export async function requireAdmin(req, res) {
   // Set CORS headers dynamically

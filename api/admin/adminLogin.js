@@ -7,7 +7,7 @@ dotenv.config();
 // Allow specific origin (not wildcard)
 const allowedOrigins = [
   "http://localhost:5173", // frontend URL
-  // Add production domain
+  "https://al-morasha7.vercel.app", // Production frontend URL
 ];
 export default async function handler(req, res) {
   // Get the origin from the request
