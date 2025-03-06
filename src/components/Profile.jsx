@@ -129,7 +129,7 @@ const Profile = () => {
               ) : (
                 <div className="user-profile-unpaid-notice">
                   <AlertCircle size={32} color="#202d61" />
-                  <h3>الدفع مطلوب</h3>
+
                   <p>
                     يرجى حجز موعد جلسة أولاً أدناه إذا لم تقم بحجزها بعد. وبعد
                     قبول الجلسة وانتهائها، يمكنك الدفع هنا

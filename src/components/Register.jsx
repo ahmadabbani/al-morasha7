@@ -28,10 +28,10 @@ const Register = () => {
 
   // Dropdown options
   const roles = [
-    "مرشح لمجلس البلدية",
-    "مرشح مختار",
-    "مدير حملة إنتخابية",
-    "ناشط سياسي محلي",
+    "مرشح/ة  لمجلس البلدية",
+    "مرشح/ة  مختار",
+    "مدير/ة  حملة إنتخابية",
+    "ناشط/ة  سياسي/ة محلي/ة",
   ];
 
   const districts = [
@@ -285,9 +285,6 @@ const Register = () => {
             </>
           )}
         </button>
-
-        {/* Price Heading */}
-        <p className="register-price">السعر: 999$</p>
 
         {/* Legal Statement */}
         <p className="register-legal">
