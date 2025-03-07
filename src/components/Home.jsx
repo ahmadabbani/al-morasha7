@@ -39,10 +39,10 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Boxes Section */}
+      {/* Home Sections */}
       <HomeBoxes />
       <About />
-      {/*<Blogs /> */}
+      <Blogs />
       <ContactUs />
       <Footer />
     </div>

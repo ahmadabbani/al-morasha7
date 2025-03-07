@@ -1,5 +1,5 @@
 .admin-container {
-    padding: 2rem;
+    padding: 4rem 2rem 2rem 2rem;
     background-color: #f5f5f5;
     min-height: 100vh;
 }
@@ -81,6 +81,17 @@
     background-color: #FFFFFF;
     color: #202d61;
     border: 2px solid #202d61;
+}
+
+.admin-create-blog {
+    background-color: #27c44b;
+    border: 2px solid #27c44b;
+}
+
+.admin-create-blog:hover {
+    opacity: 0.9;
+    border: 2px solid #27c44b;
+    color: #27c44b;
 }
 
 .admin-dashboard {

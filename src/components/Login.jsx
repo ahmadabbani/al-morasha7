@@ -7,8 +7,6 @@ import { useAuth } from "../components/AuthContext";
 import ResendVerification from "./ResendVerification";
 
 const Login = () => {
-  const url = `${import.meta.env.VITE_REACT_APP_API_URL}/users/auth/login`;
-  console.log("Fetching from:", url);
   const { setUser } = useAuth();
   const [formData, setFormData] = useState({
     emailOrPhone: "",

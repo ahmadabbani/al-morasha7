@@ -299,6 +299,13 @@ const AdminDashboard = () => {
         </button>
       </div>
       <div className="admin-top-right">
+        <Link
+          to="/admin/admin-blog-dashboard"
+          className="admin-create admin-create-blog"
+        >
+          <Plus size={24} />
+          Create Blog
+        </Link>
         <Link to="/admin/admin-register" className="admin-create">
           <Plus size={24} />
           New Admin
@@ -499,14 +506,7 @@ const AdminDashboard = () => {
     <div className="admin-container">
       {renderSearchBar()}
       <div className="admin-dashboard">
-        {renderUserBox(
-          "Pending Approval",
-          Clock,
-          bookedPendingUsers,
-
-          "#ff9800",
-          "bookedPending"
-        )}
+        {renderUserBox("All Users", Users, users, "#9c27b0", "allUsers")}{" "}
         {renderUserBox(
           "Confirmed Sessions",
           CheckCheck,
@@ -515,7 +515,14 @@ const AdminDashboard = () => {
           "#4caf50",
           "bookedAccepted"
         )}{" "}
-        {renderUserBox("All Users", Users, users, "#9c27b0", "allUsers")}{" "}
+        {renderUserBox(
+          "Pending Approval",
+          Clock,
+          bookedPendingUsers,
+
+          "#ff9800",
+          "bookedPending"
+        )}
       </div>
       <BookingCalendar updateUsersList={updateUsersList} />
     </div>

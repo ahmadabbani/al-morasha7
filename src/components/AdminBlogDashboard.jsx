@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Upload, Plus } from "lucide-react";
 import { toast } from "react-toastify";
 import { useDropzone } from "react-dropzone";
@@ -47,7 +47,8 @@ const AdminBlogDashboard = () => {
         }/admin/adminAction/createBlog`,
         {
           method: "POST",
-          body: blogData, // FormData handles multipart/form-data automatically
+          body: blogData,
+          credentials: "include",
         }
       );
 
@@ -69,6 +70,13 @@ const AdminBlogDashboard = () => {
 
   return (
     <section className="blogs-admin container my-5">
+      <Link to="/">
+        <img
+          src="/images/header-logo.png"
+          alt="logo"
+          className="admin-blog-logo"
+        />
+      </Link>
       <h2 className="blogs-admin-title">Create a new blog</h2>
       <form onSubmit={handleSubmit} className="blogs-admin-form">
         {/* Title */}
@@ -77,14 +85,12 @@ const AdminBlogDashboard = () => {
             Title
           </label>
           <input
-            type="text"
             id="title"
             name="title"
             value={formData.title}
             onChange={handleInputChange}
             placeholder="Blog title"
             className="blogs-admin-input"
-            required
           />
         </div>
 
@@ -101,7 +107,6 @@ const AdminBlogDashboard = () => {
             placeholder="Blog description..."
             className="blogs-admin-textarea"
             rows="5"
-            required
           />
         </div>
 

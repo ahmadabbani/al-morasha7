@@ -38,23 +38,12 @@ export default async function handler(req, res) {
 
   const endpoint = req.query.endpoint;
 
-  // Handle GET requests
-  if (req.method === "GET") {
-    if (endpoint === "acceptSession") {
-      // --- acceptSession GET Logic ---
-      try {
-        await requireAdmin(req, res);
-      } catch (error) {
-        if (error.message === "Unauthorized") {
-          return res.status(401).json({ error: "Unauthorized" });
-        } else if (error.message === "Forbidden") {
-          return res.status(403).json({ error: "Forbidden" });
-        } else {
-          return res.status(500).json({ error: "Internal server error" });
-        }
-      }
-
-      try {
+  try {
+    // **GET Requests**
+    if (req.method === "GET") {
+      if (endpoint === "acceptSession") {
+        // --- acceptSession GET Logic ---
+        await requireAdmin(req, res); // Validate admin access
         const client = await pool.connect();
         try {
           const users = await client.query(`
@@ -74,43 +63,32 @@ export default async function handler(req, res) {
             WHERE "isAdmin" = false
             ORDER BY created_at DESC
           `);
-
           return res.status(200).json(users.rows);
         } finally {
           client.release();
         }
-      } catch (error) {
-        console.error("Error fetching users:", error);
-        return res.status(500).json({ error: "Internal server error" });
-      }
-    } else if (endpoint === "blogs") {
-      // --- blogs Logic ---
-      try {
+      } else if (endpoint === "blogs") {
+        // --- blogs GET Logic ---
         const client = await pool.connect();
-        const result = await client.query(
-          "SELECT * FROM blogs ORDER BY id DESC"
-        );
-        client.release();
-
-        res.status(200).json(result.rows);
-      } catch (error) {
-        console.error("Database error:", error);
-        res.status(500).json({ error: "حدث خطأ أثناء جلب المدونات" });
+        try {
+          const result = await client.query(
+            "SELECT * FROM blogs ORDER BY id DESC"
+          );
+          return res.status(200).json(result.rows);
+        } finally {
+          client.release();
+        }
+      } else {
+        return res.status(404).json({ error: "Endpoint not found" });
       }
-    } else {
-      return res.status(404).json({ error: "Endpoint not found" });
     }
-  }
-
-  // Handle POST requests
-  if (req.method === "POST") {
-    if (endpoint === "createBlog") {
-      // --- createBlog Logic ---
-      const form = formidable({ multiples: false });
-
-      try {
+    // **POST Requests**
+    else if (req.method === "POST") {
+      if (endpoint === "createBlog") {
+        // --- createBlog POST Logic ---
+        await requireAdmin(req, res); // Validate admin access
+        const form = formidable({ multiples: false });
         const [fields, files] = await form.parse(req);
-
         const { title, description } = fields;
         const image = files.image?.[0];
 
@@ -122,144 +100,95 @@ export default async function handler(req, res) {
           folder: "blogs",
           public_id: `${Date.now()}-${image.originalFilename.split(".")[0]}`,
         });
-
         const imageUrl = uploadResult.secure_url;
 
         const client = await pool.connect();
-        const result = await client.query(
-          "INSERT INTO blogs (title, description, image_url) VALUES ($1, $2, $3) RETURNING *",
-          [title[0], description[0], imageUrl]
-        );
-        client.release();
-
-        res.status(201).json({
-          message: "The blog was successfully created",
-          blog: result.rows[0],
-        });
-      } catch (error) {
-        console.error("Database error:", error);
-        res
-          .status(500)
-          .json({ error: "An error occurred while creating the blog" });
-      }
-    } else {
-      return res.status(404).json({ error: "Endpoint not found" });
-    }
-  }
-
-  // Handle PUT requests
-  if (req.method === "PUT") {
-    if (endpoint === "acceptSession") {
-      // --- acceptSession PUT Logic ---
-      try {
-        await requireAdmin(req, res);
-      } catch (error) {
-        if (error.message === "Unauthorized") {
-          return res.status(401).json({ error: "Unauthorized" });
-        } else if (error.message === "Forbidden") {
-          return res.status(403).json({ error: "Forbidden" });
-        } else {
-          return res.status(500).json({ error: "Internal server error" });
+        try {
+          const result = await client.query(
+            "INSERT INTO blogs (title, description, image_url) VALUES ($1, $2, $3) RETURNING *",
+            [title[0], description[0], imageUrl]
+          );
+          return res.status(201).json({
+            message: "The blog was successfully created",
+            blog: result.rows[0],
+          });
+        } finally {
+          client.release();
         }
+      } else {
+        return res.status(404).json({ error: "Endpoint not found" });
       }
-
-      const { userId } = req.body;
-
-      try {
+    }
+    // **PUT Requests**
+    else if (req.method === "PUT") {
+      if (endpoint === "acceptSession") {
+        // --- acceptSession PUT Logic ---
+        await requireAdmin(req, res); // Validate admin access
+        const { userId } = req.body;
         const client = await pool.connect();
         try {
           await client.query("UPDATE users SET status = true WHERE id = $1", [
             userId,
           ]);
-
           return res
             .status(200)
             .json({ message: "Date status updated successfully" });
         } finally {
           client.release();
         }
-      } catch (error) {
-        console.error("Error updating user status:", error);
-        return res.status(500).json({ error: "Internal server error" });
-      }
-    } else if (endpoint === "isPayed") {
-      // --- isPayed Logic ---
-      try {
-        await requireAdmin(req, res);
-      } catch (error) {
-        if (error.message === "Unauthorized") {
-          return res.status(401).json({ error: "Unauthorized" });
-        } else if (error.message === "Forbidden") {
-          return res.status(403).json({ error: "Forbidden" });
-        } else {
-          return res.status(500).json({ error: "Internal server error" });
-        }
-      }
-
-      const { userId } = req.body;
-
-      try {
+      } else if (endpoint === "isPayed") {
+        // --- isPayed PUT Logic ---
+        await requireAdmin(req, res); // Validate admin access
+        const { userId } = req.body;
         const client = await pool.connect();
         try {
           await client.query(
             'UPDATE users SET "isPayed" = TRUE WHERE id = $1',
             [userId]
           );
-
           return res
             .status(200)
             .json({ message: "Contents unlocked successfully" });
         } finally {
           client.release();
         }
-      } catch (error) {
-        console.error("Error unlocking contents:", error);
-        return res.status(500).json({ error: "Internal server error" });
-      }
-    } else if (endpoint === "rejectSession") {
-      // --- rejectSession Logic ---
-      try {
-        await requireAdmin(req, res);
-      } catch (error) {
-        if (error.message === "Unauthorized") {
-          return res.status(401).json({ error: "Unauthorized" });
-        } else if (error.message === "Forbidden") {
-          return res.status(403).json({ error: "Forbidden" });
-        } else {
-          return res.status(500).json({ error: "Internal server error" });
-        }
-      }
-
-      const { userId } = req.body;
-
-      try {
+      } else if (endpoint === "rejectSession") {
+        // --- rejectSession PUT Logic ---
+        await requireAdmin(req, res); // Validate admin access
+        const { userId } = req.body;
         const client = await pool.connect();
         try {
           await client.query(
             "UPDATE users SET session_date = NULL, session_time = NULL, status = false WHERE id = $1",
             [userId]
           );
-
           return res
             .status(200)
             .json({ message: "Date status updated successfully" });
         } finally {
           client.release();
         }
-      } catch (error) {
-        console.error("Error updating Session status:", error);
-        return res.status(500).json({ error: "Internal server error" });
+      } else {
+        return res.status(404).json({ error: "Endpoint not found" });
       }
-    } else {
-      return res.status(404).json({ error: "Endpoint not found" });
+    }
+    // **Fallback for Unsupported Methods**
+    else {
+      return res.status(405).json({ error: "Method not allowed" });
+    }
+  } catch (error) {
+    console.error("Error in handler:", error);
+    if (error.message === "Unauthorized") {
+      return res.status(401).json({ error: "Unauthorized" });
+    } else if (error.message === "Forbidden") {
+      return res.status(403).json({ error: "Forbidden" });
+    } else if (!res.headersSent) {
+      return res.status(500).json({ error: "Internal server error" });
     }
   }
-
-  // Fallback for unsupported methods
-  return res.status(405).json({ error: "Method not allowed" });
 }
 
-// Config for multipart/form-data (from createBlog)
+// Config for multipart/form-data (for createBlog endpoint)
 export const config = {
   api: {
     bodyParser: false, // Disable Vercel's default body parser for multipart data
