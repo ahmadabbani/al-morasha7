@@ -30,7 +30,7 @@ const AdminBlogDashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!image) {
-      toast.error("يرجى رفع صورة للمدونة");
+      toast.error("Please upload an image for the blog");
       return;
     }
 
@@ -53,13 +53,15 @@ const AdminBlogDashboard = () => {
 
       const data = await response.json();
       if (!response.ok)
-        throw new Error(data.error || "حدث خطأ أثناء إنشاء المدونة");
+        throw new Error(
+          data.error || "An error occurred while creating the blog"
+        );
 
-      toast.success("تم إنشاء المدونة بنجاح");
+      toast.success("The blog was created successfully");
       setFormData({ title: "", description: "" });
       setImage(null);
     } catch (error) {
-      toast.error(error.message || "حدث خطأ أثناء إنشاء المدونة");
+      toast.error(error.message || "An error occurred while creating the blog");
     } finally {
       setLoading(false);
     }
@@ -67,12 +69,12 @@ const AdminBlogDashboard = () => {
 
   return (
     <section className="blogs-admin container my-5">
-      <h2 className="blogs-admin-title">إنشاء مدونة جديدة</h2>
+      <h2 className="blogs-admin-title">Create a new blog</h2>
       <form onSubmit={handleSubmit} className="blogs-admin-form">
         {/* Title */}
         <div className="mb-4">
           <label htmlFor="title" className="blogs-admin-label">
-            العنوان
+            Title
           </label>
           <input
             type="text"
@@ -80,7 +82,7 @@ const AdminBlogDashboard = () => {
             name="title"
             value={formData.title}
             onChange={handleInputChange}
-            placeholder="أدخل عنوان المدونة"
+            placeholder="Blog title"
             className="blogs-admin-input"
             required
           />
@@ -89,14 +91,14 @@ const AdminBlogDashboard = () => {
         {/* Description */}
         <div className="mb-4">
           <label htmlFor="description" className="blogs-admin-label">
-            الوصف
+            Description
           </label>
           <textarea
             id="description"
             name="description"
             value={formData.description}
             onChange={handleInputChange}
-            placeholder="اكتب وصف المدونة هنا..."
+            placeholder="Blog description..."
             className="blogs-admin-textarea"
             rows="5"
             required
@@ -105,7 +107,7 @@ const AdminBlogDashboard = () => {
 
         {/* Image Upload */}
         <div className="mb-4">
-          <label className="blogs-admin-label">صورة المدونة</label>
+          <label className="blogs-admin-label">Blog Image</label>
           <div className="blogs-admin-dropzone">
             {image ? (
               <div className="blogs-admin-preview">
@@ -119,14 +121,14 @@ const AdminBlogDashboard = () => {
                   onClick={() => setImage(null)}
                   className="blogs-admin-remove-btn"
                 >
-                  إزالة
+                  Remove
                 </button>
               </div>
             ) : (
               <div {...getRootProps()} className="blogs-admin-upload-area">
                 <input {...getInputProps()} />
                 <Upload size={24} className="blogs-admin-upload-icon" />
-                <p>اسحب الصورة هنا أو انقر للرفع</p>
+                <p>Drag the image here or click to upload</p>
               </div>
             )}
           </div>
@@ -143,7 +145,7 @@ const AdminBlogDashboard = () => {
           ) : (
             <>
               <Plus size={20} />
-              إنشاء المدونة
+              Create Blog
             </>
           )}
         </button>

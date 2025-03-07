@@ -182,10 +182,10 @@ export default function BookingCalendar({
 
       // Refresh booked slots
       await fetchBookedSlots();
-      toast.success("تم تعطيل الموعد بنجاح");
+      toast.success("The date was successfully disabled");
     } catch (error) {
       console.error("Error disabling slot:", error);
-      toast.error("حدث خطأ أثناء تعطيل الموعد");
+      toast.error("An error occurred while disabling the date");
     } finally {
       setLoadingSlots((prev) => {
         const newSet = new Set(prev);
@@ -238,10 +238,10 @@ export default function BookingCalendar({
       }
       // Refresh booked slots
       await fetchBookedSlots();
-      toast.success("تم تفعيل الموعد بنجاح");
+      toast.success("The date was successfully activated");
     } catch (error) {
       console.error("Error enabling slot:", error);
-      toast.error("حدث خطأ أثناء تفعيل الموعد");
+      toast.error("An error occurred while activating the date");
     } finally {
       setLoadingSlots((prev) => {
         const newSet = new Set(prev);

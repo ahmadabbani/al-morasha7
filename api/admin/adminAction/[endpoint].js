@@ -115,7 +115,7 @@ export default async function handler(req, res) {
         const image = files.image?.[0];
 
         if (!title?.[0] || !description?.[0] || !image) {
-          return res.status(400).json({ error: "جميع الحقول مطلوبة" });
+          return res.status(400).json({ error: "All fields are required" });
         }
 
         const uploadResult = await cloudinary.uploader.upload(image.filepath, {
@@ -132,12 +132,15 @@ export default async function handler(req, res) {
         );
         client.release();
 
-        res
-          .status(201)
-          .json({ message: "تم إنشاء المدونة بنجاح", blog: result.rows[0] });
+        res.status(201).json({
+          message: "The blog was successfully created",
+          blog: result.rows[0],
+        });
       } catch (error) {
         console.error("Database error:", error);
-        res.status(500).json({ error: "حدث خطأ أثناء إنشاء المدونة" });
+        res
+          .status(500)
+          .json({ error: "An error occurred while creating the blog" });
       }
     } else {
       return res.status(404).json({ error: "Endpoint not found" });
@@ -171,7 +174,7 @@ export default async function handler(req, res) {
 
           return res
             .status(200)
-            .json({ message: "User status updated successfully" });
+            .json({ message: "Date status updated successfully" });
         } finally {
           client.release();
         }
@@ -205,7 +208,7 @@ export default async function handler(req, res) {
 
           return res
             .status(200)
-            .json({ message: "contents unlocked successfully" });
+            .json({ message: "Contents unlocked successfully" });
         } finally {
           client.release();
         }
@@ -239,7 +242,7 @@ export default async function handler(req, res) {
 
           return res
             .status(200)
-            .json({ message: "Session status updated successfully" });
+            .json({ message: "Date status updated successfully" });
         } finally {
           client.release();
         }

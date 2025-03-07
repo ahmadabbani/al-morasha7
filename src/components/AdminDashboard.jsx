@@ -103,7 +103,6 @@ const AdminDashboard = () => {
       setUsers(data);
     } catch (error) {
       console.error("Error fetching users:", error);
-      toast.error("حدث خطأ أثناء جلب المستخدمين");
     } finally {
       setLoading(false);
     }
@@ -139,7 +138,7 @@ const AdminDashboard = () => {
         }
       );
 
-      if (!response.ok) throw new Error("Failed to update user status");
+      if (!response.ok) throw new Error("Failed to update date status");
 
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
@@ -149,8 +148,8 @@ const AdminDashboard = () => {
 
       toast.success("تم قبول المستخدم بنجاح");
     } catch (error) {
-      console.error("Error updating user status:", error);
-      toast.error("حدث خطأ أثناء تحديث حالة المستخدم");
+      console.error("Error updating date status:", error);
+      toast.error("Error updating date status");
     } finally {
       setUpdatingUsers((prev) => {
         const newSet = new Set(prev);
@@ -178,7 +177,7 @@ const AdminDashboard = () => {
         }
       );
 
-      if (!response.ok) throw new Error("Failed to reject user session");
+      if (!response.ok) throw new Error("Failed to reject the date");
 
       // Update users state to remove session date and time
       setUsers((prevUsers) =>
@@ -189,10 +188,10 @@ const AdminDashboard = () => {
         )
       );
 
-      toast.success("تم رفض الموعد بنجاح");
+      toast.success("The appointment was successfully rejected");
     } catch (error) {
-      console.error("Error rejectng user session:", error);
-      toast.error("حدث خطأ أثناء رفض الموعد");
+      console.error("Error rejectng the appointment:", error);
+      toast.error("An error occurred while rejecting the appointment");
     } finally {
       setRejectingUsers((prev) => {
         const newSet = new Set(prev);
