@@ -7,6 +7,7 @@
     align-items: center;
     width: 100%;
     max-width: 100%;
+    min-height: 100vh;
     direction: rtl;
     /* Right-to-left for Arabic */
 
@@ -172,6 +173,10 @@
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+    .register-form {
+        max-width: 500px;
+    }
+
     .register-heading {
         font-size: 2rem;
     }
@@ -182,5 +187,41 @@
 
     .submit-btn {
         font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 580px) {
+    .register-container {
+        padding: 100px 0 40px 0;
+    }
+
+    .register-form {
+        max-width: 450px;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .register-form {
+        max-width: 420px;
+    }
+}
+
+
+@media (max-width: 460px) {
+    .register-form {
+        max-width: 390px;
+    }
+}
+
+@media (max-width: 420px) {
+    .register-form {
+        max-width: 360px;
+    }
+}
+
+@media (max-width: 390px) {
+    .register-form {
+        max-width: 340px;
     }
 }
