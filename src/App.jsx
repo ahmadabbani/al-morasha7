@@ -67,7 +67,14 @@ function App() {
               </ProtectedAdmin>
             }
           />
-          <Route path="admin-register" element={<AdminRegister />} />
+          <Route
+            path="admin-register"
+            element={
+              <ProtectedAdmin>
+                <AdminRegister />
+              </ProtectedAdmin>
+            }
+          />
           <Route path="admin-login" element={<AdminLogin />} />
         </Route>
       </Routes>

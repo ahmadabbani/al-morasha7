@@ -2,15 +2,15 @@ import pool from "../utils/db.js";
 import bcrypt from "bcrypt";
 // Error messages in Arabic
 const errors = {
-  METHOD_NOT_ALLOWED: "الطريقة غير مسموح بها",
-  FIELDS_REQUIRED: "جميع الحقول مطلوبة",
-  USER_EXISTS: "البريد الإلكتروني أو الهاتف موجود مسبقاً",
-  REGISTRATION_FAILED: "فشل التسجيل",
+  METHOD_NOT_ALLOWED: "Method not allowed",
+  FIELDS_REQUIRED: "All fields are required",
+  USER_EXISTS: "The email or phone number is already registered",
+  REGISTRATION_FAILED: "Registration failed",
 };
 
 // Success message in Arabic
 const success = {
-  REGISTRATION_SUCCESS: "تم التسجيل بنجاح",
+  REGISTRATION_SUCCESS: "Registration successful",
 };
 export default async function handler(req, res) {
   // Set CORS headers

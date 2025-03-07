@@ -130,9 +130,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 576px) {
-    .admin-login-container {
-        padding: 1rem;
-    }
 
     .admin-login-form {
         padding: 1.5rem;

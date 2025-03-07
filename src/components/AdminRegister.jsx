@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "./AdminRegister.css"; // Import the CSS file
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AdminRegister = () => {
   const [formData, setFormData] = useState({
@@ -31,13 +31,13 @@ const AdminRegister = () => {
 
     // Frontend validation
     if (Object.values(formData).some((value) => value.trim() === "")) {
-      toast.error("جميع الحقول مطلوبة");
+      toast.error("All fields are required");
       setLoading(false);
       return;
     }
 
     if (!validateEmail(formData.email)) {
-      toast.error("البريد الإلكتروني غير صالح");
+      toast.error("Please enter a valid email address");
       setLoading(false);
       return;
     }
@@ -54,9 +54,10 @@ const AdminRegister = () => {
 
       const data = await response.json();
 
-      if (!response.ok) throw new Error(data.error || "حدث خطأ أثناء التسجيل");
+      if (!response.ok)
+        throw new Error(data.error || "An error occurred during registration");
 
-      toast.success("تم التسجيل بنجاح! يرجى تسجيل الدخول");
+      toast.success("Registration successful! Please log in");
       setFormData({
         // Reset form
         name: "",
@@ -73,11 +74,13 @@ const AdminRegister = () => {
 
   return (
     <div className="admin-register-container">
-      <img
-        src="/images/header-logo.png"
-        alt="logo"
-        className="admin-register-logo"
-      />
+      <Link to="/">
+        <img
+          src="/images/header-logo.png"
+          alt="logo"
+          className="admin-register-logo"
+        />
+      </Link>
       <h1 className="admin-register-heading">New Admin Account</h1>
       <form onSubmit={handleSubmit} className="admin-register-form">
         {/* Full Name */}

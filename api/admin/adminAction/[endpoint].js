@@ -1,5 +1,5 @@
-import pool from "../utils/db.js";
-import { requireAdmin } from "../utils/auth.js";
+import pool from "../../utils/db.js"; // Adjusted path: two levels up from adminAction/
+import { requireAdmin } from "../../utils/auth.js"; // Adjusted path
 import dotenv from "dotenv";
 import formidable from "formidable";
 import { v2 as cloudinary } from "cloudinary";
@@ -36,9 +36,11 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
+  const endpoint = req.query.endpoint;
+
   // Handle GET requests
   if (req.method === "GET") {
-    if (req.url === "/api/admin/adminAction/acceptSession") {
+    if (endpoint === "acceptSession") {
       // --- acceptSession GET Logic ---
       try {
         await requireAdmin(req, res);
@@ -81,7 +83,7 @@ export default async function handler(req, res) {
         console.error("Error fetching users:", error);
         return res.status(500).json({ error: "Internal server error" });
       }
-    } else if (req.url === "/api/admin/adminAction/blogs") {
+    } else if (endpoint === "blogs") {
       // --- blogs Logic ---
       try {
         const client = await pool.connect();
@@ -96,13 +98,13 @@ export default async function handler(req, res) {
         res.status(500).json({ error: "حدث خطأ أثناء جلب المدونات" });
       }
     } else {
-      return res.status(405).json({ error: "Method not allowed" });
+      return res.status(404).json({ error: "Endpoint not found" });
     }
   }
 
   // Handle POST requests
   if (req.method === "POST") {
-    if (req.url === "/api/admin/adminAction/createBlog") {
+    if (endpoint === "createBlog") {
       // --- createBlog Logic ---
       const form = formidable({ multiples: false });
 
@@ -138,13 +140,13 @@ export default async function handler(req, res) {
         res.status(500).json({ error: "حدث خطأ أثناء إنشاء المدونة" });
       }
     } else {
-      return res.status(405).json({ error: "Method not allowed" });
+      return res.status(404).json({ error: "Endpoint not found" });
     }
   }
 
   // Handle PUT requests
   if (req.method === "PUT") {
-    if (req.url === "/api/admin/adminAction/acceptSession") {
+    if (endpoint === "acceptSession") {
       // --- acceptSession PUT Logic ---
       try {
         await requireAdmin(req, res);
@@ -177,7 +179,7 @@ export default async function handler(req, res) {
         console.error("Error updating user status:", error);
         return res.status(500).json({ error: "Internal server error" });
       }
-    } else if (req.url === "/api/admin/adminAction/isPayed") {
+    } else if (endpoint === "isPayed") {
       // --- isPayed Logic ---
       try {
         await requireAdmin(req, res);
@@ -211,7 +213,7 @@ export default async function handler(req, res) {
         console.error("Error unlocking contents:", error);
         return res.status(500).json({ error: "Internal server error" });
       }
-    } else if (req.url === "/api/admin/adminAction/rejectSession") {
+    } else if (endpoint === "rejectSession") {
       // --- rejectSession Logic ---
       try {
         await requireAdmin(req, res);
@@ -246,7 +248,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: "Internal server error" });
       }
     } else {
-      return res.status(405).json({ error: "Method not allowed" });
+      return res.status(404).json({ error: "Endpoint not found" });
     }
   }
 

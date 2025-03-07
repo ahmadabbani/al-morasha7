@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "./AdminLogin.css"; // Import the CSS file
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
 
 const AdminLogin = () => {
@@ -26,7 +26,7 @@ const AdminLogin = () => {
 
     // Frontend validation
     if (!formData.email || !formData.password) {
-      toast.error("جميع الحقول مطلوبة");
+      toast.error("All fields are required");
       setLoading(false);
       return;
     }
@@ -45,10 +45,10 @@ const AdminLogin = () => {
       const data = await response.json();
 
       if (!response.ok)
-        throw new Error(data.error || "حدث خطأ أثناء تسجيل الدخول");
+        throw new Error(data.error || "An error occurred during login");
 
       setUser(data.user);
-      toast.success("تم تسجيل الدخول بنجاح");
+      toast.success("Login successful");
       navigate("/admin");
       // Redirect or update state here (e.g., set user data in context/state)
     } catch (error) {
@@ -60,11 +60,13 @@ const AdminLogin = () => {
 
   return (
     <div className="admin-login-container">
-      <img
-        src="/images/header-logo.png"
-        alt="logo"
-        className="admin-login-logo"
-      />
+      <Link to="/">
+        <img
+          src="/images/header-logo.png"
+          alt="logo"
+          className="admin-login-logo"
+        />
+      </Link>
       <h1 className="admin-login-heading">Login</h1>
       <form onSubmit={handleSubmit} className="admin-login-form">
         {/* Email or Phone */}

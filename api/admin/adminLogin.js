@@ -25,14 +25,14 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "الطريقة غير مسموح بها" });
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   const { email, password } = req.body;
 
   // Basic validation
   if (!email || !password) {
-    return res.status(400).json({ error: "جميع الحقول مطلوبة" });
+    return res.status(400).json({ error: "All fields are required" });
   }
 
   try {
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       );
 
       if (user.rows.length === 0) {
-        return res.status(404).json({ error: "البريد الإلكتروني غير موجود" });
+        return res.status(404).json({ error: "The email does not exist" });
       }
 
       // Compare passwords
@@ -55,7 +55,7 @@ export default async function handler(req, res) {
         user.rows[0].password
       );
       if (!validPassword) {
-        return res.status(401).json({ error: "كلمة المرور غير صحيحة" });
+        return res.status(401).json({ error: "Incorrect password" });
       }
 
       // Generate JWT
@@ -82,7 +82,7 @@ export default async function handler(req, res) {
 
       // Return non-sensitive user data
       return res.status(200).json({
-        message: "تم تسجيل الدخول بنجاح",
+        message: "Login successful",
         user: {
           id: user.rows[0].id,
           name: user.rows[0].name,
@@ -101,7 +101,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Login error:", error);
     return res.status(500).json({
-      error: "حدث خطأ أثناء تسجيل الدخول",
+      error: "An error occurred during login",
       details: error.message,
     });
   }

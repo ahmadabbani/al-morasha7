@@ -141,9 +141,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 576px) {
-    .admin-register-container {
-        padding: 1rem;
-    }
 
     .admin-register-form {
         padding: 1.5rem;

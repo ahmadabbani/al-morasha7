@@ -11,11 +11,13 @@ import {
   Mail,
   MapPin,
   Phone,
+  Plus,
   User,
   Users,
   Vote,
 } from "lucide-react";
 import LogoutButton from "./LogoutButton";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -289,47 +291,21 @@ const AdminDashboard = () => {
           onChange={handleSearchInputChange}
           onKeyPress={(e) => e.key === "Enter" && handleSearch()}
         />
-        <Button
-          className="admin-search-button"
-          onClick={handleSearch}
-          sx={{
-            backgroundColor: "#2196f3",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            fontWeight: 600,
-            transition: "background 0.2s ease",
-            padding: "0.75rem 1rem", // Custom padding
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            lineHeight: "normal",
-          }}
-        >
+        <button className="admin-search-button" onClick={handleSearch}>
           Search
-        </Button>
+        </button>
 
-        <Button
-          className="admin-search-button"
-          onClick={handleResetSearch}
-          sx={{
-            backgroundColor: "#2196f3",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            fontWeight: 600,
-            transition: "background 0.2s ease",
-            padding: "0.75rem 1rem",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            lineHeight: "normal",
-          }}
-        >
+        <button className="admin-search-button" onClick={handleResetSearch}>
           Reset
-        </Button>
+        </button>
       </div>
-      <LogoutButton />
+      <div className="admin-top-right">
+        <Link to="/admin/admin-register" className="admin-create">
+          <Plus size={24} />
+          New Admin
+        </Link>
+        <LogoutButton />{" "}
+      </div>
     </div>
   );
   const renderUserBox = (title, Icon, usersList, boxColor, boxId) => {
@@ -345,15 +321,31 @@ const AdminDashboard = () => {
 
     return (
       <div className="admin-box">
-        <h3 className="admin-box-title" style={{ color: boxColor }}>
-          <Icon />
-          {title}
-          {isSearching && (
-            <span className="admin-results-count">
-              ({filteredUsers.length} results found)
-            </span>
-          )}
-        </h3>
+        <div
+          className="admin-box-title-wrapper"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <h3
+            className="admin-box-title"
+            style={{ color: boxColor, margin: 0 }}
+          >
+            <Icon />
+            {title}
+            {isSearching && (
+              <span className="admin-results-count">
+                ({filteredUsers.length} results found)
+              </span>
+            )}
+          </h3>
+          <span className="admin-paginated-count">
+            {filteredUsers.length} users
+          </span>
+        </div>
 
         <div className="admin-users-list">
           {paginatedUsers.map((user) => (
@@ -508,15 +500,6 @@ const AdminDashboard = () => {
     <div className="admin-container">
       {renderSearchBar()}
       <div className="admin-dashboard">
-        {renderUserBox("All Users", Users, users, "#9c27b0", "allUsers")}{" "}
-        {renderUserBox(
-          "Confirmed Sessions",
-          CheckCheck,
-          bookedAcceptedUsers,
-
-          "#4caf50",
-          "bookedAccepted"
-        )}{" "}
         {renderUserBox(
           "Pending Approval",
           Clock,
@@ -525,6 +508,15 @@ const AdminDashboard = () => {
           "#ff9800",
           "bookedPending"
         )}
+        {renderUserBox(
+          "Confirmed Sessions",
+          CheckCheck,
+          bookedAcceptedUsers,
+
+          "#4caf50",
+          "bookedAccepted"
+        )}{" "}
+        {renderUserBox("All Users", Users, users, "#9c27b0", "allUsers")}{" "}
       </div>
       <BookingCalendar updateUsersList={updateUsersList} />
     </div>

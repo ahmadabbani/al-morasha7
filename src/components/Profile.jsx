@@ -123,12 +123,14 @@ const Profile = () => {
                     <BookOpen size={24} color="#202d61" />
                     <h4> الدليل الخاص بك</h4>
                     <p>يمكنك الوصول إلى دليلك الشامل من هنا.</p>
-                    <button className="user-profile-btn">تنزيل الدليل</button>
+                    <button className="user-profile-btn download-btn">
+                      تنزيل الدليل
+                    </button>
                   </div>
                 </>
               ) : (
                 <div className="user-profile-unpaid-notice">
-                  <AlertCircle size={32} color="#202d61" />
+                  <AlertCircle size={32} className="alert-circle" />
 
                   <p>
                     يرجى حجز موعد جلسة أولاً أدناه إذا لم تقم بحجزها بعد. وبعد
