@@ -6,6 +6,7 @@ import About from "./About";
 import ContactUs from "./ContactUs";
 import Blogs from "./Blogs";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -31,7 +32,9 @@ const Home = () => {
               "المرشّح" هو المرجع الذي يضمن لكم الجهوزية الكاملة لخوض الانتخابات
               بثقة وقوّة.
             </p>
-            <button className="home-button">سجل الآن</button>
+            <Link to="/register">
+              <button className="home-button">سجل الآن</button>
+            </Link>
           </motion.div>
         </div>
       </div>

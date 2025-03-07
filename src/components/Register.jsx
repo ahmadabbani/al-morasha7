@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import {
   User,
@@ -25,7 +25,9 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [registered, setRegistered] = useState(false);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // Dropdown options
   const roles = [
     "مرشح/ة  لمجلس البلدية",

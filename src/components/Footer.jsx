@@ -61,7 +61,7 @@ const Footer = () => {
                   duration={0}
                   className="footer-link"
                 >
-                  من نحن
+                  عن البرنامج
                 </ScrollLink>
               </li>
               <li>
@@ -72,7 +72,7 @@ const Footer = () => {
                   duration={0}
                   className="footer-link"
                 >
-                  التسجيل
+                  تسجيل جديد
                 </ScrollLink>
               </li>
             </ul>
@@ -85,7 +85,9 @@ const Footer = () => {
                 لا تفوّت فرصة الحصول على الدليل الذي تحتاجه لمعلومات كاملة حول
                 حملتك الانتخابية وخطوات الترشّح بنجاح!
               </p>
-              <button className="footer-register-btn">سجل الآن!</button>
+              <Link to="/register">
+                <button className="footer-register-btn">سجل الآن!</button>
+              </Link>
             </div>
             <div className="footer-social-icons">
               <a

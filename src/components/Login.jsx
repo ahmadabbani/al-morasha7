@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Mail, Lock, LogIn } from "lucide-react";
 import "./Login.css"; // Import the CSS file
@@ -19,6 +19,9 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
