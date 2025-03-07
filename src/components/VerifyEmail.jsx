@@ -42,7 +42,7 @@ const VerifyEmail = () => {
         // Auto-redirect to login after 5 seconds
         setTimeout(() => {
           navigate("/login");
-        }, 5000);
+        }, 8000);
       } catch (error) {
         setStatus("error");
         setErrorMessage(error.message);
@@ -77,7 +77,7 @@ const VerifyEmail = () => {
             تم التحقق من بريدك الإلكتروني بنجاح. يمكنك الآن تسجيل الدخول إلى
             حسابك.
           </p>
-          <p>سيتم تحويلك تلقائياً إلى صفحة تسجيل الدخول خلال 5 ثوانٍ.</p>
+          <p>سيتم تحويلك تلقائياً إلى صفحة تسجيل الدخول خلال 8 ثوانٍ.</p>
           <button onClick={() => navigate("/login")} className="login-btn">
             الذهاب إلى صفحة تسجيل الدخول
           </button>

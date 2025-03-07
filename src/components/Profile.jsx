@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../components/AuthContext";
 import BookingCalendar from "./BookingCalendar";
 import LogoutButton from "./LogoutButton";
@@ -20,6 +20,11 @@ import "./Profile.css";
 
 const Profile = () => {
   const { user } = useAuth();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const checkDateStatus = (date) => {
     if (!date) return null;
     const today = dayjs();

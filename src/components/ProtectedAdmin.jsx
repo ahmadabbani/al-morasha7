@@ -15,7 +15,10 @@ const ProtectedAdmin = ({ children }) => {
     }
   }, [user, loading, navigate]);
 
-  if (loading) return <div>جار التحميل...</div>;
+  if (loading)
+    return (
+      <div style={{ textAlign: "center", paddingTop: "2rem" }}>Loading..</div>
+    );
 
   // Only render children if user exists and is admin
   return user && user.isAdmin ? children : null;
