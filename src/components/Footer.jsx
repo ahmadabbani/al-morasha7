@@ -6,6 +6,8 @@ import {
   FaFacebook,
   FaTiktok,
   FaWhatsapp,
+  FaLinkedin,
+  FaYoutube,
 } from "react-icons/fa";
 import { motion, useInView } from "framer-motion";
 
@@ -86,20 +88,57 @@ const Footer = () => {
               <button className="footer-register-btn">سجل الآن!</button>
             </div>
             <div className="footer-social-icons">
-              <a href="#" className="footer-social-link">
-                <FaInstagram className="footer-icon" />
-              </a>
-              <a href="#" className="footer-social-link">
-                <FaTwitter className="footer-icon" />
-              </a>
-              <a href="#" className="footer-social-link">
-                <FaFacebook className="footer-icon" />
-              </a>
-              <a href="#" className="footer-social-link">
+              <a
+                href="https://www.tiktok.com/@almourachah?_t=ZS-8uU6DWUwyBd&_r=1"
+                className="footer-social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaTiktok className="footer-icon" />
               </a>
-              <a href="#" className="footer-social-link">
+              <a
+                href="https://www.instagram.com/al_mourachah?igsh=eGd1N3h3eWtmdnN4&utm_source=qr"
+                className="footer-social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaInstagram className="footer-icon" />
+              </a>
+              {/* <a href="#" className="footer-social-link" target="_blank" rel="noopener noreferrer">
+                <FaTwitter className="footer-icon" />
+              </a> */}
+              <a
+                href="https://www.facebook.com/share/163jj6EvGE/?mibextid=wwXIfr"
+                className="footer-social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebook className="footer-icon" />
+              </a>
+              <a
+                href="#"
+                className="footer-social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaYoutube className="footer-icon" />
+              </a>
+
+              <a
+                href="#"
+                className="footer-social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaWhatsapp className="footer-icon" />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/almourachah-%D8%A7%D9%84%D9%85%D8%B1%D8%B4%D9%91%D8%AD/"
+                className="footer-social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedin className="footer-icon" />
               </a>
             </div>
           </div>

@@ -189,7 +189,7 @@ const About = () => {
                     السياسي والعمل العام بالخلفيات والمهارات اللازمة للنجاح.
                   </p>
                   <img
-                    src="/images/voting.jpg"
+                    src="/images/political-leadership.JPG"
                     alt="Political Leadership"
                     className="about-modal-image"
                   />

@@ -101,12 +101,12 @@
 
 @media (max-width: 480px) {
     .home-container {
-        height: 65vh;
+        height: 75vh;
     }
 
     .home-content {
         margin-right: 0;
-        padding: 0 15px;
+        padding: 2.5rem 15px 0 15px;
     }
 
     .home-title {
@@ -118,14 +118,10 @@
     }
 }
 
-@media (max-width: 440px) {
-    .home-container {
-        height: 70vh;
-    }
-}
+@media (max-width: 440px) {}
 
 @media (max-width: 375px) {
     .home-container {
-        height: 75vh;
+        height: 80vh;
     }
 }
