@@ -32,10 +32,7 @@
       "source": "/api/users/getSessions",
       "destination": "/api/users/getSessions.js"
     },
-    {
-      "source": "/api/users/getUsers",
-      "destination": "/api/users/getUsers.js"
-    },
+
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

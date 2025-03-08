@@ -17,7 +17,7 @@ export async function requireAdmin(req, res) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Credentials", "true");
   }
-  res.setHeader("Access-Control-Allow-Methods", "GET");
+  res.setHeader("Access-Control-Allow-Methods", "GET, PUT");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   // Handle preflight request
   if (req.method === "OPTIONS") {
