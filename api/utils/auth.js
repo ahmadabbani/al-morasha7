@@ -8,6 +8,7 @@ dotenv.config();
 const allowedOrigins = [
   "http://localhost:5173", // Local development
   "https://al-morasha7.vercel.app", // Production frontend URL
+  "https://almourachah.org",
 ];
 export async function requireAdmin(req, res) {
   // Set CORS headers dynamically

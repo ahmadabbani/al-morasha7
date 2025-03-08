@@ -8,6 +8,7 @@ dotenv.config();
 const allowedOrigins = [
   "http://localhost:5173", // frontend URL
   "https://al-morasha7.vercel.app", // Production frontend URL
+  "https://almourachah.org",
 ];
 export default async function handler(req, res) {
   // Get the origin from the request
