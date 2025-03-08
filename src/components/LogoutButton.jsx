@@ -24,14 +24,14 @@ const LogoutButton = () => {
 
       if (res.ok) {
         setUser(null); // Clear user state
-        toast.success("تم تسجيل الخروج بنجاح"); // Success toast
+        toast.success("Logout successful"); // Success toast
         navigate("/login"); // Redirect to login page
       } else {
-        throw new Error("فشل تسجيل الخروج");
+        throw new Error("Logout failed");
       }
     } catch (error) {
       console.error("Logout error:", error);
-      toast.error(error.message || "حدث خطأ أثناء تسجيل الخروج");
+      toast.error(error.message || "An error occurred during logout");
     } finally {
       setLoading(false); // Reset loading state
     }

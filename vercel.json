@@ -9,8 +9,33 @@
       "destination": "/api/admin/adminAction/[endpoint].js"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+      "source": "/api/admin/adminLogin",
+      "destination": "/api/admin/adminLogin.js"
+    },
+    {
+      "source": "/api/admin/adminRegister",
+      "destination": "/api/admin/adminRegister.js"
+    },
+    {
+      "source": "/api/users/adminDisabled",
+      "destination": "/api/users/adminDisabled.js"
+    },
+    {
+      "source": "/api/users/adminEnabled",
+      "destination": "/api/users/adminEnabled.js"
+    },
+    {
+      "source": "/api/users/bookSession",
+      "destination": "/api/users/bookSession.js"
+    },
+    {
+      "source": "/api/users/getSessions",
+      "destination": "/api/users/getSessions.js"
+    },
+    {
+      "source": "/api/users/getUsers",
+      "destination": "/api/users/getUsers.js"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
