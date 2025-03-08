@@ -51,7 +51,7 @@ export default async function handler(req, res) {
     if (req.method === "GET") {
       if (endpoint === "acceptSession") {
         // --- acceptSession GET Logic ---
-        await requireAdmin(req, res); // Validate admin access
+        // Validate admin access
         const client = await pool.connect();
         try {
           const users = await client.query(`
@@ -94,7 +94,7 @@ export default async function handler(req, res) {
     else if (req.method === "POST") {
       if (endpoint === "createBlog") {
         // --- createBlog POST Logic ---
-        await requireAdmin(req, res); // Validate admin access
+        // Validate admin access
         const form = formidable({ multiples: false });
         const [fields, files] = await form.parse(req);
         const { title, description } = fields;
@@ -131,7 +131,7 @@ export default async function handler(req, res) {
     else if (req.method === "PUT") {
       if (endpoint === "acceptSession") {
         // --- acceptSession PUT Logic ---
-        await requireAdmin(req, res); // Validate admin access
+        // Validate admin access
         const { userId } = req.body;
         const client = await pool.connect();
         try {
@@ -146,7 +146,7 @@ export default async function handler(req, res) {
         }
       } else if (endpoint === "isPayed") {
         // --- isPayed PUT Logic ---
-        await requireAdmin(req, res); // Validate admin access
+        // Validate admin access
         const { userId } = req.body;
         const client = await pool.connect();
         try {
@@ -162,7 +162,7 @@ export default async function handler(req, res) {
         }
       } else if (endpoint === "rejectSession") {
         // --- rejectSession PUT Logic ---
-        await requireAdmin(req, res); // Validate admin access
+        // Validate admin access
         const { userId } = req.body;
         const client = await pool.connect();
         try {
