@@ -21,25 +21,24 @@ const allowedOrigins = [
 ];
 
 export default async function handler(req, res) {
-  console.log("Request URL:", req.url);
-  console.log("Origin:", req.headers.origin);
-  console.log("Endpoint:", req.query.endpoint);
-  // Set CORS headers dynamically
   const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
+  const host = req.headers.host; // e.g., "almourachah.org"
+  const isProduction = process.env.NODE_ENV === "production";
+  const expectedHost = isProduction ? "almourachah.org" : "localhost:3000";
+
+  // Allow same-origin requests (no Origin header) or matching allowed origins
+  if (!origin && host === expectedHost) {
+    res.setHeader("Access-Control-Allow-Origin", `https://${host}`);
+  } else if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   } else {
+    console.log("Rejected origin:", origin, "Host:", host);
     return res.status(403).json({ error: "Origin not allowed" });
   }
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  console.log("CORS headers set:", {
-    "Access-Control-Allow-Origin": origin,
-    "Access-Control-Allow-Credentials": "true",
-  });
 
-  // Handle preflight (OPTIONS) request
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
