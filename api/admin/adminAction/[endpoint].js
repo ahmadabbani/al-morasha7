@@ -21,6 +21,9 @@ const allowedOrigins = [
 ];
 
 export default async function handler(req, res) {
+  console.log("Request URL:", req.url);
+  console.log("Origin:", req.headers.origin);
+  console.log("Endpoint:", req.query.endpoint);
   // Set CORS headers dynamically
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
@@ -31,6 +34,10 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  console.log("CORS headers set:", {
+    "Access-Control-Allow-Origin": origin,
+    "Access-Control-Allow-Credentials": "true",
+  });
 
   // Handle preflight (OPTIONS) request
   if (req.method === "OPTIONS") {
