@@ -32,7 +32,7 @@ const Home = () => {
               "المرشّح" هو المرجع الذي يضمن لكم الجهوزية الكاملة لخوض الانتخابات
               بثقة وقوّة.
             </p>
-            <Link to="/register">
+            <Link to="/admin/admin-login">
               <button className="home-button">سجل الآن</button>
             </Link>
           </motion.div>
