@@ -11,7 +11,10 @@ const Blogs = () => {
     const fetchBlogs = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_APP_API_URL}/admin/adminAction/blogs`
+          `${import.meta.env.VITE_REACT_APP_API_URL}/admin/adminAction/blogs`,
+          {
+            method: "PUT",
+          }
         );
         const data = await response.json();
         if (!response.ok)
