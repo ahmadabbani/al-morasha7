@@ -70,7 +70,7 @@ const Footer = () => {
                   offset={-70}
                   smooth={true}
                   duration={0}
-                  className="footer-link"
+                  className="footer-link footer-register"
                 >
                   تسجيل جديد
                 </ScrollLink>

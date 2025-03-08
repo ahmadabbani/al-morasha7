@@ -68,6 +68,23 @@ const Header = () => {
       }`}
     >
       <nav className="header-nav">
+        <LinkToExternal to="/" className="header-logo-container">
+          <img
+            src={
+              !isHome
+                ? "/images/header-logo.png"
+                : scrolled
+                ? "/images/header-logo.png"
+                : "/images/header-logo-white.png"
+            }
+            alt="Logo"
+            className="header-logo"
+          />
+        </LinkToExternal>
+        {/* Hamburger Icon */}
+        <button className="header-hamburger" onClick={toggleMenu}>
+          <FaBars />
+        </button>
         {/* Always visible links */}
         <div
           className={`header-nav-links ${
@@ -118,27 +135,29 @@ const Header = () => {
               </ScrollLink>
             </>
           )}
+          {user && !user.isAdmin && (
+            <LinkToExternal
+              to="/profile"
+              className="header-nav-link header-nav-profile"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              حسابي
+            </LinkToExternal>
+          )}
+
           <LinkToExternal
             to="/register"
-            className="header-nav-link"
+            className="header-nav-link header-nav-register"
             onClick={() => setIsMenuOpen(false)}
           >
             تسجيل جديد
           </LinkToExternal>
+
           {/* Conditional links */}
           {!loading && (
             <div className="header-auth-links">
               {user ? (
                 <>
-                  {!user.isAdmin && (
-                    <LinkToExternal
-                      to="/profile"
-                      className="header-nav-link"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      حسابي
-                    </LinkToExternal>
-                  )}
                   <button
                     onClick={() => {
                       handleLogout();
@@ -161,23 +180,6 @@ const Header = () => {
             </div>
           )}
         </div>
-        <LinkToExternal to="/" className="header-logo-container">
-          <img
-            src={
-              !isHome
-                ? "/images/header-logo.png"
-                : scrolled
-                ? "/images/header-logo.png"
-                : "/images/header-logo-white.png"
-            }
-            alt="Logo"
-            className="header-logo"
-          />
-        </LinkToExternal>
-        {/* Hamburger Icon */}
-        <button className="header-hamburger" onClick={toggleMenu}>
-          <FaBars />
-        </button>
       </nav>
     </motion.header>
   );

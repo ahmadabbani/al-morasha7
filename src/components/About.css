@@ -189,10 +189,10 @@
 }
 
 .about-modal-register {
-    color: #202d61;
+    color: #1ea81e;
     font-weight: bold;
     display: inline-block;
-    border-bottom: 2px solid #202d61;
+    border-bottom: 2px solid #1ea81e;
     padding-bottom: 3px;
     transition: transform 0.3s;
 }
@@ -276,7 +276,7 @@
 }
 
 .about-cta-link {
-    color: inherit;
+    color: #139c13;
     /* keeps the same color as parent text */
     text-decoration: underline;
     /* adds the line under the text */
@@ -289,7 +289,7 @@
 }
 
 .about-cta-link:hover {
-    color: inherit;
+    color: #0aa80a;
     /* maintains color on hover */
     transform: translateY(-2px);
     /* subtle hover effect */

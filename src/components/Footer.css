@@ -24,6 +24,7 @@
     padding: 0;
     margin: 0;
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: 2rem;
 }
@@ -84,9 +85,9 @@
 }
 
 .footer-register-btn {
-    background-color: transparent;
+    background-color: #1ea81e;
     color: #FFFFFF;
-    border: 2px solid #FFFFFF;
+    border: 2px solid #1ea81e;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     font-size: 0.9rem;
@@ -98,9 +99,26 @@
 
 .footer-register-btn:hover {
     background-color: #FFFFFF;
-    color: #202d61;
+    color: #1ea81e;
     border: 2px solid #FFFFFF;
-    transform: translateY(-2px);
+}
+
+.footer-register {
+    background-color: #1ea81e;
+    color: #FFFFFF;
+    border: 2px solid #1ea81e;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.footer-register:hover {
+    background-color: #FFFFFF;
+    color: #1ea81e;
+    border: 2px solid #FFFFFF;
+
 }
 
 @media (max-width: 992px) and (min-width: 768px) {

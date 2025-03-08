@@ -23,7 +23,7 @@
     width: 100%;
     max-width: 900px;
     padding: 3rem 40px 0 40px;
-    margin-right: 10%;
+    margin-right: 5%;
 }
 
 .home-title {
@@ -52,9 +52,9 @@
 }
 
 .home-button {
-    background: transparent;
+    background: #1ea81e;
     color: white;
-    border: 2px solid white;
+    border: 2px solid #1ea81e;
     padding: 11px 32px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -65,9 +65,10 @@
 
 .home-button:hover {
     background: white;
-    color: #202d61;
+    border: 2px solid white;
+    color: #1ea81e;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+
 }
 
 @media (max-width: 768px) {
