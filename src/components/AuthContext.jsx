@@ -14,6 +14,7 @@ export function AuthProvider({ children }) {
         const res = await fetch(
           `${import.meta.env.VITE_REACT_APP_API_URL}/users/auth/me`,
           {
+            method: "GET",
             credentials: "include",
           }
         );

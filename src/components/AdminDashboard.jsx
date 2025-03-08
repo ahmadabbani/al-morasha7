@@ -95,6 +95,7 @@ const AdminDashboard = () => {
           import.meta.env.VITE_REACT_APP_API_URL
         }/admin/adminAction/acceptSession`,
         {
+          method: "GET",
           credentials: "include",
         }
       );
