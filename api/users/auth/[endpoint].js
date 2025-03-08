@@ -38,22 +38,23 @@ const success = {
 };
 
 export default async function handler(req, res) {
-  console.log("CORS middleware running, req.url:", req.url);
-  console.log("Origin:", req.headers.origin);
-  console.log("Dynamic endpoint:", req.query.endpoint);
-
-  // STEP 1: Handle CORS first - Apply CORS headers
   const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
+  const host = req.headers.host; // e.g., "almourachah.org"
+  const isProduction = process.env.NODE_ENV === "production";
+  const expectedHost = isProduction ? "almourachah.org" : "localhost:3000";
+
+  if (!origin && host === expectedHost) {
+    res.setHeader("Access-Control-Allow-Origin", `https://${host}`);
+  } else if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   } else {
+    console.log("Rejected origin:", origin, "Host:", host);
     return res.status(403).json({ error: "Origin not allowed" });
   }
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // STEP 2: Handle preflight (OPTIONS) request before anything else
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
