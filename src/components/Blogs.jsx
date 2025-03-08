@@ -13,7 +13,7 @@ const Blogs = () => {
         const response = await fetch(
           `${import.meta.env.VITE_REACT_APP_API_URL}/admin/adminAction/blogs`,
           {
-            method: "PUT",
+            method: "GET",
           }
         );
         const data = await response.json();
