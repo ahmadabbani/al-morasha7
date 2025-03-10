@@ -2,7 +2,6 @@ import { React, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   FaInstagram,
-  FaTwitter,
   FaFacebook,
   FaTiktok,
   FaWhatsapp,
