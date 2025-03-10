@@ -118,7 +118,7 @@ const Footer = () => {
                 <FaFacebook className="footer-icon" />
               </a>
               <a
-                href="#"
+                href="https://www.youtube.com/@%D8%A7%D9%84%D9%85%D8%B1%D8%B4%D9%91%D8%AD-%D8%A9"
                 className="footer-social-link"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -127,7 +127,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="https://wa.me/96171346435"
                 className="footer-social-link"
                 target="_blank"
                 rel="noopener noreferrer"
