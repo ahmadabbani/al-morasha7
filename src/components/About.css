@@ -281,24 +281,23 @@
 }
 
 .about-cta-link {
-    color: #19d419;
-    /* keeps the same color as parent text */
-    text-decoration: underline;
-    /* adds the line under the text */
-    text-underline-offset: 10px;
-    font-weight: inherit;
-    font-size: 1.4rem;
-    /* keeps the same font weight */
-    font-weight: bold !important;
-    display: inline-block;
+    background: #1ea81e;
+    color: white;
+    border: 2px solid #1ea81e;
+    padding: 4px 22px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
 
-    transition: transform 0.3s ease;
 }
 
 .about-cta-link:hover {
-    /* maintains color on hover */
+    background: white;
+    border: 2px solid white;
+    color: #1ea81e;
     transform: translateY(-2px);
-    /* subtle hover effect */
 }
 
 .check-icon {

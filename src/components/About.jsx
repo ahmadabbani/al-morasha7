@@ -262,7 +262,7 @@ const About = () => {
             لا تضيّعوا الوقت،
             <span style={{ padding: "0 6px 0 0" }}>
               <Link to="/register" className="about-cta-link">
-                وسجّلوا الآن!
+                وسجّل/ي الآن!
               </Link>
             </span>
           </p>

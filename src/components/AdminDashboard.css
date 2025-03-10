@@ -385,6 +385,16 @@
 }
 
 @media (max-width: 575px) {
+    .admin-top-right {
+        gap: 0.35rem;
+    }
+
+    .admin-create {
+        font-size: 0.9rem;
+        gap: 3px;
+        padding: 0.25rem 0.5rem;
+    }
+
     .admin-user-card {
         flex-direction: column;
         gap: 15px;
@@ -400,6 +410,10 @@
 }
 
 @media (max-width: 440px) {
+    .admin-top-right {
+        flex-direction: column;
+    }
+
     .admin-search-container {
         gap: 0.5rem;
     }
@@ -413,9 +427,5 @@
 @media (max-width: 375px) {
     .admin-search-container {
         flex-direction: column;
-    }
-
-    .admin-top-right {
-        gap: 0.5rem;
     }
 }
