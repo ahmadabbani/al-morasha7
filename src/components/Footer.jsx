@@ -65,15 +65,15 @@ const Footer = () => {
                 </ScrollLink>
               </li>
               <li>
-                <ScrollLink
-                  to="contact"
+                <Link
+                  to="/register"
                   offset={-70}
                   smooth={true}
                   duration={0}
                   className="footer-link footer-register"
                 >
                   تسجيل جديد
-                </ScrollLink>
+                </Link>
               </li>
             </ul>
           </div>
@@ -86,7 +86,7 @@ const Footer = () => {
                 حول حملتكم الانتخابية وخطوات الترشّح بنجاح!
               </p>
               <Link to="/register">
-                <button className="footer-register-btn"> سجلوا الآن !</button>
+                <button className="footer-register-btn"> سجل/ي الآن !</button>
               </Link>
             </div>
             <div className="footer-social-icons">

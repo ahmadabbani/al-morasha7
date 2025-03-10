@@ -33,7 +33,7 @@ const Home = () => {
               الانتخابات بثقة وقوّة.
             </p>
             <Link to="/register">
-              <button className="home-button">سجلوا الآن</button>
+              <button className="home-button">سجل/ي الآن</button>
             </Link>
           </motion.div>
         </div>

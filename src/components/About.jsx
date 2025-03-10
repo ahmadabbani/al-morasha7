@@ -155,7 +155,7 @@ const About = () => {
                     البرنامج.
                   </p>
                   <Link to="/register" className="about-modal-register">
-                    سجلوا الآن
+                    سجل/ي الآن
                   </Link>
                   <img
                     src="/images/cover-book.png"
@@ -262,7 +262,7 @@ const About = () => {
             لا تضيّعوا الوقت،
             <span style={{ padding: "0 6px 0 0" }}>
               <Link to="/register" className="about-cta-link">
-                وسجّل/ي الآن!
+                سجّل/ي الآن!
               </Link>
             </span>
           </p>
