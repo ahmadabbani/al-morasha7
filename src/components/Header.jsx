@@ -131,7 +131,7 @@ const Header = () => {
                 className="header-nav-link"
                 onClick={() => setIsMenuOpen(false)}
               >
-                تواصل معنا
+                تواصلوا معنا
               </ScrollLink>
             </>
           )}

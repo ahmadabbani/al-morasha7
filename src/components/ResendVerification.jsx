@@ -49,7 +49,7 @@ const ResendVerification = ({ email = "", onClose }) => {
       <div className="resend-container" dir="rtl">
         <h3 className="resend-success">تم إرسال بريد التحقق</h3>
         <p className="resend-message">
-          تم إرسال رابط التأكيد إلى بريدك الإلكتروني. يرجى التحقق من بريدك
+          تم إرسال رابط التأكيد إلى بريدك/ي الإلكتروني. يرجى التحقق من بريدك/ي
           الإلكتروني والنقر على الرابط للتأكيد.
         </p>
         <button onClick={onClose} className="resend-close-btn">
@@ -72,7 +72,7 @@ const ResendVerification = ({ email = "", onClose }) => {
             id="email"
             value={emailInput}
             onChange={(e) => setEmailInput(e.target.value)}
-            placeholder="أدخل بريدك الإلكتروني"
+            placeholder=" البريد الإلكتروني"
             required
             className="resend-input"
           />

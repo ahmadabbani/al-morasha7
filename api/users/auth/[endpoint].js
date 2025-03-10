@@ -80,7 +80,7 @@ export default async function handler(req, res) {
         try {
           // Find user by email or phone
           const user = await client.query(
-            `SELECT id, name, email, password, phone, status, district, role, "isAdmin", "isPayed", is_verified,
+            `SELECT id, name, email, password, phone, status, district, region, role, "isAdmin", "isPayed", is_verified,
              session_date::date as session_date,
              to_char(session_time, 'HH24:MI') as session_time 
            FROM users WHERE email = $1 OR phone = $1`,
@@ -145,6 +145,7 @@ export default async function handler(req, res) {
               phone: user.rows[0].phone,
               status: user.rows[0].status,
               district: user.rows[0].district,
+              region: user.rows[0].region,
               role: user.rows[0].role,
               session_date: user.rows[0].session_date,
               session_time: user.rows[0].session_time,
@@ -164,10 +165,18 @@ export default async function handler(req, res) {
       }
     } else if (endpoint === "register") {
       // --- Register Logic ---
-      const { name, phone, email, district, role, password } = req.body;
+      const { name, phone, email, district, region, role, password } = req.body;
 
       // Basic validation
-      if (!name || !phone || !email || !district || !role || !password) {
+      if (
+        !name ||
+        !phone ||
+        !email ||
+        !district ||
+        !region ||
+        !role ||
+        !password
+      ) {
         return res.status(400).json({ error: errors.FIELDS_REQUIRED });
       }
 
@@ -199,13 +208,14 @@ export default async function handler(req, res) {
           // Insert new user
           await client.query(
             `INSERT INTO users 
-            (name, phone, email, district, role, password, session_date, session_time, verification_token, token_expiry, is_verified, email_verified_at) 
-            VALUES ($1, $2, $3, $4, $5, $6, NULL, NULL, $7, $8, false, NULL)`,
+            (name, phone, email, district, region, role, password, session_date, session_time, verification_token, token_expiry, is_verified, email_verified_at) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, NULL, NULL, $8, $9, false, NULL)`,
             [
               name,
               phone,
               email,
               district,
+              region,
               role,
               hashedPassword,
               verificationToken,
@@ -351,7 +361,7 @@ export default async function handler(req, res) {
 
         // Fetch user from DB
         const user = await pool.query(
-          `SELECT id, name, email, phone, status, district, role, "isAdmin", "isPayed", session_date::date as session_date,
+          `SELECT id, name, email, phone, status, district, region, role, "isAdmin", "isPayed", session_date::date as session_date,
                   to_char(session_time, 'HH24:MI') as session_time 
            FROM users WHERE id = $1`,
           [decoded.id]

@@ -82,11 +82,11 @@ const Footer = () => {
           <div className="col-md-3 col-12 footer-cta-section">
             <div className="footer-cta-wrapper">
               <p className="footer-cta-text">
-                لا تفوّت فرصة الحصول على الدليل الذي تحتاجه لمعلومات كاملة حول
-                حملتك الانتخابية وخطوات الترشّح بنجاح!
+                لا تفوّتوا فرصة الحصول على الدليل الذي تحتاجونه لمعلومات كاملة
+                حول حملتكم الانتخابية وخطوات الترشّح بنجاح!
               </p>
               <Link to="/register">
-                <button className="footer-register-btn">سجل الآن!</button>
+                <button className="footer-register-btn"> سجلوا الآن !</button>
               </Link>
             </div>
             <div className="footer-social-icons">

@@ -13,17 +13,17 @@ export async function sendVerificationEmail(email, name, verificationToken) {
       to: email,
       subject: "تأكيد بريدك الإلكتروني",
       html: `
-        <div dir="rtl" style="font-family: Arial, sans-serif; padding: 20px;">
-          <h2>مرحباً ${name}،</h2>
-          <p>شكراً للتسجيل في خدمتنا. يرجى النقر على الرابط أدناه لتأكيد بريدك الإلكتروني:</p>
-          <p>
-            <a href="${verificationUrl}" style="background-color: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px;">
-              تأكيد البريد الإلكتروني
-            </a>
-          </p>
-          <p>إذا لم تقم بالتسجيل في خدمتنا، يرجى تجاهل هذا البريد الإلكتروني.</p>
-          <p>مع تحياتنا،<br>فريق الدعم</p>
-        </div>
+       <div dir="rtl" style="font-family: Arial, sans-serif; padding: 20px; font-size: 18px;">
+  <h2 style="font-size: 24px;">مرحباً ${name}،</h2>
+  <p>شكراً لانضمامك إلى برنامج <strong>المرشح/ة</strong>! يرجى النقر على الرابط أدناه لتأكيد بريدك الإلكتروني:</p>
+  <p>
+    <a href="${verificationUrl}" style="background-color: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; font-size: 18px;">
+      تأكيد البريد الإلكتروني
+    </a>
+  </p>
+  <p>إذا لم تكن قد انضممت إلى البرنامج، يرجى تجاهل هذا البريد الإلكتروني.</p>
+  <p>مع أطيب التحيات،<br>فريق الدعم</p>
+</div>
       `,
     });
 

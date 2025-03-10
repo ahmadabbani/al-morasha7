@@ -42,7 +42,7 @@ const VerifyEmail = () => {
         // Auto-redirect to login after 5 seconds
         setTimeout(() => {
           navigate("/login");
-        }, 8000);
+        }, 12000);
       } catch (error) {
         setStatus("error");
         setErrorMessage(error.message);
@@ -74,10 +74,10 @@ const VerifyEmail = () => {
           <h2>تم التحقق بنجاح!</h2>
           <div className="success-icon">✓</div>
           <p>
-            تم التحقق من بريدك الإلكتروني بنجاح. يمكنك الآن تسجيل الدخول إلى
-            حسابك.
+            تم التحقق من بريدك/ي الإلكتروني بنجاح. يمكنك/ي الآن تسجيل الدخول إلى
+            حسابك/ي
           </p>
-          <p>سيتم تحويلك تلقائياً إلى صفحة تسجيل الدخول خلال 8 ثوانٍ.</p>
+          <p>سيتم تحويلك/ي تلقائياً إلى صفحة تسجيل الدخول خلال ثوانٍ</p>
           <button onClick={() => navigate("/login")} className="login-btn">
             الذهاب إلى صفحة تسجيل الدخول
           </button>
@@ -92,7 +92,7 @@ const VerifyEmail = () => {
       <div className="verification-box error">
         <h2>فشل التحقق</h2>
         <div className="error-icon">✗</div>
-        <p>عذراً، لم نتمكن من التحقق من بريدك الإلكتروني.</p>
+        <p>عذراً، لم نتمكن من التحقق من بريدك/ي الإلكتروني.</p>
         <p className="error-message">{errorMessage}</p>
         <p>قد يكون الرابط قد انتهت صلاحيته أو تم استخدامه بالفعل.</p>
         <button onClick={() => navigate("/login")} className="login-btn">

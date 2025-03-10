@@ -44,7 +44,6 @@ export default async function handler(req, res) {
 
       // Combine both results
       const allDisabledSlots = [...userBookings.rows, ...adminDisabled.rows];
-      console.log(allDisabledSlots);
       return res.status(200).json(allDisabledSlots);
     } finally {
       client.release();

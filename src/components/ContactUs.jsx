@@ -18,7 +18,7 @@ const ContactUs = () => {
       className="contact-us container my-5"
       id="contact"
     >
-      <h2 className="contact-title">تواصل معنا</h2>
+      <h2 className="contact-title">تواصلوا معنا</h2>
       <form className="contact-form">
         <div className="row">
           {/* Name Field */}
@@ -31,7 +31,7 @@ const ContactUs = () => {
               type="text"
               id="name"
               className="form-input"
-              placeholder="أدخل اسمك"
+              placeholder="الاسم"
               required
             />
           </div>
@@ -46,7 +46,7 @@ const ContactUs = () => {
               type="email"
               id="email"
               className="form-input"
-              placeholder="أدخل بريدك الإلكتروني"
+              placeholder="البريد الإلكتروني"
               required
             />
           </div>
@@ -62,7 +62,7 @@ const ContactUs = () => {
             type="text"
             id="subject"
             className="form-input"
-            placeholder="أدخل موضوع رسالتك"
+            placeholder="موضوع الرسالة"
             required
           />
         </div>
@@ -76,7 +76,7 @@ const ContactUs = () => {
           <textarea
             id="message"
             className="form-textarea"
-            placeholder="اكتب رسالتك هنا..."
+            placeholder=" الرسالة..."
             rows="5"
             required
           ></textarea>

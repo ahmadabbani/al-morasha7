@@ -6,15 +6,24 @@ import "./AdminDashboard.css";
 import BookingCalendar from "./BookingCalendar";
 import {
   Calendar,
+  Calendar1,
+  CalendarCheck,
   CheckCheck,
   Clock,
+  Clock1,
+  Clock10,
+  Locate,
+  LocateFixed,
   Mail,
+  Map,
   MapPin,
+  Navigation,
   Phone,
   Plus,
   User,
   Users,
   Vote,
+  DollarSign,
 } from "lucide-react";
 import LogoutButton from "./LogoutButton";
 import { Link } from "react-router-dom";
@@ -147,7 +156,7 @@ const AdminDashboard = () => {
         )
       );
 
-      toast.success("تم قبول المستخدم بنجاح");
+      toast.success("Session has been successfully accepted");
     } catch (error) {
       console.error("Error updating date status:", error);
       toast.error("Error updating date status");
@@ -189,7 +198,7 @@ const AdminDashboard = () => {
         )
       );
 
-      toast.success("The appointment was successfully rejected");
+      toast.success("Session has been successfully rejected");
     } catch (error) {
       console.error("Error rejectng the appointment:", error);
       toast.error("An error occurred while rejecting the appointment");
@@ -375,6 +384,11 @@ const AdminDashboard = () => {
                     {user.phone}
                   </span>
                 )}
+                <span className="admin-user-email">
+                  <CalendarCheck size={22} strokeWidth={2.5} />
+                  Registered at:
+                  <span>{dayjs(user.created_at).format("YYYY-MM-DD")}</span>
+                </span>
                 {user.session_date ? (
                   <>
                     <span
@@ -385,10 +399,18 @@ const AdminDashboard = () => {
                       }`}
                     >
                       <Calendar size={22} strokeWidth={2} />
+                      <span
+                        className={`admin-user-booking ${
+                          checkDateStatus(user.session_date)
+                            ? "date-passed"
+                            : "date-active"
+                        }`}
+                      >
+                        Session Date:{" "}
+                      </span>
                       {dayjs(user.session_date).format("YYYY-MM-DD")} -{" "}
                       {user.session_time}
                     </span>
-
                     {checkDateStatus(user.session_date) && (
                       <span className="date-status">date passed</span>
                     )}
@@ -404,7 +426,10 @@ const AdminDashboard = () => {
               {/* Right Side */}
               <div className="admin-user-status">
                 <span className="admin-user-district">
-                  {user.district} <MapPin />
+                  {user.district} <Map />
+                </span>
+                <span className="admin-user-district">
+                  {user.region} <MapPin />
                 </span>
                 <span className="admin-user-role">
                   {user.role}
@@ -503,6 +528,8 @@ const AdminDashboard = () => {
     (user) => !user.status && user.session_date
   );
 
+  const payedUsers = users.filter((user) => user.isPayed);
+
   return (
     <div className="admin-container">
       {renderSearchBar()}
@@ -522,6 +549,14 @@ const AdminDashboard = () => {
           bookedPendingUsers,
 
           "#ff9800",
+          "bookedPending"
+        )}
+        {renderUserBox(
+          "Payed Users",
+          DollarSign,
+          payedUsers,
+
+          "#2ecc71",
           "bookedPending"
         )}
       </div>

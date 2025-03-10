@@ -15,7 +15,7 @@
 
 /* Welcome Widget */
 .user-profile-welcome-widget {
-    background: linear-gradient(135deg, #202d61, #d5d8db);
+    background: linear-gradient(135deg, #202d61, #b5bfc7);
     color: white;
     border: none;
     border-radius: 1rem;
@@ -170,7 +170,6 @@ span {
 
 .user-profile-unpaid-notice {
     text-align: center;
-    padding: 2rem;
     color: var(--lebanese-red);
 }
 
@@ -181,14 +180,16 @@ span {
 
 .user-profile-unpaid-notice .user-profile-guide-price {
     display: block;
-    font-size: 1.4rem;
+    padding-top: 0.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: var(--lebanese-red);
+    color: #1ea81e;
 }
 
 .user-profile-btn {
     background: var(--lebanese-red);
     color: white;
+
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
@@ -263,6 +264,26 @@ span {
     }
 }
 
+.booking-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* Resource Items */
 .user-profile-resources {
     display: flex;
@@ -293,6 +314,7 @@ span {
     border-radius: 1rem;
     border: 1px solid var(--medium-gray);
 }
+
 
 /* Calendar DatePicker */
 .profile-container {
@@ -331,11 +353,86 @@ span {
 
 }
 
+.calendar-top-header {
+    display: flex;
+    align-items: center;
+    margin: 0 3.8rem 1rem 3.8rem;
+    justify-content: space-between;
+}
+
+.disable-day-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+
+.disable-day-text {
+    display: block;
+    padding: 0;
+    margin: 0;
+    color: #ff4d4d;
+    font-weight: 600;
+}
+
+.disable-day-button {
+    background-color: #e0e0e0;
+    color: #555555;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.disable-day-button:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.disable-day-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.disable-day-button:disabled {
+    background-color: #b0b0b0;
+    color: #888888;
+    cursor: not-allowed;
+}
+
+/* Customizable Spinner */
+.disable-day-spinner {
+    display: inline-block;
+    font-size: 16px;
+    /* Adjust size as needed */
+    color: #555555;
+    /* Matches button text color, customizable */
+    animation: spin 1s linear infinite;
+    /* Spinning animation */
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 /* Time Slots Grid */
 .profile-time-grid {
     gap: 8px;
-    width: 50%;
+    width: 90%;
     margin: auto;
 }
 
@@ -398,16 +495,21 @@ span {
 
 /* Button Styles */
 .profile-confirm-button {
-    background-color: white;
-    border: 2px solid #202d61;
+    background-color: #1ea81e;
+    border: 2px solid #1ea81e;
+    color: #FFFFFF;
     border-radius: 4px;
-    font-weight: bold;
-    transition: transform 0.3s;
+    padding: 0.5rem 1.8rem;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .profile-confirm-button:hover {
     transform: translateY(-2px);
-    background-color: white;
+    background-color: #2ab92a;
+    border: 2px solid #2ab92a;
 }
 
 @media (max-width: 580px) {

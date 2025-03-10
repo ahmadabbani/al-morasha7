@@ -60,6 +60,7 @@ export default async function handler(req, res) {
               phone,
               email,
               district,
+              region,
               role,
               status,
               "isPayed",

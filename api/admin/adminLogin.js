@@ -91,6 +91,7 @@ export default async function handler(req, res) {
           phone: user.rows[0].phone,
           status: user.rows[0].status,
           district: user.rows[0].district,
+          region: user.rows[0].region,
           role: user.rows[0].role,
           isPayed: user.rows[0].isPayed,
           isAdmin: user.rows[0].isAdmin,

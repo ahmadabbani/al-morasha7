@@ -95,7 +95,7 @@ const Login = () => {
                 name="emailOrPhone"
                 value={formData.emailOrPhone}
                 onChange={handleChange}
-                placeholder="أدخل بريدك الإلكتروني أو هاتفك"
+                placeholder="البريد الإلكتروني أو الهاتف"
                 className="login-input form-input"
                 required
               />
@@ -113,7 +113,7 @@ const Login = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="أدخل كلمة المرور"
+                placeholder="كلمة المرور"
                 className="login-input form-input"
                 required
               />

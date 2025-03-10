@@ -6,7 +6,7 @@
 }
 
 .footer-logo {
-    width: 120px;
+    width: 160px;
     height: auto;
     transition: transform 0.3s ease;
 }
@@ -34,7 +34,7 @@
     color: #FFFFFF;
     text-decoration: none;
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 700;
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -91,7 +91,7 @@
     padding: 0.5rem 1rem;
     border-radius: 4px;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -107,7 +107,7 @@
     background-color: #1ea81e;
     color: #FFFFFF;
     border: 2px solid #1ea81e;
-    padding: 0.25rem 0.65rem;
+    padding: 0.35rem 0.95rem;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -173,7 +173,7 @@
     }
 
     .footer-logo {
-        width: 100px;
+        width: 130px;
     }
 
     .footer-link {

@@ -24,7 +24,7 @@ const LogoutButton = () => {
 
       if (res.ok) {
         setUser(null); // Clear user state
-        toast.success("Logout successful"); // Success toast
+        toast.success("Logout successful!"); // Success toast
         navigate("/login"); // Redirect to login page
       } else {
         throw new Error("Logout failed");

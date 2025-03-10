@@ -14,6 +14,7 @@ import timezone from "dayjs/plugin/timezone";
 import { useAuth } from "../components/AuthContext";
 import { toast } from "react-toastify";
 import "./Profile.css";
+import { AlertCircle, ArrowDown } from "lucide-react";
 
 // Add timezone plugins to dayjs
 dayjs.extend(utc);
@@ -31,15 +32,38 @@ export default function BookingCalendar({
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [bookedSlots, setBookedSlots] = useState([]);
+  const [disabledDays, setDisabledDays] = useState([]);
   const [loading, setLoading] = useState(false);
   //loading slots
   const [loadingSlots, setLoadingSlots] = useState(new Set());
-
-  // Generate all 24 hour slots
-  const timeSlots = Array.from({ length: 24 }, (_, i) => {
-    const hour = i.toString().padStart(2, "0");
-    return `${hour}:00`;
+  const [loadingDays, setLoadingDays] = useState(false);
+  // Generate all 24-hour slots with 15-minute intervals
+  const timeSlots = Array.from({ length: 24 * 4 }, (_, i) => {
+    const hour = Math.floor(i / 4)
+      .toString()
+      .padStart(2, "0");
+    const minutes = (i % 4) * 15;
+    return `${hour}:${minutes.toString().padStart(2, "0")}`;
   });
+
+  // one day slot
+  const daySlot = Array.from({ length: 1 }, (_, i) => {
+    return "00:00 - 23:59"; // Represents the whole day
+  });
+
+  const fetchDisabledDays = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_APP_API_URL}/users/getDisabledDays`
+      );
+      if (!response.ok) throw new Error("Failed to fetch disabled days");
+      const disabledDays = await response.json();
+      setDisabledDays(disabledDays); // Assume you have state for disabled days
+    } catch (error) {
+      console.error("Error fetching disabled days:", error);
+      // Optionally handle the error (e.g., display a message)
+    }
+  };
 
   const fetchBookedSlots = async () => {
     try {
@@ -55,7 +79,6 @@ export default function BookingCalendar({
         session_date: dayjs(slot.session_date).format("YYYY-MM-DD"),
         session_time: slot.session_time, // Already in HH:MM format
       }));
-      console.log("convertedslots:", convertedSlots);
 
       setBookedSlots(convertedSlots);
     } catch (error) {
@@ -65,8 +88,18 @@ export default function BookingCalendar({
   };
 
   useEffect(() => {
+    fetchDisabledDays();
     fetchBookedSlots();
   }, []);
+
+  // Helper function to format Date object to "YYYY-MM-DD"
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+    const day = String(date.getDate()).padStart(2, "0");
+    const formatted = `${year}-${month}-${day}`;
+    return formatted;
+  };
 
   const isTimeSlotBooked = (time) => {
     return bookedSlots.some((slot) => {
@@ -85,10 +118,7 @@ export default function BookingCalendar({
   const handleTimeSelect = (time) => {
     setSelectedTime(time);
   };
-
-  const isDateDisabled = (date) => {
-    return date < dayjs().tz(userTimezone).startOf("day").toDate();
-  };
+  ///////// here it will include fetched date (day) to be disbled) after fetching them from db when a full dy is disbaled
 
   const handleBooking = async () => {
     if (!userId) {
@@ -162,6 +192,10 @@ export default function BookingCalendar({
   const handleAdminDisable = async (time) => {
     if (!isAdmin) return;
     setLoadingSlots((prev) => new Set(prev).add(time));
+
+    if (time.includes(" - ")) {
+      setLoadingDays(true);
+    }
     const bookingDate = dayjs(selectedDate).format("YYYY-MM-DD");
     try {
       const response = await fetch(
@@ -179,19 +213,30 @@ export default function BookingCalendar({
       );
 
       if (!response.ok) throw new Error("Failed to disable date");
-
-      // Refresh booked slots
-      await fetchBookedSlots();
-      toast.success("The date was successfully disabled");
+      // If time includes a range indicator ("-"), refresh only disabled days.
+      // Otherwise, refresh the booked slots.
+      if (time.includes(" - ")) {
+        toast.success("The Day Was Successfully Disabled");
+        await fetchDisabledDays();
+      } else {
+        toast.success("The Time Was Successfully Disabled");
+        await fetchBookedSlots();
+      }
     } catch (error) {
       console.error("Error disabling slot:", error);
       toast.error("An error occurred while disabling the date");
     } finally {
+      // Existing loadingSlots cleanup (unchanged)
       setLoadingSlots((prev) => {
         const newSet = new Set(prev);
         newSet.delete(time);
         return newSet;
       });
+
+      // New loadingDays cleanup (reset to false if it was set)
+      if (time.includes(" - ")) {
+        setLoadingDays(false);
+      }
     }
   };
 
@@ -254,30 +299,85 @@ export default function BookingCalendar({
   return (
     <div className="profile-container">
       <LoadingOverlay visible={loading} />
-
-      <Text size="lg" fw={700} mb="md" c="#202d61">
-        {!isAdmin ? "احجز موعدك" : "Make a date available or unavailable"}
-      </Text>
-
+      <div
+        style={{ fontWeight: "700", marginBottom: "2rem", color: "#202d61" }}
+      >
+        {!isAdmin ? (
+          <>
+            <h2>
+              احجز موعدك{" "}
+              <ArrowDown
+                size={20}
+                strokeWidth={3}
+                className="user-profile-arrow-down"
+              />
+            </h2>
+            <span style={{ fontSize: "0.9rem", fontWeight: "700" }}>
+              يرجى اختيار الموعد المناسب لكم لحجز مكالمة فردية مجانية مع المدرب
+              لمناقشة البرنامج التدريبي وتفاصيله
+            </span>
+          </>
+        ) : (
+          "Make a date available or unavailable"
+        )}
+      </div>
       <DatePicker
         value={selectedDate}
         onChange={(date) => {
           setSelectedDate(date);
           setSelectedTime(null);
         }}
-        excludeDate={isDateDisabled}
-        locale="ar"
-        firstDayOfWeek={0}
+        firstDayOfWeek={1}
         minDate={new Date()}
+        excludeDate={(date) => {
+          const day = date.getDay();
+          const isWeekend = day === 0 || day === 6;
+
+          const formattedDate = formatDate(date);
+          const isDisabled = disabledDays.includes(formattedDate);
+
+          return isWeekend || isDisabled;
+        }}
+        locale="ar"
         mb="xl"
         className="profile-datepicker"
       />
 
       {selectedDate && (
         <div className="profile-time-section">
-          <Text size="lg" fw={700} mb="md" c="#202d61">
-            {!isAdmin ? "اختر الوقت" : "Select a Time"}
-          </Text>
+          <div className={isAdmin ? "calendar-top-header" : ""}>
+            <Text
+              size="lg"
+              fw={700}
+              mb={isAdmin ? 0 : "md"}
+              c="#202d61"
+              style={isAdmin ? { width: "fit-content" } : undefined}
+            >
+              {!isAdmin ? "اختر الوقت" : "Disable a Time"}
+            </Text>
+            {isAdmin &&
+              daySlot.map((time) => (
+                <div key={time} className="disable-day-container">
+                  <p className="disable-day-text">
+                    To disable the full day, click here:
+                  </p>
+                  <button
+                    onClick={() => handleAdminDisable(time)}
+                    className="disable-day-button"
+                    disabled={
+                      loadingSlots.has(time) ||
+                      (time.includes(" - ") && loadingDays)
+                    }
+                  >
+                    {time.includes(" - ") && loadingDays ? (
+                      <span className="disable-day-spinner">⏳</span>
+                    ) : (
+                      selectedDate.toDateString()
+                    )}
+                  </button>
+                </div>
+              ))}
+          </div>
 
           <Grid className="profile-time-grid">
             {timeSlots.map((time) => {
@@ -329,18 +429,14 @@ export default function BookingCalendar({
           </Grid>
         </div>
       )}
-
       {selectedDate && selectedTime && (
-        <Button
-          w={200}
-          mt="xl"
+        <button
           onClick={handleBooking}
           loading={loading}
-          size="lg"
           className="profile-confirm-button"
         >
-          تأكيد الحجز
-        </Button>
+          {loading ? <span className="booking-spinner"></span> : "تأكيد الحجز"}
+        </button>
       )}
     </div>
   );
