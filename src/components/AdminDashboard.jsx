@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, Loader } from "@mantine/core";
-import { Unlock } from "lucide-react";
+import { FileDown, FileSpreadsheet, Unlock } from "lucide-react";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import "./AdminDashboard.css";
 import BookingCalendar from "./BookingCalendar";
+import * as XLSX from "xlsx";
 import {
   Calendar,
   Calendar1,
@@ -27,7 +28,7 @@ import {
   DollarSign,
 } from "lucide-react";
 import LogoutButton from "./LogoutButton";
-import { Link } from "react-router-dom";
+import { isRouteErrorResponse, Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -275,6 +276,45 @@ const AdminDashboard = () => {
     }
   };
 
+  //export to excel
+  const handleExportToExcel = () => {
+    if (!users || users.length === 0) {
+      alert("No users to export");
+      return;
+    }
+
+    // Prepare the data with specific fields
+    const exportData = users.map((user) => {
+      const formattedSessionDate = user.session_date
+        ? `${dayjs(user.session_date).format("YYYY-MM-DD")} - ${
+            user.session_time
+          }`
+        : "No Session Scheduled";
+      return {
+        ID: user.id,
+        Name: user.name,
+        Phone: user.phone,
+        Email: user.email,
+        Session_Date: formattedSessionDate,
+        District: user.district,
+        Region: user.region,
+        Role: user.role,
+        Payed: user.isPayed ? "Yes" : "No",
+        Registered_at: dayjs(user.created_at).format("YYYY-MM-DD"),
+      };
+    });
+
+    // Create a worksheet from the data
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+
+    // Create a workbook and append the worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Candidates");
+
+    // Generate and download the Excel file
+    XLSX.writeFile(workbook, "Candidates.xlsx");
+  };
+
   const handleSearch = () => {
     setIsSearching(!!searchQuery);
     setPagesState({
@@ -345,6 +385,13 @@ const AdminDashboard = () => {
           <Plus size={24} />
           New Admin
         </Link>
+        <button
+          onClick={handleExportToExcel}
+          disabled={loading || users.length === 0}
+          className="admin-create admin-export"
+        >
+          <FileSpreadsheet size={24} /> Export to Excel
+        </button>
         <LogoutButton />{" "}
       </div>
     </div>

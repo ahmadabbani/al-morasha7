@@ -15,6 +15,7 @@ const Header = () => {
   const { user, loading, setUser } = useAuth();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const isAuthPage = ["/login", "/register", "/profile"].includes(
     location.pathname
@@ -37,6 +38,7 @@ const Header = () => {
   }, [scrolled]);
 
   const handleLogout = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(
         `${import.meta.env.VITE_REACT_APP_API_URL}/users/auth/logout`,
@@ -55,6 +57,8 @@ const Header = () => {
       }
     } catch (error) {
       toast.error(error.message || "حدث خطأ أثناء تسجيل الخروج");
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -182,8 +186,13 @@ const Header = () => {
                       setIsMenuOpen(false);
                     }}
                     className="header-nav-link header-logout-button"
+                    disabled={isLoading} // Disable while loading
                   >
-                    تسجيل الخروج
+                    {isLoading ? (
+                      <span className="header-logout-spinner"></span>
+                    ) : (
+                      "تسجيل الخروج"
+                    )}
                   </button>
                 </>
               ) : (

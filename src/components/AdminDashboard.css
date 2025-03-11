@@ -97,9 +97,18 @@
 }
 
 .admin-create-blog:hover {
-    opacity: 0.9;
     border: 2px solid #27c44b;
     color: #27c44b;
+}
+
+.admin-export {
+    background-color: orange;
+    border: 2px solid orange;
+}
+
+.admin-export:hover {
+    border: 2px solid orange;
+    color: orange;
 }
 
 .admin-dashboard {
@@ -483,7 +492,7 @@
     background: #d32f2f;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1290px) {
     .admin-top-bar {
         display: flex;
         flex-direction: column-reverse;
@@ -502,7 +511,7 @@
 
 }
 
-@media (max-width: 575px) {
+@media (max-width: 680px) {
     .admin-top-right {
         gap: 0.35rem;
     }
@@ -527,7 +536,7 @@
     }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 580px) {
     .admin-top-right {
         flex-direction: column;
     }
@@ -543,6 +552,7 @@
 }
 
 @media (max-width: 375px) {
+
     .admin-search-container {
         flex-direction: column;
     }

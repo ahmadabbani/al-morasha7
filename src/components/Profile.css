@@ -647,3 +647,20 @@ span {
         object-fit: contain;
     }
 }
+
+@media (max-width: 425px) {
+    .disable-day-container {
+        flex-direction: column;
+    }
+
+    .disable-day-button {
+        margin-bottom: 0.8rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .profile-datepicker {
+        max-width: 260px;
+        width: 260px;
+    }
+}
