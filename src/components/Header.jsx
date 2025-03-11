@@ -124,6 +124,7 @@ const Header = () => {
                 smooth={true}
                 duration={0}
                 className="header-nav-link"
+                onClick={() => setIsMenuOpen(false)}
               >
                 عن البرنامج
               </ScrollLink>
@@ -133,6 +134,7 @@ const Header = () => {
                 smooth={true}
                 duration={0}
                 className="header-nav-link"
+                onClick={() => setIsMenuOpen(false)}
               >
                 من نحن
               </ScrollLink>
@@ -142,6 +144,7 @@ const Header = () => {
                 smooth={true}
                 duration={0}
                 className="header-nav-link"
+                 onClick={() => setIsMenuOpen(false)}
               >
                 المدوّنات
               </ScrollLink> */}
