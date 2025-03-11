@@ -132,7 +132,7 @@ const Header = () => {
               >
                 من نحن
               </ScrollLink>
-              <ScrollLink
+              {/*  <ScrollLink
                 to="blogs"
                 offset={-70}
                 smooth={true}
@@ -140,7 +140,7 @@ const Header = () => {
                 className="header-nav-link"
               >
                 المدوّنات
-              </ScrollLink>
+              </ScrollLink> */}
               <ScrollLink
                 to="contact"
                 offset={-70}

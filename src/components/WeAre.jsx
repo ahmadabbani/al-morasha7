@@ -1,15 +1,32 @@
-import React from "react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Users, Handshake, BarChart, CheckCircle } from "lucide-react";
 import "./WeAre.css";
 
 const WeAre = () => {
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
+  const ref4 = useRef(null);
+  const inView1 = useInView(ref1, { once: true });
+  const inView2 = useInView(ref2, { once: true });
+  const inView3 = useInView(ref3, { once: true });
+  const inView4 = useInView(ref4, { once: true });
   return (
     <section className="we-are-container" id="whoweare">
       <h1 className="we-are-title">من نحن</h1>
       <div className="container">
         <div className="row justify-content-center we-are-grid">
           {/* Card 1 */}
-          <div className="col-md-5 me-md-4 we-are-card ">
+          <motion.div
+            ref={ref1}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={
+              inView1 ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }
+            }
+            transition={{ duration: 0.6, delay: 0 }}
+            className="col-md-5 me-md-4 we-are-card "
+          >
             <div className="we-are-icon">
               <Users size={50} />
             </div>
@@ -32,10 +49,18 @@ const WeAre = () => {
               القيادية، تطوير استراتيجياتهم الانتخابية، والتعامل مع التحديات
               التي تواجههم خلال مسيرتهم الانتخابية.
             </p>
-          </div>
+          </motion.div>
 
           {/* Card 2 */}
-          <div className="col-md-5 we-are-card me-md-4 ">
+          <motion.div
+            ref={ref2}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={
+              inView2 ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }
+            }
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="col-md-5 we-are-card me-md-4 "
+          >
             <div className="we-are-icon">
               <Handshake size={50} />
             </div>
@@ -60,10 +85,18 @@ const WeAre = () => {
               المجالات التي تحتاج إلى تطوير، مما يوفّر لهم خارطة طريق واضحة
               لتحسين مهاراتهم وتعزيز جاهزيتهم قبل الوصول إلى المنصب.
             </p>
-          </div>
+          </motion.div>
 
           {/* Card 3 */}
-          <div className="col-md-5 we-are-card me-md-4">
+          <motion.div
+            ref={ref3}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={
+              inView3 ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }
+            }
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="col-md-5 we-are-card me-md-4"
+          >
             <div className="we-are-icon">
               <BarChart size={50} />
             </div>
@@ -77,10 +110,18 @@ const WeAre = () => {
               بناء هوية قيادية قوية، وضع استراتيجيات انتخابية فعالة، والتفاعل
               بثقة مع الجمهور والناخبين.
             </p>
-          </div>
+          </motion.div>
 
           {/* Card 4 */}
-          <div className="col-md-5 we-are-card me-md-4">
+          <motion.div
+            ref={ref4}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={
+              inView4 ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }
+            }
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="col-md-5 we-are-card me-md-4"
+          >
             <div className="we-are-icon">
               <CheckCircle size={50} />
             </div>
@@ -98,7 +139,7 @@ const WeAre = () => {
               المرشّح هو خطوتكم الأولى نحو النجاح والاستعداد الأمثل لخوض
               الانتخابات بثقة واحترافية.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -22,7 +22,6 @@
     margin-bottom: 60px;
     position: relative;
     z-index: 1;
-    animation: slideIn 1s ease-out;
 }
 
 /* Grid Layout */
@@ -42,7 +41,6 @@
     overflow: hidden;
     margin-bottom: 30px;
     opacity: 0;
-    animation: cardFadeIn 0.8s ease forwards;
 }
 
 .we-are-card:nth-child(1) {
@@ -109,29 +107,6 @@
 }
 
 /* Animations */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes cardFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 @keyframes pulse {
     0% {

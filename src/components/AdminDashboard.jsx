@@ -591,6 +591,13 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-container">
+      <Link to="/">
+        <img
+          src="/images/header-logo.png"
+          alt="logo"
+          className="admin-dashboard-logo"
+        />
+      </Link>
       {renderSearchBar()}
       <div className="admin-dashboard">
         {renderUserBox("All Users", Users, users, "#9c27b0", "allUsers")}{" "}

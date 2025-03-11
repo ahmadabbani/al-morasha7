@@ -92,7 +92,7 @@ const Footer = () => {
                   </Link>
                 )}
               </li>
-              <li>
+              {/*  <li>
                 {location.pathname === "/" ? (
                   <ScrollLink
                     to="blogs"
@@ -108,7 +108,7 @@ const Footer = () => {
                     المدوّنات
                   </Link>
                 )}
-              </li>
+              </li> */}
               <li>
                 <Link to="/register" className="footer-link footer-register">
                   تسجيل جديد
