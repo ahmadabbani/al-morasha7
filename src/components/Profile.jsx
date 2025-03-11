@@ -126,7 +126,7 @@ const Profile = () => {
         {/* Content Section */}
         <Row className="user-profile-content mb-4">
           <Col md={6}>
-            <Card className="user-profile-payment-section h-75">
+            <Card className="user-profile-payment-section h-100">
               <Card.Body className="p-4">
                 {user.isPayed ? (
                   <>
@@ -202,7 +202,9 @@ const Profile = () => {
           </Col>
         </Row>
       </Container>
-      <Footer />
+      <div style={{ direction: "rtl" }}>
+        <Footer />
+      </div>
     </>
   );
 };

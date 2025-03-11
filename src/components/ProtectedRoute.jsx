@@ -16,7 +16,23 @@ const ProtectedRoute = ({ children }) => {
     }
   }, [user, loading, navigate]);
 
-  if (loading) return <div>جار التحميل...</div>;
+  if (loading)
+    return (
+      <div
+        style={{
+          fontSize: "1rem",
+          fontWeight: "600",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "3rem",
+          color: "#202d61",
+          height: "100vh",
+        }}
+      >
+        جار التحميل...
+      </div>
+    );
 
   return user && !user.isAdmin ? children : null;
 };
