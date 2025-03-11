@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Clock, ArrowLeft } from "lucide-react"; // Icons for time and back navigation
 import "./SingleBlog.css";
+import Footer from "./Footer";
 const SingleBlog = () => {
   const { id } = useParams(); // Get blog ID from URL params
   const navigate = useNavigate();
@@ -65,28 +66,34 @@ const SingleBlog = () => {
   const youtubeEmbedUrl = getYoutubeEmbedUrl(blog.link);
 
   return (
-    <div className="single-blog-container">
-      <button className="single-blog-back-btn" onClick={() => navigate(-1)}>
-        <ArrowLeft size={25} />
-      </button>
-      <h1 className="single-blog-title">{blog.title}</h1>
-      <div className="single-blog-meta">
-        <Clock size={18} />
-        <span>{new Date(blog.created_at).toLocaleDateString()}</span>
-      </div>
-      {youtubeEmbedUrl && (
-        <div className="single-blog-video">
-          <iframe
-            src={youtubeEmbedUrl}
-            title={blog.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+    <>
+      <div className="single-blog-container">
+        <button className="single-blog-back-btn" onClick={() => navigate(-1)}>
+          <ArrowLeft size={25} />
+        </button>
+        <h1 className="single-blog-title">{blog.title}</h1>
+        <div className="single-blog-meta">
+          <Clock size={18} />
+          <span>{new Date(blog.created_at).toLocaleDateString()}</span>
         </div>
-      )}
-      <p className="single-blog-description">{blog.description}</p>
-    </div>
+        {youtubeEmbedUrl && (
+          <div className="single-blog-video">
+            <iframe
+              src={youtubeEmbedUrl}
+              title={blog.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        )}
+        <p className="single-blog-description">{blog.description}</p>
+      </div>
+      <div style={{ direction: "rtl" }}>
+        {" "}
+        <Footer />
+      </div>
+    </>
   );
 };
 
