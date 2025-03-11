@@ -70,7 +70,7 @@ const About = () => {
                 فكل ما تحتاجونه سيكون بين يديكم في دليل واحد.
               </p>
               <button className="read-more" onClick={() => setSelectedBox(1)}>
-                اقرأ المزيد <ArrowLeft className="arrow-icon" size={18} />
+                المزيد <ArrowLeft className="arrow-icon" size={18} />
               </button>
             </div>
           </motion.div>
@@ -100,7 +100,7 @@ const About = () => {
                 وإدارة الشؤون البلدية بثقة وكفاءة.
               </p>
               <button className="read-more" onClick={() => setSelectedBox(2)}>
-                اقرأ المزيد <ArrowLeft className="arrow-icon" size={18} />
+                المزيد <ArrowLeft className="arrow-icon" size={18} />
               </button>
             </div>
           </motion.div>
@@ -131,7 +131,7 @@ const About = () => {
                 وفهم كيفية التأثير في مجتمعكم المحلّي.
               </p>
               <button className="read-more" onClick={() => setSelectedBox(3)}>
-                اقرأ المزيد <ArrowLeft className="arrow-icon" size={18} />
+                المزيد <ArrowLeft className="arrow-icon" size={18} />
               </button>
             </div>
           </motion.div>
