@@ -355,9 +355,12 @@ span {
 
 .calendar-top-header {
     display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
     align-items: center;
-    margin: 0 3.8rem 1rem 3.8rem;
-    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 0 0 1rem 0;
+
 }
 
 .disable-day-container {
@@ -372,7 +375,7 @@ span {
     padding: 0;
     margin: 0;
     color: #ff4d4d;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .disable-day-button {
