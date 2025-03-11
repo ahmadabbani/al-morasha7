@@ -124,6 +124,24 @@ const Header = () => {
                 عن البرنامج
               </ScrollLink>
               <ScrollLink
+                to="whoweare"
+                offset={-70}
+                smooth={true}
+                duration={0}
+                className="header-nav-link"
+              >
+                من نحن
+              </ScrollLink>
+              <ScrollLink
+                to="blogs"
+                offset={-70}
+                smooth={true}
+                duration={0}
+                className="header-nav-link"
+              >
+                المدوّنات
+              </ScrollLink>
+              <ScrollLink
                 to="contact"
                 offset={-70}
                 smooth={true}

@@ -1,0 +1,171 @@
+/* Container Styles */
+.we-are-container {
+    direction: rtl;
+    background: linear-gradient(135deg, #ffffff 0%, #e6f0fa 100%);
+    padding: 60px 20px;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.we-are-container .container {
+    max-width: 100%;
+    width: 100%;
+}
+
+/* Main Title */
+.we-are-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #202d61;
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+    animation: slideIn 1s ease-out;
+}
+
+/* Grid Layout */
+.we-are-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Card Styles */
+.we-are-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 40px 30px;
+    box-shadow: 0 8px 20px rgba(32, 45, 97, 0.1);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: cardFadeIn 0.8s ease forwards;
+}
+
+.we-are-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.we-are-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.we-are-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.we-are-card:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.we-are-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(32, 45, 97, 0.2);
+}
+
+/* Card Decorative Element */
+.we-are-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #FFFFFF, #202d61);
+    opacity: 0.8;
+}
+
+/* Icon Styles */
+.we-are-icon {
+    color: #202d61;
+    margin-bottom: 25px;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* Card Title */
+.we-are-card-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #202d61;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+/* Card Text */
+.we-are-card-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #202d61;
+    opacity: 0.9;
+}
+
+/* English Text Styling */
+.english-text {
+    font-weight: bold;
+    color: #d42127;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .we-are-container {
+        padding: 50px 20px;
+    }
+
+    .we-are-title {
+        font-size: 2rem;
+    }
+
+    .we-are-card {
+        padding: 30px 20px;
+    }
+
+    .we-are-card-title {
+        font-size: 22px;
+    }
+
+    .we-are-icon {
+        font-size: 40px;
+    }
+}

@@ -7,6 +7,7 @@ import ContactUs from "./ContactUs";
 import Blogs from "./Blogs";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import WeAre from "./WeAre";
 
 const Home = () => {
   return (
@@ -42,6 +43,7 @@ const Home = () => {
       {/* Home Sections */}
       <HomeBoxes />
       <About />
+      <WeAre />
       {/*<Blogs /> */}
       <ContactUs />
       <Footer />

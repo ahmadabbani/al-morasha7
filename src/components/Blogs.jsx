@@ -34,7 +34,7 @@ const Blogs = () => {
   };
 
   return (
-    <section className="blogs-list container my-5">
+    <section className="blogs-list container my-5" id="blogs">
       <h2 className="blogs-list-title">المدونات</h2>
       {loading ? (
         <div className="blogs-list-loading">جاري التحميل...</div>

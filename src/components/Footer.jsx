@@ -1,5 +1,5 @@
 import { React, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // Added useLocation
 import {
   FaInstagram,
   FaFacebook,
@@ -9,13 +9,13 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { motion, useInView } from "framer-motion";
-
 import { Link as ScrollLink } from "react-scroll";
 import "./Footer.css"; // Separate CSS file
 
 const Footer = () => {
   const refFooter = useRef(null);
   const inView7 = useInView(refFooter, { once: true });
+  const location = useLocation(); // Hook to get the current path
 
   return (
     <motion.footer
@@ -42,35 +42,75 @@ const Footer = () => {
           <div className="col-md-6 col-12 footer-nav">
             <ul className="footer-links">
               <li>
-                <ScrollLink
-                  to="home"
-                  smooth={true}
-                  duration={0}
-                  offset={-70}
-                  className="footer-link"
-                >
-                  الرئيسية
-                </ScrollLink>
+                {location.pathname === "/" ? (
+                  <ScrollLink
+                    to="home"
+                    smooth={true}
+                    duration={0}
+                    offset={-70}
+                    className="footer-link"
+                  >
+                    الرئيسية
+                  </ScrollLink>
+                ) : (
+                  <Link to="/" className="footer-link">
+                    الرئيسية
+                  </Link>
+                )}
               </li>
               <li>
-                <ScrollLink
-                  to="about"
-                  offset={-70}
-                  smooth={true}
-                  duration={0}
-                  className="footer-link"
-                >
-                  عن البرنامج
-                </ScrollLink>
+                {location.pathname === "/" ? (
+                  <ScrollLink
+                    to="about"
+                    smooth={true}
+                    duration={0}
+                    offset={-70}
+                    className="footer-link"
+                  >
+                    عن البرنامج
+                  </ScrollLink>
+                ) : (
+                  <Link to="/" className="footer-link">
+                    عن البرنامج
+                  </Link>
+                )}
               </li>
               <li>
-                <Link
-                  to="/register"
-                  offset={-70}
-                  smooth={true}
-                  duration={0}
-                  className="footer-link footer-register"
-                >
+                {location.pathname === "/" ? (
+                  <ScrollLink
+                    to="whoweare"
+                    smooth={true}
+                    duration={0}
+                    offset={-70}
+                    className="footer-link"
+                  >
+                    من نحن
+                  </ScrollLink>
+                ) : (
+                  <Link to="/" className="footer-link">
+                    من نحن
+                  </Link>
+                )}
+              </li>
+              <li>
+                {location.pathname === "/" ? (
+                  <ScrollLink
+                    to="blogs"
+                    smooth={true}
+                    duration={0}
+                    offset={-70}
+                    className="footer-link"
+                  >
+                    المدوّنات
+                  </ScrollLink>
+                ) : (
+                  <Link to="/" className="footer-link">
+                    المدوّنات
+                  </Link>
+                )}
+              </li>
+              <li>
+                <Link to="/register" className="footer-link footer-register">
                   تسجيل جديد
                 </Link>
               </li>
@@ -105,9 +145,6 @@ const Footer = () => {
               >
                 <FaInstagram className="footer-icon" />
               </a>
-              {/* <a href="#" className="footer-social-link" target="_blank" rel="noopener noreferrer">
-                <FaTwitter className="footer-icon" />
-              </a> */}
               <a
                 href="https://www.facebook.com/share/163jj6EvGE/?mibextid=wwXIfr"
                 className="footer-social-link"
@@ -124,7 +161,6 @@ const Footer = () => {
               >
                 <FaYoutube className="footer-icon" />
               </a>
-
               <a
                 href="https://wa.me/96171346435"
                 className="footer-social-link"
