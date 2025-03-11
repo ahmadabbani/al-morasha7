@@ -87,6 +87,22 @@ export default async function handler(req, res) {
         } finally {
           client.release();
         }
+      } else if (endpoint === "singleBlog") {
+        // --- singleBlog GET Logic ---
+        const blogId = req.query.id; // Get id from query params
+        const client = await pool.connect();
+        try {
+          const result = await client.query(
+            "SELECT * FROM blogs WHERE id = $1",
+            [blogId]
+          );
+          if (result.rows.length === 0) {
+            return res.status(404).json({ error: "Blog not found" });
+          }
+          return res.status(200).json(result.rows[0]);
+        } finally {
+          client.release();
+        }
       } else {
         return res.status(404).json({ error: "Endpoint not found" });
       }
@@ -98,10 +114,10 @@ export default async function handler(req, res) {
         // Validate admin access
         const form = formidable({ multiples: false });
         const [fields, files] = await form.parse(req);
-        const { title, description } = fields;
+        const { title, description, link } = fields;
         const image = files.image?.[0];
 
-        if (!title?.[0] || !description?.[0] || !image) {
+        if (!title?.[0] || !description?.[0] || !link?.[0] || !image) {
           return res.status(400).json({ error: "All fields are required" });
         }
 
@@ -114,8 +130,8 @@ export default async function handler(req, res) {
         const client = await pool.connect();
         try {
           const result = await client.query(
-            "INSERT INTO blogs (title, description, image_url) VALUES ($1, $2, $3) RETURNING *",
-            [title[0], description[0], imageUrl]
+            "INSERT INTO blogs (title, description, link, image_url) VALUES ($1, $2, $3, $4) RETURNING *",
+            [title[0], description[0], link[0], imageUrl]
           );
           return res.status(201).json({
             message: "The blog was successfully created",

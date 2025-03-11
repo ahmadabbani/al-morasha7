@@ -45,6 +45,27 @@ const AdminDashboard = () => {
   });
   const itemsPerPage = 3;
 
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch(
+        `${
+          import.meta.env.VITE_REACT_APP_API_URL
+        }/admin/adminAction/acceptSession`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
+      if (!response.ok) throw new Error("Failed to fetch users");
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -118,27 +139,6 @@ const AdminDashboard = () => {
         )}
       </div>
     ) : null;
-  };
-
-  const fetchUsers = async () => {
-    try {
-      const response = await fetch(
-        `${
-          import.meta.env.VITE_REACT_APP_API_URL
-        }/admin/adminAction/acceptSession`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-      if (!response.ok) throw new Error("Failed to fetch users");
-      const data = await response.json();
-      setUsers(data);
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    } finally {
-      setLoading(false);
-    }
   };
 
   // Callback to update the users list after an admin enable a booked date from calendar component

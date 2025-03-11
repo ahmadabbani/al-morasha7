@@ -44,7 +44,7 @@ const Blogs = () => {
             <p className="blogs-list-empty">لا توجد مدونات بعد</p>
           ) : (
             blogs.map((blog) => (
-              <div key={blog.id} className="col-md-4 mb-4">
+              <div key={blog.id} className="col-md-6 col-lg-4 mb-4">
                 <div
                   className="blogs-list-card"
                   onClick={() => handleBlogClick(blog.id)}
@@ -56,7 +56,11 @@ const Blogs = () => {
                   />
                   <div className="blogs-list-content">
                     <h3 className="blogs-list-card-title">{blog.title}</h3>
-                    <p className="blogs-list-card-desc">{blog.description}</p>
+                    <p className="blogs-list-card-desc">
+                      {blog.description.length > 100
+                        ? blog.description.substring(0, 100) + "..."
+                        : blog.description}
+                    </p>
                   </div>
                 </div>
               </div>

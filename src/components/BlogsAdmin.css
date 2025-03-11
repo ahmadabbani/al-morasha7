@@ -155,3 +155,24 @@
         transform: rotate(360deg);
     }
 }
+
+@media (max-width: 600px) {
+    .blogs-admin-form {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .blogs-admin-form {
+        max-width: 340px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 375px) {
+    .blogs-admin-form {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}

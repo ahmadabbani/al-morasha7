@@ -16,6 +16,7 @@ import Home from "./components/Home";
 import VerifyEmail from "./components/VerifyEmail";
 import AdminBlogDashboard from "./components/AdminBlogDashboard";
 import ResendVerification from "./components/ResendVerification";
+import SingleBlog from "./components/SingleBlog";
 function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
@@ -39,6 +40,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verify" element={<VerifyEmail />} />
+        <Route path="/blog/:id" element={<SingleBlog />} />
 
         {/* Protected Routes */}
         <Route

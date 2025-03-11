@@ -14,7 +14,7 @@ import timezone from "dayjs/plugin/timezone";
 import { useAuth } from "../components/AuthContext";
 import { toast } from "react-toastify";
 import "./Profile.css";
-import { AlertCircle, ArrowDown } from "lucide-react";
+import { AlertCircle, ArrowDown, Lock } from "lucide-react";
 
 // Add timezone plugins to dayjs
 dayjs.extend(utc);
@@ -37,6 +37,10 @@ export default function BookingCalendar({
   //loading slots
   const [loadingSlots, setLoadingSlots] = useState(new Set());
   const [loadingDays, setLoadingDays] = useState(false);
+  // Add these states alongside your existing ones (e.g., isModalOpen, selectedUser)
+  const [isDisableModalOpen, setIsDisableModalOpen] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [isDisabling, setIsDisabling] = useState(false);
   // Generate all 24-hour slots with 15-minute intervals
   const timeSlots = Array.from({ length: 24 * 4 }, (_, i) => {
     const hour = Math.floor(i / 4)
@@ -50,6 +54,23 @@ export default function BookingCalendar({
   const daySlot = Array.from({ length: 1 }, (_, i) => {
     return "00:00 - 23:59"; // Represents the whole day
   });
+
+  // Function to open the disable modal
+  const openDisableModal = (time) => {
+    setSelectedDay(time);
+    setIsDisableModalOpen(true);
+  };
+
+  // Function to confirm disable action
+  const handleConfirmDisable = async () => {
+    if (selectedDay) {
+      setIsDisabling(true); // Start loading
+      await handleAdminDisable(selectedDay); // Execute the disable action
+      setIsDisabling(false); // Stop loading
+      setIsDisableModalOpen(false); // Close modal
+      setSelectedDay(null);
+    }
+  };
 
   const fetchDisabledDays = async () => {
     try {
@@ -362,7 +383,7 @@ export default function BookingCalendar({
                     To disable the full day, click here:
                   </p>
                   <button
-                    onClick={() => handleAdminDisable(time)}
+                    onClick={() => openDisableModal(time)}
                     className="disable-day-button"
                     disabled={
                       loadingSlots.has(time) ||
@@ -437,6 +458,39 @@ export default function BookingCalendar({
         >
           {loading ? <span className="booking-spinner"></span> : "تأكيد الحجز"}
         </button>
+      )}
+      {isDisableModalOpen && (
+        <div className="disable-day-confirmation-overlay">
+          <div className="disable-day-confirmation-modal">
+            <div className="disable-day-confirmation-icon">
+              <Lock size={24} />
+            </div>
+            <p className="disable-day-confirmation-message">
+              This will disable the entire day. It will no longer be available
+              for scheduling.
+            </p>
+            <div className="disable-day-confirmation-buttons">
+              <button
+                className="disable-day-confirmation-disable-btn"
+                onClick={handleConfirmDisable}
+                disabled={isDisabling}
+              >
+                {isDisabling ? (
+                  <span className="disable-day-confirmation-spinner"></span>
+                ) : (
+                  "Disable"
+                )}
+              </button>
+              <button
+                className="disable-day-confirmation-cancel-btn"
+                onClick={() => setIsDisableModalOpen(false)}
+                disabled={isDisabling} // Optional: disable Cancel during loading
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

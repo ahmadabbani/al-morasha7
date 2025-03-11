@@ -7,7 +7,11 @@ import { useDropzone } from "react-dropzone";
 import "./BlogsAdmin.css";
 
 const AdminBlogDashboard = () => {
-  const [formData, setFormData] = useState({ title: "", description: "" });
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    link: "",
+  });
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -38,6 +42,7 @@ const AdminBlogDashboard = () => {
     const blogData = new FormData();
     blogData.append("title", formData.title);
     blogData.append("description", formData.description);
+    blogData.append("link", formData.link);
     blogData.append("image", image);
 
     try {
@@ -59,7 +64,7 @@ const AdminBlogDashboard = () => {
         );
 
       toast.success("The blog was created successfully");
-      setFormData({ title: "", description: "" });
+      setFormData({ title: "", description: "", link: "" });
       setImage(null);
     } catch (error) {
       toast.error(error.message || "An error occurred while creating the blog");
@@ -107,6 +112,21 @@ const AdminBlogDashboard = () => {
             placeholder="Blog description..."
             className="blogs-admin-textarea"
             rows="5"
+          />
+        </div>
+
+        {/*youtube link*/}
+        <div className="mb-4">
+          <label htmlFor="description" className="blogs-admin-label">
+            Youtube link
+          </label>
+          <textarea
+            id="link"
+            name="link"
+            value={formData.link}
+            onChange={handleInputChange}
+            placeholder="Youtube link..."
+            className="blogs-admin-input"
           />
         </div>
 

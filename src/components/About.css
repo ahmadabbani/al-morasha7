@@ -339,3 +339,9 @@
         margin-right: auto;
     }
 }
+
+@media (max-width: 385px) {
+    .about-cta-link {
+        width: 65%;
+    }
+}
