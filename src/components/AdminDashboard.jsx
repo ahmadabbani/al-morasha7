@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Loader } from "@mantine/core";
+import { Unlock } from "lucide-react";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import "./AdminDashboard.css";
@@ -47,6 +48,28 @@ const AdminDashboard = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  // Add state for modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isUnlocking, setIsUnlocking] = useState(false);
+
+  // Function to open modal with user details
+  const openUnlockModal = (userId, userName) => {
+    setSelectedUser({ id: userId, name: userName });
+    setIsModalOpen(true);
+  };
+
+  // Function to confirm unlock
+  const handleConfirmUnlock = async () => {
+    if (selectedUser) {
+      setIsUnlocking(true); // Start loading
+      await handleIsPayed(selectedUser.id, selectedUser.name); // Wait for unlocking
+      setIsUnlocking(false); // Stop loading
+      setIsModalOpen(false); // Close modal
+      setSelectedUser(null);
+    }
+  };
 
   //pagination
   // Add this pagination helper function
@@ -212,7 +235,7 @@ const AdminDashboard = () => {
   };
 
   //make isPayed true
-  const handleIsPayed = async (userId) => {
+  const handleIsPayed = async (userId, userName) => {
     setIsPayedUsers((prev) => new Set(prev).add(userId));
 
     try {
@@ -237,7 +260,9 @@ const AdminDashboard = () => {
         )
       );
 
-      toast.success("Contents Unlocked Successfully");
+      toast.success(
+        `Contents Unlocked Successfully and email sent to ${userName}`
+      );
     } catch (error) {
       console.error("Error updating user status:", error);
       toast.error("An error occured while unlocking contents");
@@ -479,7 +504,7 @@ const AdminDashboard = () => {
                   {!user.isPayed && (
                     <button
                       className="admin-unlock-button"
-                      onClick={() => handleIsPayed(user.id)}
+                      onClick={() => openUnlockModal(user.id, user.name)}
                       disabled={
                         updatingUsers.has(user.id) ||
                         rejectingUsers.has(user.id) ||
@@ -505,6 +530,40 @@ const AdminDashboard = () => {
           )}
         </div>
         {renderPagination(filteredUsers.length, boxId)}
+        {/* Modal placed at the root of the component */}
+        {isModalOpen && (
+          <div className="unlock-confirmation-overlay">
+            <div className="unlock-confirmation-modal">
+              <div className="unlock-confirmation-icon">
+                <Unlock size={24} />
+              </div>
+              <p className="unlock-confirmation-message">
+                This will unlock the content for {selectedUser?.name}. They can
+                access the guide in their profile, and an email will be sent to
+                notify them.
+              </p>
+              <div className="unlock-confirmation-buttons">
+                <button
+                  className="unlock-confirmation-unlock-btn"
+                  onClick={handleConfirmUnlock}
+                  disabled={isUnlocking}
+                >
+                  {isUnlocking ? (
+                    <span className="unlock-confirmation-spinner"></span> // Custom spinner
+                  ) : (
+                    "Unlock"
+                  )}
+                </button>
+                <button
+                  className="unlock-confirmation-cancel-btn"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   };

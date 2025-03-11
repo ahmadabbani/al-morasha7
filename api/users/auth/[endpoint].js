@@ -1,11 +1,10 @@
-import pool from "../../utils/db.js"; // Adjusted path: one level up from auth/ to root
+import pool from "../../utils/db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 import dotenv from "dotenv";
 import crypto from "crypto";
-import { sendVerificationEmail } from "../../utils/emailService.js"; // Adjusted path: one level up
-
+import { sendVerificationEmail } from "../../utils/emailService.js";
 dotenv.config();
 
 // Unified allowed origins for CORS

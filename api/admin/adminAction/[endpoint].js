@@ -3,6 +3,7 @@ import { requireAdmin } from "../../utils/auth.js"; // Adjusted path
 import dotenv from "dotenv";
 import formidable from "formidable";
 import { v2 as cloudinary } from "cloudinary";
+import { sendPaymentConfirmationEmail } from "../../utils/emailService.js";
 
 dotenv.config();
 
@@ -154,9 +155,32 @@ export default async function handler(req, res) {
             'UPDATE users SET "isPayed" = TRUE WHERE id = $1',
             [userId]
           );
+          // Fetch user’s email and name from database
+          const userResult = await client.query(
+            "SELECT email, name FROM users WHERE id = $1",
+            [userId]
+          );
+          if (userResult.rows.length === 0) {
+            throw new Error("User not found");
+          }
+          const { email, name } = userResult.rows[0];
+
+          // Send payment confirmation email
+          const emailResult = await sendPaymentConfirmationEmail(email, name);
+          if (!emailResult.success) {
+            console.error(
+              "Failed to send payment confirmation email:",
+              emailResult.error
+            );
+            // Log error but proceed, as email sending isn’t critical
+          }
+
           return res
             .status(200)
             .json({ message: "Contents unlocked successfully" });
+        } catch (error) {
+          console.error("Error in isPayed endpoint:", error);
+          return res.status(500).json({ error: "Internal server error" });
         } finally {
           client.release();
         }
