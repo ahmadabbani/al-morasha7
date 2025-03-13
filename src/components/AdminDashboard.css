@@ -125,7 +125,40 @@
     border-radius: 25px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+    /* Enable Scroll */
+    max-height: 800px;
+    /* Adjust height as needed */
+    overflow-y: auto;
+
+    /* Firefox Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #202d61 #f0f0f0;
 }
+
+/* Webkit (Chrome, Edge, Safari) */
+.admin-box::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+}
+
+.admin-box::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.admin-box::-webkit-scrollbar-thumb {
+    background: #202d61;
+    border-radius: 10px;
+    border: 2px solid #f0f0f0;
+    /* Creates spacing around the thumb */
+}
+
+.admin-box::-webkit-scrollbar-thumb:hover {
+    background: #1a2350;
+}
+
+
 
 .admin-box-title {
     font-size: 20px;

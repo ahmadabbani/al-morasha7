@@ -44,7 +44,7 @@ const AdminDashboard = () => {
     bookedPending: 1,
     allUsers: 1,
   });
-  const itemsPerPage = 3;
+  const itemsPerPage = 5000;
 
   const fetchUsers = async () => {
     try {
