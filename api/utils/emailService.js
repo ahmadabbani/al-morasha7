@@ -110,3 +110,37 @@ export async function sendPaymentConfirmationEmail(email, name) {
     return { success: false, error: error.message };
   }
 }
+
+//appointemrnt notification
+export async function sendNewAppointmentEmail() {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "Almourachah-Notification@almourachah.com", // Update sender email
+      to: "info@almourachah.org",
+      subject: "New Appointment from Almourachah",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; background: #f9f9f9; border-radius: 10px;">
+          <h2 style="color: #202d61; text-align: center;">New Appointment Notification</h2>
+          <p style="font-size: 16px; line-height: 1.5; margin: 15px 0;">
+            A new user has booked an appointment through the Almourachah platform. Please review the details in the system.
+          </p>
+          <p style="font-size: 16px; line-height: 1.5; margin: 15px 0;">
+            For further information, please check the admin panel.
+          </p>
+          <p style="font-size: 16px; line-height: 1.5; margin: 15px 0;">
+            Best regards,<br>Almourachah Team
+          </p>
+        </div>
+      `,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error sending appointment notification email:", error);
+    return { success: false, error: error.message };
+  }
+}

@@ -1,13 +1,13 @@
-// api/users/bookSession.js
 import pool from "../utils/db.js";
 import moment from "moment-timezone";
+import { sendNewAppointmentEmail } from "../utils/emailService.js"; // Adjust path based on your structure
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "PUT");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Content-Type, X-User-Timezone" // Added X-User-Timezone here
+    "Content-Type, X-User-Timezone"
   );
   if (req.method === "OPTIONS") {
     return res.status(200).end();
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   }
 
   const { userId, sessionDate, sessionTime } = req.body;
-  const userTimezone = req.headers["x-user-timezone"] || "Asia/Beirut"; // Default to Beirut if not specified
+  const userTimezone = req.headers["x-user-timezone"] || "Asia/Beirut";
 
   if (!userId || !sessionDate || !sessionTime) {
     return res.status(400).json({ error: "جميع الحقول مطلوبة" });
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     const client = await pool.connect();
 
     try {
-      const timeFormatted = sessionTime + ":00"; // Add seconds to match TIME format
+      const timeFormatted = sessionTime + ":00";
 
       // Check if slot is already booked
       const existingBooking = await client.query(
@@ -40,11 +40,21 @@ export default async function handler(req, res) {
         return res.status(409).json({ error: "هذا الموعد محجوز مسبقاً" });
       }
 
-      // Book the slot with proper type casting
+      // Book the slot
       await client.query(
         "UPDATE users SET session_date = $1::date, session_time = $2::time, status = false WHERE id = $3",
         [sessionDate, timeFormatted, userId]
       );
+
+      // Send email notification to admin
+      const emailResult = await sendNewAppointmentEmail();
+      if (!emailResult.success) {
+        console.error(
+          "Failed to send appointment notification email:",
+          emailResult.error
+        );
+        // Log the error but proceed with the success response
+      }
 
       return res.status(200).json({ message: "تم حجز الموعد بنجاح" });
     } finally {
