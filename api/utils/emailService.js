@@ -122,7 +122,8 @@ export async function sendNewAppointmentEmail() {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; background: #f9f9f9; border-radius: 10px;">
           <h2 style="color: #202d61; text-align: center;">New Appointment Notification</h2>
           <p style="font-size: 16px; line-height: 1.5; margin: 15px 0;">
-            A new user has booked an appointment through the Almourachah platform. Please review the details in the system.
+     A new user has booked an appointment through the Almourachah platform.
+      Please review the details in the system and take the necessary action to confirm or reject the appointment.
           </p>
           <p style="font-size: 16px; line-height: 1.5; margin: 15px 0;">
             For further information, please check the admin panel.
