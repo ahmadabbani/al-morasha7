@@ -32,17 +32,7 @@
       "source": "/api/users/getSessions",
       "destination": "/api/users/getSessions.js"
     },
-    {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
-    },
+
     { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "https://almourachah.org/:path*",
-      "permanent": true
-    }
   ]
 }
