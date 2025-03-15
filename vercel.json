@@ -37,8 +37,8 @@
   ],
   "redirects": [
     {
-      "source": "https://www.domain.org/:path*",
-      "destination": "https://domain.org/:path*",
+      "source": "https://www.almourachah.org/:path*",
+      "destination": "https://almourachah.org/:path*",
       "permanent": true
     }
   ]
