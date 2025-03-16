@@ -4,7 +4,11 @@ import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 import dotenv from "dotenv";
 import crypto from "crypto";
-import { sendVerificationEmail } from "../../utils/emailService.js";
+import {
+  sendVerificationEmail,
+  sendContactUsEmail,
+} from "../../utils/emailService.js";
+
 dotenv.config();
 
 // Unified allowed origins for CORS
@@ -252,6 +256,18 @@ export default async function handler(req, res) {
           error: errors.REGISTRATION_FAILED,
           details: error.message,
         });
+      }
+    } else if (endpoint === "send-contact-us") {
+      const { name, email, subject, message } = req.body;
+      try {
+        const result = await sendContactUsEmail(name, email, subject, message);
+        if (result.success) {
+          return res.status(200).json({ success: true });
+        } else {
+          return res.status(500).json({ success: false, error: result.error });
+        }
+      } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
       }
     } else if (endpoint === "logout") {
       // --- Logout Logic ---

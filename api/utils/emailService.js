@@ -145,3 +145,44 @@ export async function sendNewAppointmentEmail() {
     return { success: false, error: error.message };
   }
 }
+
+export async function sendContactUsEmail(name, email, subject, message) {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "Almourachah-Contact@almourachah.com", // Adjust sender email as needed
+      to: "info@almourachah.org",
+      subject: `Contact Us: ${subject}`,
+      html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; background: #f9f9f9; border-radius: 10px;">
+          <h2 style="color: #202d61; text-align: center;">New Message from Almourachah Contact Form</h2>
+          <p style="font-size: 16px; line-height: 1.5; margin: 15px 0;">
+            You have received a new message from the "Contact Us" form:
+          </p>
+          <ul style="list-style: none; padding: 0; margin: 20px 0; background: #ffffff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <li style="padding: 10px 15px; border-bottom: 1px solid #eee; font-size: 16px; line-height: 1.5;">
+              <strong style="color: #202d61; width: 100px; display: inline-block;">Name:</strong> ${name}
+            </li>
+            <li style="padding: 10px 15px; border-bottom: 1px solid #eee; font-size: 16px; line-height: 1.5;">
+              <strong style="color: #202d61; width: 100px; display: inline-block;">Email:</strong> ${email}
+            </li>
+            <li style="padding: 10px 15px; border-bottom: 1px solid #eee; font-size: 16px; line-height: 1.5;">
+              <strong style="color: #202d61; width: 100px; display: inline-block;">Subject:</strong> ${subject}
+            </li>
+            <li style="padding: 10px 15px; font-size: 16px; line-height: 1.5;">
+              <strong style="color: #202d61; width: 100px; display: inline-block;">Message:</strong> ${message}
+            </li>
+          </ul>
+        </div>
+      `,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error sending contact us email:", error);
+    return { success: false, error: error.message };
+  }
+}

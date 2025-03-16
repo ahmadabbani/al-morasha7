@@ -4,11 +4,47 @@ import { useRef } from "react";
 
 import "./ContactUs.css";
 import { Mail, MessageSquare, PenSquare, Send, User } from "lucide-react";
+import { toast } from "react-toastify";
 
 const ContactUs = () => {
   const refContact = useRef(null);
   const inView6 = useInView(refContact, { once: true });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const subject = e.target.subject.value;
+    const message = e.target.message.value;
+    if (!name || !email || !subject || !message) {
+      toast.warning("يرجى ملء جميع الحقول المطلوبة");
+      return;
+    }
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_APP_API_URL}/users/auth/send-contact-us`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, subject, message }),
+          credentials: "include",
+        }
+      );
+
+      const data = await response.json();
+      if (data.success) {
+        toast.success("!تم إرسال الرسالة بنجاح"); // Or use alert("Message sent successfully!");
+        e.target.reset(); // Clear the form
+      } else {
+        toast.error("فشل إرسال الرسالة. حاول مرة أخرى."); // Or use alert("Failed to send message.");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("حدث خطأ. حاول مرة أخرى."); // Or use alert("An error occurred.");
+    }
+  };
   return (
     <motion.section
       ref={refContact}
@@ -19,7 +55,7 @@ const ContactUs = () => {
       id="contact"
     >
       <h2 className="contact-title">تواصلوا معنا</h2>
-      <form className="contact-form">
+      <form className="contact-form" onSubmit={handleSubmit}>
         <div className="row">
           {/* Name Field */}
           <div className="col-md-6 mb-4">
@@ -32,7 +68,6 @@ const ContactUs = () => {
               id="name"
               className="form-input"
               placeholder="الاسم"
-              required
             />
           </div>
 
@@ -47,7 +82,6 @@ const ContactUs = () => {
               id="email"
               className="form-input"
               placeholder="البريد الإلكتروني"
-              required
             />
           </div>
         </div>
@@ -63,7 +97,6 @@ const ContactUs = () => {
             id="subject"
             className="form-input"
             placeholder="موضوع الرسالة"
-            required
           />
         </div>
 
@@ -78,7 +111,6 @@ const ContactUs = () => {
             className="form-textarea"
             placeholder=" الرسالة..."
             rows="5"
-            required
           ></textarea>
         </div>
 
