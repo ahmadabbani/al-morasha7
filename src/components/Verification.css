@@ -18,6 +18,11 @@
     width: 100%;
 }
 
+.verification-box .contact-success-msg {
+    font-size: 18px;
+    font-weight: 700;
+}
+
 .verification-box.success {
     border-top: 5px solid #4CAF50;
 }

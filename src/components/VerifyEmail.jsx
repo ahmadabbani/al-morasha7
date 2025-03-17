@@ -40,9 +40,9 @@ const VerifyEmail = () => {
         toast.success(data.message || "تم التحقق من البريد الإلكتروني بنجاح");
 
         // Auto-redirect to login after 5 seconds
-        setTimeout(() => {
+        /*setTimeout(() => {
           navigate("/login");
-        }, 12000);
+        }, 12000);*/
       } catch (error) {
         setStatus("error");
         setErrorMessage(error.message);
@@ -77,7 +77,9 @@ const VerifyEmail = () => {
             تم التحقق من بريدك/ي الإلكتروني بنجاح. يمكنك/ي الآن تسجيل الدخول إلى
             حسابك/ي
           </p>
-          <p>سيتم تحويلك/ي تلقائياً إلى صفحة تسجيل الدخول خلال ثوانٍ</p>
+          <p className="contact-success-msg">
+            سوف يتم التواصل معكم خلال الـ 24 ساعة القادمة
+          </p>
           <button onClick={() => navigate("/login")} className="login-btn">
             الذهاب إلى صفحة تسجيل الدخول
           </button>

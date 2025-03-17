@@ -11,17 +11,17 @@ export async function sendVerificationEmail(email, name, verificationToken) {
     const { data, error } = await resend.emails.send({
       from: "Almourachah-Verification@almourachah.com", // Update with your sender domain configured in Resend
       to: email,
-      subject: "تأكيد بريدك الإلكتروني",
+      subject: "تأكيد بريدك/ي الإلكتروني",
       html: `
        <div dir="rtl" style="font-family: Arial, sans-serif; padding: 20px; font-size: 18px;">
   <h2 style="font-size: 24px;">مرحباً ${name}،</h2>
-  <p>شكراً لانضمامك إلى برنامج <strong>المرشح/ة</strong>! يرجى النقر على الرابط أدناه لتأكيد بريدك الإلكتروني:</p>
+  <p>شكراً لانضمامك/ي إلى برنامج <strong>المرشح/ة</strong>! يرجى النقر على الرابط أدناه لتأكيد بريدك/ي الإلكتروني:</p>
   <p>
     <a href="${verificationUrl}" style="background-color: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; font-size: 18px;">
       تأكيد البريد الإلكتروني
     </a>
   </p>
-  <p>إذا لم تكن قد انضممت إلى البرنامج، يرجى تجاهل هذا البريد الإلكتروني.</p>
+  <p>إذا لم تكونوا قد انضممتم إلى البرنامج، يرجى تجاهل هذا البريد الإلكتروني.</p>
   <p>مع أطيب التحيات،<br>فريق الدعم</p>
 </div>
       `,
