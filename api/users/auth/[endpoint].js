@@ -168,7 +168,8 @@ export default async function handler(req, res) {
       }
     } else if (endpoint === "register") {
       // --- Register Logic ---
-      const { name, phone, email, district, region, role, password } = req.body;
+      const { name, phone, email, district, region, role, password, contact } =
+        req.body;
 
       // Basic validation
       if (
@@ -178,7 +179,8 @@ export default async function handler(req, res) {
         !district ||
         !region ||
         !role ||
-        !password
+        !password ||
+        !contact
       ) {
         return res.status(400).json({ error: errors.FIELDS_REQUIRED });
       }
@@ -211,8 +213,8 @@ export default async function handler(req, res) {
           // Insert new user
           await client.query(
             `INSERT INTO users 
-            (name, phone, email, district, region, role, password, session_date, session_time, verification_token, token_expiry, is_verified, email_verified_at) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7, NULL, NULL, $8, $9, false, NULL)`,
+            (name, phone, email, district, region, role, password, contact, session_date, session_time, verification_token, token_expiry, is_verified, email_verified_at) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NULL, NULL, $9, $10, false, NULL)`,
             [
               name,
               phone,
@@ -221,6 +223,7 @@ export default async function handler(req, res) {
               region,
               role,
               hashedPassword,
+              contact,
               verificationToken,
               tokenExpiry,
             ]

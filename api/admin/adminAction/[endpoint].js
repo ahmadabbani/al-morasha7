@@ -63,6 +63,7 @@ export default async function handler(req, res) {
               district,
               region,
               role,
+              contact,
               status,
               "isPayed",
               session_date::date as session_date,

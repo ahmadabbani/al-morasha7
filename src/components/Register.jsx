@@ -8,6 +8,7 @@ import {
   UserCheck,
   Lock,
   KeyRound,
+  MessageCircleMore,
 } from "lucide-react";
 import "./Register.css"; // Import the CSS file
 import "./Verification.css"; // Import the CSS file
@@ -22,6 +23,7 @@ const Register = () => {
     region: "",
     role: "",
     password: "",
+    contact: "",
   });
   const [loading, setLoading] = useState(false);
   const [registered, setRegistered] = useState(false);
@@ -30,6 +32,12 @@ const Register = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  //way of contact
+  const contacts = [
+    "عبر البريد الالكتروني",
+    "التواصل عبر الواتساب",
+    "اتصال هاتفي",
+  ];
   // Dropdown options
   const roles = [
     "مرشح/ة  لمجلس البلدية",
@@ -1655,6 +1663,7 @@ const Register = () => {
         region: "",
         role: "",
         password: "",
+        contact: "",
       });
     } catch (error) {
       toast.error(error.message);
@@ -1834,6 +1843,30 @@ const Register = () => {
             placeholder="كلمة المرور"
             className="register-input form-input"
           />
+        </div>
+
+        {/* way of contact */}
+        <div className="register-input-group mb-4">
+          <label htmlFor="contact" className="register-label">
+            <MessageCircleMore className="icon" size={20} color="#202d61" />
+            كيف تريدون ان يتم التواصل معكم؟
+          </label>
+          <select
+            id="contact"
+            name="contact"
+            value={formData.contact}
+            onChange={handleChange}
+            className="register-select form-input way-of-contact"
+          >
+            <option value="" disabled>
+              كيف تريدون ان يتم التواصل معكم؟
+            </option>
+            {contacts.map((contact, index) => (
+              <option key={index} value={contact}>
+                {contact}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Submit Button */}

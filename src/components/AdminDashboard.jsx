@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, Loader } from "@mantine/core";
-import { FileDown, FileSpreadsheet, Unlock } from "lucide-react";
+import {
+  FileDown,
+  FileSpreadsheet,
+  MessageCircleMore,
+  Unlock,
+} from "lucide-react";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import "./AdminDashboard.css";
@@ -299,6 +304,7 @@ const AdminDashboard = () => {
         District: user.district,
         Region: user.region,
         Role: user.role,
+        ContactUs: user.contact,
         Payed: user.isPayed ? "Yes" : "No",
         Registered_at: dayjs(user.created_at).format("YYYY-MM-DD"),
       };
@@ -493,6 +499,11 @@ const AdminDashboard = () => {
                     date yet
                   </span>
                 )}
+                <span className="admin-user-email">
+                  <MessageCircleMore size={22} strokeWidth={2.5} />
+                  Contact us:
+                  <span> {user.contact} </span>
+                </span>
               </div>
 
               {/* Right Side */}
