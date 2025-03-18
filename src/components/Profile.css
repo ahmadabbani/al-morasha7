@@ -210,6 +210,26 @@ span {
     background-color: rgb(23, 172, 23);
 }
 
+.user-profile-list {
+    direction: rtl;
+    color: #202d61;
+}
+
+.user-profile-list h3 {
+    color: #1ea81e;
+    margin-bottom: 1rem;
+
+}
+
+.user-profile-list ul li {
+
+    background-color: var(--light-gray);
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: 30px;
+    font-weight: 700;
+}
+
 .user-profile-book-date-btn {
     display: flex;
     align-items: center;

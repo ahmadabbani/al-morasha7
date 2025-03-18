@@ -14,6 +14,15 @@ import {
   AlertCircle,
   ArrowDown,
   Map,
+  Book,
+  Hotel,
+  ChevronsRightLeftIcon,
+  Badge,
+  BadgeCent,
+  BadgeCheck,
+  BadgeCheckIcon,
+  Medal,
+  UserCheck,
 } from "lucide-react";
 import dayjs from "dayjs";
 import { Card, Container, Row, Col } from "react-bootstrap";
@@ -177,16 +186,54 @@ const Profile = () => {
                         </span>
                         $السعر: 999
                       </span>
-                      <span
-                        style={{
-                          display: "block",
-                          fontSize: "1rem",
-                        }}
-                      >
-                        للمزيد من التفاصيل حول طريقة الدفع بعد التواصل مع المدرب
-                        وحجز موعد المقابلة الافتراضية
-                      </span>
                     </h2>
+                    <div className="user-profile-list">
+                      <h3>تغطي التكاليف النقاط التالية:</h3>
+                      <ul>
+                        <li>
+                          <span style={{ marginLeft: "8px" }}>
+                            {" "}
+                            <Book size={22} color="#1E3A8A" />
+                          </span>
+                          الدليل القانوني والعلمي
+                        </li>
+                        <li>
+                          <span style={{ marginLeft: "8px" }}>
+                            <CheckCircle size={22} color="#2E7D32" />
+                          </span>
+                          التقييم الذاتي من شركة Stewart Leadership العالمية
+                        </li>
+                        <li>
+                          <span style={{ marginLeft: "8px" }}>
+                            <Hotel size={22} color="#8B5C2E" />
+                          </span>
+                          تكاليف الفندق كاملةً لمدّة يومين
+                        </li>
+                        <li>
+                          <span style={{ marginLeft: "8px" }}>
+                            <UserCheck size={22} color="#C62828" />
+                          </span>
+                          ١٢ ساعة من الكوتشينغ
+                        </li>
+                        <li>
+                          <span style={{ marginLeft: "8px" }}>
+                            <Medal size={22} color="#4CAF50" />
+                          </span>
+                          شهادة مشاركة من Stewart Leadership
+                        </li>
+                      </ul>
+                    </div>
+
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: "1rem",
+                        marginTop: "2rem",
+                      }}
+                    >
+                      للمزيد من التفاصيل حول طريقة الدفع بعد التواصل مع المدرب
+                      وحجز موعد المقابلة الافتراضية
+                    </span>
                   </div>
                 )}
               </Card.Body>
