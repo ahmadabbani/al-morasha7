@@ -9,10 +9,14 @@ import {
   Lock,
   KeyRound,
   MessageCircleMore,
+  Calendar,
 } from "lucide-react";
+import dayjs from "dayjs";
+
 import "./Register.css"; // Import the CSS file
 import "./Verification.css"; // Import the CSS file
 import { useNavigate } from "react-router-dom";
+import BookingCalendar from "./BookingCalendar";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -28,6 +32,14 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [registered, setRegistered] = useState(false);
   const [regions, setRegions] = useState([]);
+
+  //booking calendar
+  // Add these states to your Register component
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [bookingDate, setBookingDate] = useState(null);
+  const [bookingTime, setBookingTime] = useState(null);
+  //const userTimezone =
+  //Intl.DateTimeFormat().resolvedOptions().timezone || "Asia/Beirut";
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1635,13 +1647,27 @@ const Register = () => {
       return;
     }
 
+    // Validate booking data if phone call is selected
+    if (formData.contact === "اتصال هاتفي" && (!bookingDate || !bookingTime)) {
+      toast.error("يرجى اختيار موعد للاتصال");
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_REACT_APP_API_URL}/users/auth/register`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            ...formData,
+            sessionDate:
+              formData.contact === "اتصال هاتفي" ? bookingDate : null,
+            sessionTime:
+              formData.contact === "اتصال هاتفي" ? bookingTime + ":00" : null,
+            //status: formData.contact === "اتصال هاتفي" ? false : null,
+          }),
         }
       );
 
@@ -1665,6 +1691,11 @@ const Register = () => {
         password: "",
         contact: "",
       });
+
+      // Also reset booking data
+      setBookingDate(null);
+      setBookingTime(null);
+      setShowBookingModal(false);
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -1868,7 +1899,21 @@ const Register = () => {
             ))}
           </select>
         </div>
-
+        {/* Show the booking button only when phone call is selected */}
+        {formData.contact === "اتصال هاتفي" && (
+          <div className="booking-selector mb-3">
+            <button
+              type="button"
+              className="booking-button"
+              onClick={() => setShowBookingModal(true)}
+            >
+              <Calendar size={20} />
+              {bookingDate && bookingTime
+                ? `الموعد المحدد: ${bookingDate} ${bookingTime}`
+                : "اختر موعدًا للاتصال"}
+            </button>
+          </div>
+        )}
         {/* Submit Button */}
         <button
           type="submit"
@@ -1891,6 +1936,25 @@ const Register = () => {
           الخصوصية الخاصة بنا.
         </p>
       </form>
+      {showBookingModal && (
+        <div className="register-modal-overlay">
+          <div className="register-modal-content">
+            <button
+              className="register-modal-close"
+              onClick={() => setShowBookingModal(false)}
+            >
+              &times;
+            </button>
+            <BookingCalendar
+              onSelectDateTime={(date, time) => {
+                setBookingDate(dayjs(date).format("YYYY-MM-DD"));
+                setBookingTime(time);
+                setShowBookingModal(false);
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

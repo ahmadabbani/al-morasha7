@@ -26,6 +26,7 @@ const userTimezone = dayjs.tz.guess();
 export default function BookingCalendar({
   userId = "",
   updateUsersList = () => {},
+  onSelectDateTime,
 }) {
   const { user, setUser } = useAuth();
   const isAdmin = user?.isAdmin;
@@ -140,6 +141,18 @@ export default function BookingCalendar({
     setSelectedTime(time);
   };
   ///////// here it will include fetched date (day) to be disbled) after fetching them from db when a full dy is disbaled
+
+  const handleConfirmBooking = () => {
+    if (!selectedDate || !selectedTime) {
+      toast.error("يرجى اختيار التاريخ والوقت");
+      return;
+    }
+
+    if (typeof onSelectDateTime === "function") {
+      onSelectDateTime(selectedDate, selectedTime);
+    }
+    // No else block needed
+  };
 
   const handleBooking = async () => {
     if (!userId) {
@@ -452,8 +465,9 @@ export default function BookingCalendar({
       )}
       {selectedDate && selectedTime && (
         <button
-          onClick={handleBooking}
-          loading={loading}
+          onClick={handleConfirmBooking}
+          disabled={!selectedDate || !selectedTime}
+          // loading={loading}
           className="profile-confirm-button"
         >
           {loading ? <span className="booking-spinner"></span> : "تأكيد الحجز"}

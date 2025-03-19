@@ -78,9 +78,8 @@ const Profile = () => {
                 <User size={22} color=" #202d61" />
                 <span>{user.role}</span>
               </div>
-
-              <div className="user-profile-info-item">
-                {user.session_date ? (
+              {user.session_date && (
+                <div className="user-profile-info-item">
                   <>
                     <span
                       className={`user-profile-booking ${
@@ -100,17 +99,11 @@ const Profile = () => {
                     )}
                     <span>الموعد المحجوز</span>
                   </>
-                ) : (
-                  <span className="user-profile-no-booking">
-                    <Calendar size={22} color=" #202d61" strokeWidth={2} />
-                    لم تحجز/ي موعد بعد
-                  </span>
-                )}
-              </div>
-
-              <div className="user-profile-info-item">
-                {user.session_date ? (
-                  user.status ? (
+                </div>
+              )}
+              {user.session_date && (
+                <div className="user-profile-info-item">
+                  {user.status ? (
                     <span className="user-profile-status confirmed">
                       <CheckCircle size={22} />
                       تم تأكيد الموعد
@@ -120,21 +113,16 @@ const Profile = () => {
                       <Clock size={22} />
                       تأكيد الموعد قيد الانتظار
                     </span>
-                  )
-                ) : (
-                  <span className="user-profile-no-booking">
-                    <Calendar size={22} color=" #202d61" strokeWidth={2} />
-                    الرجاء حجز موعد أولاً
-                  </span>
-                )}
-              </div>
+                  )}
+                </div>
+              )}
             </div>
           </Card.Body>
         </Card>
 
         {/* Content Section */}
         <Row className="user-profile-content mb-4">
-          <Col md={6}>
+          <Col md={12}>
             <Card className="user-profile-payment-section h-100">
               <Card.Body className="p-4">
                 {user.isPayed ? (
@@ -224,7 +212,7 @@ const Profile = () => {
                       </ul>
                     </div>
 
-                    <span
+                    {/*   <span
                       style={{
                         display: "block",
                         fontSize: "1rem",
@@ -233,29 +221,25 @@ const Profile = () => {
                     >
                       للمزيد من التفاصيل حول طريقة الدفع بعد التواصل مع المدرب
                       وحجز موعد المقابلة الافتراضية
-                    </span>
+                    </span> */}
                   </div>
                 )}
               </Card.Body>
             </Card>
           </Col>
 
-          <Col md={6}>
+          {/* <Col md={6}>
             <Card className="user-profile-public-section h-100">
               <Card.Body className="p-2">
-                {/* <img
-                src="/images/cover-book.png"
-                alt="Public Resource"
-                className="user-profile-public-image"
-              /> */}
-                {/* Calendar Section */}
+               
+               
                 <BookingCalendar
                   userId={user?.id}
                   className="user-profile-booking-calendar"
                 />
               </Card.Body>
             </Card>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
       <div style={{ direction: "rtl" }}>

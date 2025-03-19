@@ -3,7 +3,10 @@ import { requireAdmin } from "../../utils/auth.js"; // Adjusted path
 import dotenv from "dotenv";
 import formidable from "formidable";
 import { v2 as cloudinary } from "cloudinary";
-import { sendPaymentConfirmationEmail } from "../../utils/emailService.js";
+import {
+  sendPaymentConfirmationEmail,
+  sendProfileConfirmationEmail,
+} from "../../utils/emailService.js";
 
 dotenv.config();
 
@@ -66,6 +69,7 @@ export default async function handler(req, res) {
               contact,
               status,
               "isPayed",
+              "isConfirmed",
               session_date::date as session_date,
               to_char(session_time, 'HH24:MI') as session_time,
               created_at
@@ -197,6 +201,45 @@ export default async function handler(req, res) {
             .json({ message: "Contents unlocked successfully" });
         } catch (error) {
           console.error("Error in isPayed endpoint:", error);
+          return res.status(500).json({ error: "Internal server error" });
+        } finally {
+          client.release();
+        }
+      } else if (endpoint === "isConfirmed") {
+        // --- isConfirmed PUT Logic to unlock profile ---
+        // Validate admin access
+        const { userId } = req.body;
+        const client = await pool.connect();
+        try {
+          await client.query(
+            'UPDATE users SET "isConfirmed" = TRUE WHERE id = $1',
+            [userId]
+          );
+          // Fetch user’s email and name from database
+          const userResult = await client.query(
+            "SELECT email, name FROM users WHERE id = $1",
+            [userId]
+          );
+          if (userResult.rows.length === 0) {
+            throw new Error("User not found");
+          }
+          const { email, name } = userResult.rows[0];
+
+          // Send confirmation email
+          const emailResult = await sendProfileConfirmationEmail(email, name);
+          if (!emailResult.success) {
+            console.error(
+              "Failed to send profile confirmation email:",
+              emailResult.error
+            );
+            // Log error but proceed, as email sending isn’t critical
+          }
+
+          return res
+            .status(200)
+            .json({ message: "Profile unlocked successfully" });
+        } catch (error) {
+          console.error("Error in isConfirmed endpoint:", error);
           return res.status(500).json({ error: "Internal server error" });
         } finally {
           client.release();

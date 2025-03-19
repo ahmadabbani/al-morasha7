@@ -98,6 +98,27 @@ const AdminDashboard = () => {
     }
   };
 
+  // Add state for modal
+  const [isCModalOpen, setIsCModalOpen] = useState(false);
+  const [isPUnlocking, setIsPUnlocking] = useState(false);
+
+  // Function to open modal with user details
+  const openCUnlockModal = (userId, userName) => {
+    setSelectedUser({ id: userId, name: userName });
+    setIsCModalOpen(true);
+  };
+
+  // Function to confirm unlock
+  const handleConfirmCUnlock = async () => {
+    if (selectedUser) {
+      setIsPUnlocking(true); // Start loading
+      await handleIsConfirmed(selectedUser.id, selectedUser.name); // Wait for unlocking
+      setIsPUnlocking(false); // Stop loading
+      setIsCModalOpen(false); // Close modal
+      setSelectedUser(null);
+    }
+  };
+
   //pagination
   // Add this pagination helper function
   const paginateUsers = (usersList, boxId) => {
@@ -278,6 +299,39 @@ const AdminDashboard = () => {
         newSet.delete(userId);
         return newSet;
       });
+    }
+  };
+
+  //make isConfirmed true to unlock profile page
+  const handleIsConfirmed = async (userId, userName) => {
+    try {
+      const response = await fetch(
+        `${
+          import.meta.env.VITE_REACT_APP_API_URL
+        }/admin/adminAction/isConfirmed`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }),
+
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to unlock user profile");
+
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === userId ? { ...user, isConfirmed: true } : user
+        )
+      );
+
+      toast.success(`Profile Unlocked Successfully`);
+    } catch (error) {
+      console.error("Error unlocking user's profile:", error);
+      toast.error("An error occured while unlocking the profile");
     }
   };
 
@@ -467,7 +521,7 @@ const AdminDashboard = () => {
                   Registered at:
                   <span>{dayjs(user.created_at).format("YYYY-MM-DD")}</span>
                 </span>
-                {user.session_date ? (
+                {user.session_date && (
                   <>
                     <span
                       className={`admin-user-booking ${
@@ -493,37 +547,11 @@ const AdminDashboard = () => {
                       <span className="date-status">date passed</span>
                     )}
                   </>
-                ) : (
-                  <span className="no-booking">
-                    <Calendar size={19} strokeWidth={2} /> User hasn’t booked a
-                    date yet
-                  </span>
                 )}
                 <span className="admin-user-email">
                   <MessageCircleMore size={22} strokeWidth={2.5} />
                   Contact us:
                   <span> {user.contact} </span>
-                </span>
-              </div>
-
-              {/* Right Side */}
-              <div className="admin-user-status">
-                <span className="admin-user-district">
-                  {user.district} <Map />
-                </span>
-                <span className="admin-user-district">
-                  {user.region} <MapPin />
-                </span>
-                <span className="admin-user-role">
-                  {user.role}
-                  <Vote />
-                </span>
-                <span
-                  className={`admin-payment-status ${
-                    user.isPayed ? "is-paid" : "not-paid"
-                  }`}
-                >
-                  {user.isPayed ? "Payed" : "Not Payed"}
                 </span>
 
                 <div className="admin-actions">
@@ -572,11 +600,49 @@ const AdminDashboard = () => {
                       {isPayedUsers.has(user.id) ? (
                         <Loader size="sm" color="white" />
                       ) : (
-                        "Unlock"
+                        <>
+                          <Unlock size={18} />
+                          Guide
+                        </>
                       )}
                     </button>
                   )}
+                  {!user.isConfirmed && (
+                    <button
+                      className="admin-unlock-button"
+                      onClick={() => openCUnlockModal(user.id, user.name)}
+                      disabled={
+                        updatingUsers.has(user.id) ||
+                        rejectingUsers.has(user.id) ||
+                        isPayedUsers.has(user.id)
+                      }
+                    >
+                      <Unlock size={18} />
+                      Profile
+                    </button>
+                  )}
                 </div>
+              </div>
+
+              {/* Right Side */}
+              <div className="admin-user-status">
+                <span className="admin-user-district">
+                  {user.district} <Map />
+                </span>
+                <span className="admin-user-district">
+                  {user.region} <MapPin />
+                </span>
+                <span className="admin-user-role">
+                  {user.role}
+                  <Vote />
+                </span>
+                <span
+                  className={`admin-payment-status ${
+                    user.isPayed ? "is-paid" : "not-paid"
+                  }`}
+                >
+                  {user.isPayed ? "Payed" : "Not Payed"}
+                </span>
               </div>
             </div>
           ))}
@@ -596,9 +662,11 @@ const AdminDashboard = () => {
                 <Unlock size={24} />
               </div>
               <p className="unlock-confirmation-message">
-                This will unlock the content for {selectedUser?.name}. They can
-                access the guide in their profile, and an email will be sent to
-                notify them.
+                This will unlock the content for {selectedUser?.name}. They will
+                receive an email notification and can access the guide in their
+                profile.
+                <br /> Note: If their profile is not unlocked, it must be
+                unlocked first.
               </p>
               <div className="unlock-confirmation-buttons">
                 <button
@@ -615,6 +683,41 @@ const AdminDashboard = () => {
                 <button
                   className="unlock-confirmation-cancel-btn"
                   onClick={() => setIsModalOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/*modal to unlock profile */}
+        {isCModalOpen && (
+          <div className="unlock-confirmation-overlay">
+            <div className="unlock-confirmation-modal">
+              <div className="unlock-confirmation-icon">
+                <Unlock size={24} />
+              </div>
+              <p className="unlock-confirmation-message">
+                This will unlock the Profile Page for {selectedUser?.name}. They
+                will receive an email notification and gain access to their
+                Profile, including the guide if available.
+              </p>
+              <div className="unlock-confirmation-buttons">
+                <button
+                  className="unlock-confirmation-unlock-btn"
+                  onClick={handleConfirmCUnlock}
+                  disabled={isPUnlocking}
+                >
+                  {isPUnlocking ? (
+                    <span className="unlock-confirmation-spinner"></span> // Custom spinner
+                  ) : (
+                    "Unlock"
+                  )}
+                </button>
+                <button
+                  className="unlock-confirmation-cancel-btn"
+                  onClick={() => setIsCModalOpen(false)}
                 >
                   Cancel
                 </button>

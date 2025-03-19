@@ -9,8 +9,6 @@
     max-width: 100%;
     min-height: 100vh;
     direction: rtl;
-    /* Right-to-left for Arabic */
-
 }
 
 /* Heading Styling */
@@ -89,6 +87,25 @@
     /* Remove default arrow */
     padding-right: 30px;
     /* Space for custom arrow if added later */
+}
+
+.booking-selector .booking-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #FFFFFF;
+    background-color: #1ea81e;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 1rem;
+    border: 2px solid #1ea81e;
+    transition: 0.2s ease;
+}
+
+.booking-selector .booking-button:hover {
+    background-color: #059705;
+    border: 2px solid #059705;
 }
 
 /* Submit Button Styling */
@@ -171,6 +188,47 @@
     border-color: #a0a0a0;
 }
 
+.register-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.register-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    direction: rtl;
+}
+
+.register-modal-close {
+    position: absolute;
+    top: -4px;
+    left: 12px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: gray;
+}
+
+.register-modal-close:hover {
+    color: #000;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .register-form {
@@ -198,6 +256,10 @@
     .register-form {
         max-width: 450px;
         padding: 1.5rem;
+    }
+
+    .booking-selector .booking-button {
+        width: 100%;
     }
 }
 

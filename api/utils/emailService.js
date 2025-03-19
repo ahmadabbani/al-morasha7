@@ -38,7 +38,7 @@ export async function sendVerificationEmail(email, name, verificationToken) {
   }
 }
 
-// New function
+// Payment confirmation
 export async function sendPaymentConfirmationEmail(email, name) {
   try {
     const { data, error } = await resend.emails.send({
@@ -88,7 +88,7 @@ export async function sendPaymentConfirmationEmail(email, name) {
             لقد تم تأكيد مشاركتكم، ونتطلع للانطلاق معك في هذه الرحلة المميزة.
           </p>
           <p style="font-size: 16px; line-height: 1.5; margin: 10px 0; direction: rtl; text-align: right;">
-            سنشارك معكم قريبًا تفاصيل إضافية حول جدول البرنامج والخطوات القادمة. لا تتردد في التواصل معنا إذا كان لديكم أي استفسار.
+            سنشارك معكم قريبًا تفاصيل إضافية حول جدول البرنامج والخطوات القادمة. لا تترددوا في التواصل معنا إذا كان لديكم أي استفسار.
           </p>
           <p style="font-size: 16px; line-height: 1.5; margin: 10px 0; direction: rtl; text-align: right;">
             بانتظار لقائنا قريبًا!
@@ -107,6 +107,73 @@ export async function sendPaymentConfirmationEmail(email, name) {
     return { success: true, data };
   } catch (error) {
     console.error("Error sending payment confirmation email:", error);
+    return { success: false, error: error.message };
+  }
+}
+
+// profile unlocked
+export async function sendProfileConfirmationEmail(email, name) {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "Almourachah-Verification@almourachah.com", // Update with your sender domain
+      to: email,
+      subject:
+        "Profile Unlocked - يمكنكم الآن الوصول إلى ملفكم الشخصي - Al Mourachah Team",
+      html: `
+       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
+  <!-- English Section -->
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0;">Dear ${name},</p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0;">Greetings,</p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0;">
+    Your profile has been successfully unlocked. You can now access your account and explore the available features.
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0;">
+    If the guide is available, you will now be able to access it as well.
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0;">
+    If you need any assistance, feel free to reach out to us.
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0;">
+    Best regards,<br>The Team
+  </p>
+
+  <!-- Separator -->
+  <hr style="border: 0; border-top: 1px solid #ccc; margin: 20px 0;">
+
+  <!-- Arabic Section -->
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0; direction: rtl; text-align: right;">
+    الموضوع: تم تفعيل حسابكم بنجاح
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0; direction: rtl; text-align: right;">
+    عزيزي/عزيزتي ${name}،  
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0; direction: rtl; text-align: right;">
+    تحية طيبة،
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0; direction: rtl; text-align: right;">
+    تم تفعيل حسابكم بنجاح، ويمكنكم الآن الاطلاع على المحتويات المتاحة في حسابكم.
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0; direction: rtl; text-align: right;">
+    إذا كان الدليل متاحًا، يمكنكم الآن الوصول إليه أيضًا.
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0; direction: rtl; text-align: right;">
+    في حال احتجكم إلى أي مساعدة، لا تترددوا في التواصل معنا.
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 10px 0; direction: rtl; text-align: right;">
+    أطيب التحيات،<br>فريق عمل برنامج المرشح/ة
+  </p>
+</div>
+
+      `,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error sending profile confirmation email:", error);
     return { success: false, error: error.message };
   }
 }

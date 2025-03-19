@@ -12,6 +12,9 @@ const ProtectedRoute = ({ children }) => {
         navigate("/login");
       } else if (user.isAdmin) {
         navigate("/admin");
+      } else if (!user.isConfirmed) {
+        // If user exists, is not admin, but is not confirmed, navigate home.
+        navigate("/");
       }
     }
   }, [user, loading, navigate]);
@@ -34,7 +37,7 @@ const ProtectedRoute = ({ children }) => {
       </div>
     );
 
-  return user && !user.isAdmin ? children : null;
+  return user && !user.isAdmin && user.isConfirmed ? children : null;
 };
 
 export default ProtectedRoute;

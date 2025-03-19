@@ -160,7 +160,7 @@ const Header = () => {
               </ScrollLink>
             </>
           )}
-          {user && !user.isAdmin && (
+          {user && !user.isAdmin && user.isConfirmed && (
             <LinkToExternal
               to="/profile"
               className="header-nav-link header-nav-profile"
