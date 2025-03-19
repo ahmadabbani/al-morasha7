@@ -370,7 +370,19 @@ export default function BookingCalendar({
           const formattedDate = formatDate(date);
           const isDisabled = disabledDays.includes(formattedDate);
 
-          return isWeekend || isDisabled;
+          // Get the current date
+          const today = new Date();
+          today.setHours(0, 0, 0, 0); // Reset time to start of day
+
+          // Calculate end date (7 days from today)
+          const endDate = new Date(today);
+          endDate.setDate(today.getDate() + 6);
+          endDate.setHours(23, 59, 59, 999); // Set to end of day
+
+          // Check if date is outside the 7-day range
+          const isOutsideRange = date < today || date > endDate;
+
+          return isWeekend || isDisabled || isOutsideRange;
         }}
         locale="ar"
         mb="xl"
