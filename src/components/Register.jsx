@@ -1909,7 +1909,7 @@ const Register = () => {
             >
               <Calendar size={20} />
               {bookingDate && bookingTime
-                ? `الموعد المحدد: ${bookingDate} ${bookingTime}`
+                ? `الموعد المحدد: ${bookingDate} - ${bookingTime}`
                 : "اختر موعدًا للاتصال"}
             </button>
           </div>
