@@ -9,6 +9,7 @@ const allowedOrigins = [
   "http://localhost:5173", // Local development
   "https://al-morasha7.vercel.app", // Production frontend URL
   "https://almourachah.org",
+  "https://almourachah.com",
 ];
 export async function requireAdmin(req, res) {
   // Set CORS headers dynamically

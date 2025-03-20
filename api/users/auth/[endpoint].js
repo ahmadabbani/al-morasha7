@@ -16,6 +16,7 @@ const allowedOrigins = [
   "http://localhost:5173", // Local development
   "https://al-morasha7.vercel.app", // Production frontend URL
   "https://almourachah.org",
+  "https://almourachah.com",
 ];
 
 // Error and success messages
