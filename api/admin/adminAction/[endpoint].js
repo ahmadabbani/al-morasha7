@@ -27,12 +27,13 @@ const allowedOrigins = [
 
 export default async function handler(req, res) {
   const origin = req.headers.origin;
-  const host = req.headers.host; // e.g., "almourachah.org"
+  const host = req.headers.host; // e.g., "almourach.org" or "almourach.com"
   const isProduction = process.env.NODE_ENV === "production";
-  const expectedHost = isProduction ? "almourachah.org" : "localhost:3000";
+  const allowedHosts = isProduction
+    ? ["almourachah.org", "almourachah.com"]
+    : ["localhost:3000"];
 
-  // Allow same-origin requests (no Origin header) or matching allowed origins
-  if (!origin && host === expectedHost) {
+  if (!origin && allowedHosts.includes(host)) {
     res.setHeader("Access-Control-Allow-Origin", `https://${host}`);
   } else if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
