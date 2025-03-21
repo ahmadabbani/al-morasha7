@@ -44,7 +44,10 @@ const Blogs = () => {
             <p className="blogs-list-empty">لا توجد مدونات بعد</p>
           ) : (
             blogs.map((blog) => (
-              <div key={blog.id} className="col-md-6 col-lg-4 mb-4">
+              <div
+                key={blog.id}
+                className="blogs-single-card col-md-6 col-lg-4 mb-4"
+              >
                 <div
                   className="blogs-list-card"
                   onClick={() => handleBlogClick(blog.id)}
