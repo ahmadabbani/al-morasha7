@@ -185,8 +185,9 @@
     .header-hamburger {
         display: block;
         order: 2;
-        padding: 0;
+        padding: 0 0 10px 0 !important;
         font-size: 1.5rem;
+
         /* Ensures hamburger stays on the right */
     }
 
@@ -194,6 +195,7 @@
         justify-content: space-between;
         /* Ensure logo stays left, hamburger right */
         flex-wrap: wrap;
+
         gap: 1rem;
         /* Allow items to stay in place */
     }
@@ -223,8 +225,6 @@
         display: flex;
         left: 0;
     }
-
-
 
     .header-auth-links {
         flex-direction: column;
