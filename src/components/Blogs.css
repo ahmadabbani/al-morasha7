@@ -68,8 +68,19 @@
     -webkit-box-orient: vertical;
 }
 
+@media (max-width: 768px) {
+    .blogs-list-img {
+        height: 300px;
+    }
+}
+
 @media (max-width: 585px) {
     .blogs-list {
         padding: 40px 40px;
+    }
+
+    .blogs-list-img {
+        object-fit: contain;
+        height: 100%;
     }
 }
