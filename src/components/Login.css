@@ -80,6 +80,17 @@
     color: #aaa;
 }
 
+.login-reset-link {
+    display: inline-block;
+    color: #d42127;
+    font-size: 0.9rem;
+    transition: 0.2s ease;
+}
+
+.login-reset-link:hover {
+    opacity: 0.85;
+}
+
 /* Submit Button Styling */
 .login-submit-btn {
     display: flex;

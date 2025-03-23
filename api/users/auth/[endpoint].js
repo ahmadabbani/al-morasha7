@@ -7,6 +7,7 @@ import crypto from "crypto";
 import {
   sendVerificationEmail,
   sendContactUsEmail,
+  sendResetPasswordEmail,
 } from "../../utils/emailService.js";
 
 dotenv.config();
@@ -275,6 +276,75 @@ export default async function handler(req, res) {
           error: errors.REGISTRATION_FAILED,
           details: error.message,
         });
+      }
+    } else if (endpoint === "reset-password") {
+      // --- Reset Password Request Logic ---
+      const { email } = req.body;
+      if (!email) {
+        return res.status(400).json({ error: "البريد الإلكتروني مطلوب" });
+      }
+      try {
+        const client = await pool.connect();
+        const result = await client.query(
+          "SELECT * FROM users WHERE email = $1",
+          [email]
+        );
+        client.release();
+
+        // Security: Don’t reveal if email exists
+        if (result.rows.length === 0) {
+          return res.status(200).json({
+            message:
+              "إذا كان البريد الإلكتروني مسجلاً، سيتم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك/ي الإلكتروني",
+          });
+        }
+
+        const user = result.rows[0];
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+        const resetLink = `https://almourachah.org/reset-password?token=${token}`;
+
+        await sendResetPasswordEmail(email, resetLink);
+        return res.status(200).json({
+          message:
+            "إذا كان البريد الإلكتروني مسجلاً، سيتم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك/ي الإلكتروني",
+        });
+      } catch (error) {
+        console.error("Error in reset-password:", error);
+        return res.status(500).json({ error: "حدث خطأ أثناء معالجة الطلب" });
+      }
+    } else if (endpoint === "set-new-password") {
+      // --- Set New Password Logic ---
+      const { token, newPassword } = req.body;
+      if (!token || !newPassword) {
+        return res
+          .status(400)
+          .json({ error: "الرمز وكلمة المرور الجديدة مطلوبان" });
+      }
+      try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const userId = decoded.userId;
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const client = await pool.connect();
+        await client.query("UPDATE users SET password = $1 WHERE id = $2", [
+          hashedPassword,
+          userId,
+        ]);
+        client.release();
+
+        return res.status(200).json({ message: "تم تحديث كلمة المرور بنجاح" });
+      } catch (error) {
+        if (error.name === "TokenExpiredError") {
+          return res.status(400).json({ error: "انتهت صلاحية الرمز" });
+        } else if (error.name === "JsonWebTokenError") {
+          return res.status(400).json({ error: "الرمز غير صالح" });
+        }
+        console.error("Error in set-new-password:", error);
+        return res
+          .status(500)
+          .json({ error: "حدث خطأ أثناء تحديث كلمة المرور" });
       }
     } else if (endpoint === "send-contact-us") {
       const { name, email, subject, message } = req.body;

@@ -253,3 +253,38 @@ export async function sendContactUsEmail(name, email, subject, message) {
     return { success: false, error: error.message };
   }
 }
+
+export async function sendResetPasswordEmail(email, link) {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "Almourachah-Verification@almourachah.com",
+      to: email,
+      subject: "إعادة تعيين كلمة المرور",
+      html: `
+        <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333; direction: rtl; text-align: right;">مرحبًا،</p>
+<p style="font-family: Arial, sans-serif; font-size: 16px; color: #333; direction: rtl; text-align: right;">
+  لقد تلقينا طلبًا لإعادة تعيين كلمة المرور الخاصة بكم. يرجى النقر على الرابط أدناه لتعيين كلمة مرور جديدة:
+</p>
+<p style="direction: rtl; text-align: right;">
+   <a href="${link}" style="display: inline-block; font-family: Arial, sans-serif; font-size: 16px; color: #fff; background-color: #d42127; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+    إعادة تعيين كلمة المرور
+  </a>
+</p>
+<p style="font-family: Arial, sans-serif; font-size: 16px; color: #333; direction: rtl; text-align: right;">
+  إذا لم تكونوا قد طلبتم هذا، يمكنكم تجاهل البريد الإلكتروني.
+</p>
+<p style="font-family: Arial, sans-serif; font-size: 16px; color: #333; direction: rtl; text-align: right;">
+  شكرًا،<br>
+  <strong>فريق عمل برنامج المرشح/ة</strong>
+</p>
+      `,
+    });
+    if (error) {
+      throw new Error(error.message);
+    }
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error sending reset password email:", error);
+    return { success: false, error: error.message };
+  }
+}

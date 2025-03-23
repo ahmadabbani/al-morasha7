@@ -17,6 +17,8 @@ import VerifyEmail from "./components/VerifyEmail";
 import AdminBlogDashboard from "./components/AdminBlogDashboard";
 import ResendVerification from "./components/ResendVerification";
 import SingleBlog from "./components/SingleBlog";
+import ResetPasswordRequest from "./components/ResetPasswordRequest";
+import SetNewPassword from "./components/SetNewPassword";
 function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
@@ -40,6 +42,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verify" element={<VerifyEmail />} />
+        <Route
+          path="/reset-password-request"
+          element={<ResetPasswordRequest />}
+        />
+        <Route path="/reset-password" element={<SetNewPassword />} />
         <Route path="/blog/:id" element={<SingleBlog />} />
 
         {/* Protected Routes */}

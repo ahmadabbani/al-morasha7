@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Mail, Lock, LogIn } from "lucide-react";
 import "./Login.css"; // Import the CSS file
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
 import ResendVerification from "./ResendVerification";
 
@@ -102,7 +102,7 @@ const Login = () => {
             </div>
 
             {/* Password */}
-            <div className="login-input-group mb-4">
+            <div className="login-input-group mb-1">
               <label htmlFor="login-password" className="login-label">
                 <Lock className="icon" size={20} color="#202d61" />
                 كلمة المرور
@@ -118,6 +118,12 @@ const Login = () => {
                 required
               />
             </div>
+            <Link
+              className="mb-4  login-reset-link"
+              to="/reset-password-request"
+            >
+              نسيت كلمة المرور؟
+            </Link>
 
             {/* Submit Button */}
             <button
