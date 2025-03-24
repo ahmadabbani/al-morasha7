@@ -17,9 +17,16 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const isAuthPage = ["/login", "/register", "/profile"].includes(
-    location.pathname
-  );
+  const isAuthPage =
+    [
+      "/login",
+      "/register",
+      "/profile",
+      "/reset-password-request",
+      "/reset-password",
+      "/verify",
+      "/resend-verification",
+    ].includes(location.pathname) || location.pathname.startsWith("/blog/");
   const isHome = location.pathname === "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {

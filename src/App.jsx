@@ -19,6 +19,8 @@ import ResendVerification from "./components/ResendVerification";
 import SingleBlog from "./components/SingleBlog";
 import ResetPasswordRequest from "./components/ResetPasswordRequest";
 import SetNewPassword from "./components/SetNewPassword";
+import { MessageCircle } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
@@ -87,6 +89,16 @@ function App() {
           <Route path="admin-login" element={<AdminLogin />} />
         </Route>
       </Routes>
+      {/* WhatsApp fixed icon */}
+      <a
+        href="https://wa.me/96171346435"
+        className="whatsapp-icon"
+        aria-label="Contact us on WhatsApp"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaWhatsapp />
+      </a>
     </>
   );
 }
