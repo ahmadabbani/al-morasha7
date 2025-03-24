@@ -89,3 +89,16 @@ button {
   transform: scale(1.1);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
 }
+
+@media (max-width: 440px) {
+  .whatsapp-icon {
+    bottom: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.7rem;
+  }
+
+  .whatsapp-icon:hover {
+    transform: scale(1.05);
+  }
+}
