@@ -213,6 +213,41 @@ export async function sendNewAppointmentEmail() {
   }
 }
 
+//new registration notification
+export async function sendNewRegistrationEmail() {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "Almourachah-Notification@almourachah.com",
+      to: "info@almourachah.org",
+      subject: "New Registration from Almourachah",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; background: #f9f9f9; border-radius: 10px;">
+  <h2 style="color: #202d61; text-align: center;">New Registration Notification</h2>
+  <p style="font-size: 16px; line-height: 1.5; margin: 15px 0;">
+    A new user has registered on the Almourachah platform.
+    Please review the details in the system and take the necessary action if required.
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 15px 0;">
+    For further information, please check the admin panel.
+  </p>
+  <p style="font-size: 16px; line-height: 1.5; margin: 15px 0;">
+    Best regards,<br>Almourachah Team
+  </p>
+</div>
+      `,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error sending registration notification email:", error);
+    return { success: false, error: error.message };
+  }
+}
+
 export async function sendContactUsEmail(name, email, subject, message) {
   try {
     const { data, error } = await resend.emails.send({

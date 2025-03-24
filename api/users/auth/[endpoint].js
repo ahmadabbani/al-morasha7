@@ -8,6 +8,7 @@ import {
   sendVerificationEmail,
   sendContactUsEmail,
   sendResetPasswordEmail,
+  sendNewRegistrationEmail,
 } from "../../utils/emailService.js";
 
 dotenv.config();
@@ -524,6 +525,14 @@ export default async function handler(req, res) {
              WHERE verification_token = $2`,
             [currentTime, token]
           );
+          // Send notification to admin about new verified user
+          const notificationResult = await sendNewRegistrationEmail();
+          if (!notificationResult.success) {
+            console.error(
+              "Failed to send new registration notification email:",
+              notificationResult.error
+            );
+          }
           return res
             .status(200)
             .json({ message: success.VERIFICATION_SUCCESS });
