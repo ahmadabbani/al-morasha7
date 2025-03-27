@@ -641,7 +641,7 @@ const AdminDashboard = () => {
                     user.isPayed ? "is-paid" : "not-paid"
                   }`}
                 >
-                  {user.isPayed ? "Payed" : "Not Payed"}
+                  {user.isPayed ? "Paid" : "Not Paid"}
                 </span>
               </div>
             </div>
