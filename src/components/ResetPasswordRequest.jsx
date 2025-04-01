@@ -49,7 +49,7 @@ const ResetPasswordRequest = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="أدخل بريدك الإلكتروني"
+              placeholder="أدخل/ي البريد الإلكتروني"
             />
           </div>
           <button type="submit" disabled={loading}>
