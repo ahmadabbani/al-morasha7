@@ -103,10 +103,6 @@
     .custom-dots li button:before {
         font-size: 10px;
     }
-
-    .slick-dots {
-        bottom: -10px;
-    }
 }
 
 
@@ -190,25 +186,15 @@
     -webkit-box-orient: vertical;
 }
 
-/*@media (max-width: 1200px) {
+@media (min-width: 1400px) {
     .blogs-list-card {
-        height: 400px;
+        max-height: 465px;
+        min-height: 465px;
     }
-
-    .blogs-list-img {
-        width: 100%;
-        max-width: 100%;
-        height: 220px !important;
-        max-height: 220px !important;
-
-    }
-}*/
+}
 
 @media (max-width: 768px) {
-    .blogs-list-card {
-        max-height: auto;
-        min-height: auto;
-    }
+
 
     /* .blogs-list-img {
         height: 250px !important;
@@ -217,13 +203,13 @@
     }*/
 }
 
-@media (max-width: 585px) {
+@media (max-width: 600px) {
     .blogs-list {
         padding: 40px 40px;
     }
 
     .blogs-list-img {
-        object-fit: contain;
-        height: 100%;
+        height: 250px !important;
+        max-height: 250px !important;
     }
 }
