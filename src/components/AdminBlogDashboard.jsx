@@ -115,17 +115,17 @@ const AdminBlogDashboard = () => {
           />
         </div>
 
-        {/*youtube link*/}
+        {/*link*/}
         <div className="mb-4">
           <label htmlFor="description" className="blogs-admin-label">
-            Youtube link
+            link
           </label>
           <textarea
             id="link"
             name="link"
             value={formData.link}
             onChange={handleInputChange}
-            placeholder="Youtube link..."
+            placeholder="link..."
             className="blogs-admin-input"
           />
         </div>
