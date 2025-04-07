@@ -45,25 +45,37 @@ const SingleBlog = () => {
   const getYoutubeEmbedUrl = (url) => {
     if (!url) return null;
 
+    // Handle YouTube links exactly as before
     // Handle shortened links (youtu.be)
     if (url.includes("youtu.be")) {
       const videoId = url.split("youtu.be/")[1].split("?")[0];
-      return `https://www.youtube.com/embed/${videoId}`;
+      return {
+        isYoutube: true,
+        url: `https://www.youtube.com/embed/${videoId}`,
+      };
     }
 
     // Handle standard links (youtube.com/watch?v=)
     if (url.includes("youtube.com/watch?v=")) {
       const videoId = url.split("v=")[1].split("&")[0];
-      return `https://www.youtube.com/embed/${videoId}`;
+      return {
+        isYoutube: true,
+        url: `https://www.youtube.com/embed/${videoId}`,
+      };
+    }
+
+    // If it's not a YouTube URL, return it as a regular link
+    if (url) {
+      return { isYoutube: false, url: url };
     }
 
     // Log an error for invalid URLs and return null
-    console.error("Invalid YouTube URL:", url);
+    console.error("Invalid URL:", url);
     return null;
   };
 
-  // Convert YouTube link to embeddable format
-  const youtubeEmbedUrl = getYoutubeEmbedUrl(blog.link);
+  // Convert link to appropriate format
+  const linkData = getYoutubeEmbedUrl(blog.link);
 
   return (
     <>
@@ -76,16 +88,30 @@ const SingleBlog = () => {
           <Clock size={18} />
           <span>{new Date(blog.created_at).toLocaleDateString()}</span>
         </div>
-        {youtubeEmbedUrl && (
-          <div className="single-blog-video">
-            <iframe
-              src={youtubeEmbedUrl}
-              title={blog.title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
+        {linkData && (
+          <>
+            {linkData.isYoutube ? (
+              <div className="single-blog-video">
+                <iframe
+                  src={linkData.url}
+                  title={blog.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <div className="single-blog-link">
+                <a
+                  href={linkData.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  رابط الصفحة
+                </a>
+              </div>
+            )}
+          </>
         )}
         <p className="single-blog-description">{blog.description}</p>
       </div>

@@ -69,6 +69,23 @@
     /* Centers the video and adds bottom margin */
 }
 
+.single-blog-link {
+    position: relative;
+    padding-bottom: 0;
+    background-color: #0b8d46;
+    padding: 8px 14px;
+    border-radius: 4px;
+    display: inline-block;
+    color: #FFFFFF;
+    margin: 20px auto 20px auto;
+    transition: all 0.3s ease;
+}
+
+.single-blog-link:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+}
+
 .single-blog-video iframe {
     position: absolute;
     top: 0;
