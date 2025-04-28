@@ -132,7 +132,10 @@ const Profile = () => {
                       <BookOpen size={24} color="#202d61" />
                       <h4> الدليل الخاص بكم</h4>
                       <p>يمكنكم الوصول إلى الدليل الشامل من هنا</p>
-                      <button className="user-profile-btn download-btn">
+                      <button
+                        className="user-profile-btn download-btn"
+                        onClick={() => window.open("/api/serveGuide", "_blank")}
+                      >
                         فتح الدليل
                       </button>
                     </div>
