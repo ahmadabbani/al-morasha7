@@ -3,6 +3,8 @@ import { requireAdmin } from "../../utils/auth.js"; // Adjusted path
 import dotenv from "dotenv";
 import formidable from "formidable";
 import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
+import path from "path";
 import {
   sendPaymentConfirmationEmail,
   sendProfileConfirmationEmail,
@@ -109,6 +111,39 @@ export default async function handler(req, res) {
           return res.status(200).json(result.rows[0]);
         } finally {
           client.release();
+        }
+      } else if (endpoint === "serveGuide") {
+        try {
+          // Path to PDF file - relative to the project root
+          const filePath = path.join(
+            process.cwd(),
+            "private-assets",
+            "guide.pdf"
+          );
+
+          // Check if file exists
+          if (!fs.existsSync(filePath)) {
+            return res.status(404).json({ error: "File not found" });
+          }
+
+          // Read the file as a stream to handle larger files efficiently
+          const stream = fs.createReadStream(filePath);
+
+          // Set headers for inline PDF viewing (not downloadable)
+          res.setHeader("Content-Type", "application/pdf");
+          res.setHeader("Content-Disposition", 'inline; filename="guide.pdf"');
+          res.setHeader(
+            "Cache-Control",
+            "no-store, no-cache, must-revalidate, proxy-revalidate"
+          );
+          res.setHeader("Pragma", "no-cache");
+          res.setHeader("Expires", "0");
+
+          // Stream the PDF to the response
+          stream.pipe(res);
+        } catch (error) {
+          console.error("Error serving PDF:", error);
+          res.status(500).json({ error: "Internal server error" });
         }
       } else {
         return res.status(404).json({ error: "Endpoint not found" });

@@ -134,7 +134,14 @@ const Profile = () => {
                       <p>يمكنكم الوصول إلى الدليل الشامل من هنا</p>
                       <button
                         className="user-profile-btn download-btn"
-                        onClick={() => window.open("/api/serveGuide", "_blank")}
+                        onClick={() =>
+                          window.open(
+                            `${
+                              import.meta.env.VITE_REACT_APP_API_URL
+                            }/admin/adminAction/serveGuide`,
+                            "_blank"
+                          )
+                        }
                       >
                         فتح الدليل
                       </button>
