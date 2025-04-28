@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../components/AuthContext";
+
 import BookingCalendar from "./BookingCalendar";
 import LogoutButton from "./LogoutButton";
 import {
@@ -31,10 +32,23 @@ import Footer from "./Footer";
 
 const Profile = () => {
   const { user } = useAuth();
-
+  const [loading, setLoading] = useState(false);
+  const [fileUrl, setFileUrl] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Clean up the blob URL when component unmounts
+  useEffect(() => {
+    return () => {
+      if (fileUrl) {
+        window.URL.revokeObjectURL(fileUrl);
+      }
+    };
+  }, [fileUrl]);
 
   const checkDateStatus = (date) => {
     if (!date) return null;
@@ -45,6 +59,7 @@ const Profile = () => {
 
   const handleOpenGuide = async () => {
     try {
+      setLoading(true);
       const res = await fetch(
         `${
           import.meta.env.VITE_REACT_APP_API_URL
@@ -61,12 +76,26 @@ const Profile = () => {
 
       const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);
-      window.open(url, "_blank");
+      setFileUrl(url);
+      setIsModalOpen(true);
     } catch (error) {
       console.error("Error opening guide:", error);
       window.location.href = "/";
+    } finally {
+      setLoading(false);
     }
   };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+    setPageNumber(1);
+  };
+
+  const goToPrevPage = () => setPageNumber((prev) => Math.max(prev - 1, 1));
+  const goToNextPage = () =>
+    setPageNumber((prev) => Math.min(prev + 1, numPages));
 
   return (
     <>
@@ -160,9 +189,32 @@ const Profile = () => {
                       <button
                         className="user-profile-btn download-btn"
                         onClick={handleOpenGuide}
+                        disabled={loading}
                       >
-                        فتح الدليل
+                        {loading ? "اِنتظر..." : "فتح الدليل"}
                       </button>
+                      {isModalOpen && fileUrl && (
+                        <div className="pdf-modal">
+                          <div className="pdf-modal-content">
+                            <div className="pdf-modal-header">
+                              <button
+                                className="pdf-modal-close"
+                                onClick={closeModal}
+                              >
+                                ×
+                              </button>
+                            </div>
+                            <div className="pdf-modal-body">
+                              <iframe
+                                src={`${fileUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+                                width="100%"
+                                height="100%"
+                                title="PDF Viewer"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </>
                 ) : (
