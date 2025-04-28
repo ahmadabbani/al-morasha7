@@ -1,6 +1,7 @@
 import pool from "../../utils/db.js"; // Adjusted path: two levels up from adminAction/
 import { requireAdmin } from "../../utils/auth.js"; // Adjusted path
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 import formidable from "formidable";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
@@ -113,7 +114,25 @@ export default async function handler(req, res) {
           client.release();
         }
       } else if (endpoint === "serveGuide") {
+        const token = req.cookies.token;
+        if (!token) {
+          return res.redirect("/");
+        }
+        const client = await pool.connect();
         try {
+          const decoded = jwt.verify(token, process.env.JWT_SECRET);
+          const user = await client.query(
+            `SELECT id, "isPayed", "isConfirmed" FROM users WHERE id = $1`,
+            [decoded.id]
+          );
+
+          if (
+            user.rows.length === 0 ||
+            !user.rows[0].isPayed ||
+            !user.rows[0].isConfirmed
+          ) {
+            return res.redirect("/");
+          }
           // Path to PDF file - relative to the project root
           const filePath = path.join(
             process.cwd(),
@@ -144,6 +163,8 @@ export default async function handler(req, res) {
         } catch (error) {
           console.error("Error serving PDF:", error);
           res.status(500).json({ error: "Internal server error" });
+        } finally {
+          client.release(); // always release connection
         }
       } else {
         return res.status(404).json({ error: "Endpoint not found" });

@@ -43,6 +43,31 @@ const Profile = () => {
     return sessionDate.isBefore(today);
   };
 
+  const handleOpenGuide = async () => {
+    try {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_REACT_APP_API_URL
+        }/admin/adminAction/serveGuide`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
+      if (!res.ok) {
+        window.location.href = "/";
+        return;
+      }
+
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      window.open(url, "_blank");
+    } catch (error) {
+      console.error("Error opening guide:", error);
+      window.location.href = "/";
+    }
+  };
+
   return (
     <>
       <Container className="user-profile-container">
@@ -134,14 +159,7 @@ const Profile = () => {
                       <p>يمكنكم الوصول إلى الدليل الشامل من هنا</p>
                       <button
                         className="user-profile-btn download-btn"
-                        onClick={() =>
-                          window.open(
-                            `${
-                              import.meta.env.VITE_REACT_APP_API_URL
-                            }/admin/adminAction/serveGuide`,
-                            "_blank"
-                          )
-                        }
+                        onClick={handleOpenGuide}
                       >
                         فتح الدليل
                       </button>
