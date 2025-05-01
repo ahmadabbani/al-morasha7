@@ -191,7 +191,7 @@ const Profile = () => {
                         onClick={handleOpenGuide}
                         disabled={loading}
                       >
-                        {loading ? "اِنتظر..." : "فتح الدليل"}
+                        {loading ? "...اِنتظار" : "فتح الدليل"}
                       </button>
                       {isModalOpen && fileUrl && (
                         <div className="pdf-modal">
