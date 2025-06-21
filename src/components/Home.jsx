@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import "./Home.css";
 import HomeBoxes from "./HomeBoxes";
 import About from "./About";
+import LeadersGuide from "./LeadersGuide";
 import ContactUs from "./ContactUs";
 import Blogs from "./Blogs";
 import Footer from "./Footer";
@@ -44,6 +45,7 @@ const Home = () => {
       <HomeBoxes />
       <About />
       <WeAre />
+      <LeadersGuide />
       <Blogs />
       <ContactUs />
       <Footer />

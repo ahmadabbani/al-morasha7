@@ -146,6 +146,16 @@ const Header = () => {
                 من نحن
               </ScrollLink>
               <ScrollLink
+                to="leaders-guide"
+                offset={-70}
+                smooth={true}
+                duration={0}
+                className="header-nav-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                قادة البلديات
+              </ScrollLink>
+              <ScrollLink
                 to="blogs"
                 offset={-70}
                 smooth={true}

@@ -1,0 +1,163 @@
+.leaders-guide-wrapper {
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    background-image: url('/images/flag2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    direction: rtl;
+}
+
+.leaders-guide-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.leaders-guide-container {
+    position: relative;
+    z-index: 1;
+}
+
+.leaders-guide-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+}
+
+.leaders-guide-main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.4;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.leaders-guide-widget {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+}
+
+.leaders-guide-icon-wrapper {
+    display: inline-flex;
+    padding: 1.5rem;
+    border-radius: 50%;
+    background-color: #202d61;
+    margin-bottom: 2rem;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+}
+
+.leaders-guide-icon {
+    width: 3rem;
+    height: 3rem;
+    color: #FFFFFF;
+}
+
+.leaders-guide-description {
+    margin-bottom: 2.5rem;
+}
+
+.leaders-guide-description p {
+    color: #fdfdfd;
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    text-align: right;
+}
+
+.leaders-guide-description p:last-child {
+    margin-bottom: 0;
+}
+
+.leaders-guide-button {
+    background: linear-gradient(135deg, #202d61 0%, #1ea81e 100%);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(32, 45, 97, 0.3);
+    min-width: 200px;
+}
+
+.leaders-guide-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(32, 45, 97, 0.4);
+    background: linear-gradient(135deg, #1ea81e 0%, #202d61 100%);
+}
+
+.leaders-guide-button:active {
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .leaders-guide-wrapper {
+        padding: 3rem 1rem;
+    }
+
+    .leaders-guide-main-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .leaders-guide-widget {
+        padding: 2rem 1.5rem;
+    }
+
+    .leaders-guide-description p {
+        font-size: 1rem;
+    }
+
+    .leaders-guide-button {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        min-width: 180px;
+    }
+
+    .leaders-guide-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .leaders-guide-icon-wrapper {
+        padding: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .leaders-guide-main-title {
+        font-size: 1.8rem;
+    }
+
+    .leaders-guide-widget {
+        padding: 1.5rem 1rem;
+    }
+
+    .leaders-guide-description p {
+        font-size: 0.95rem;
+    }
+
+    .leaders-guide-button {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+        min-width: 160px;
+    }
+}
