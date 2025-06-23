@@ -1,12 +1,11 @@
 .leaders-guide-wrapper {
     min-height: 100vh;
     padding: 4rem 2rem;
-    background-image: url('/images/flag2.jpg');
+    background-image: url('/images/flag222.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     position: relative;
-    direction: rtl;
 }
 
 .leaders-guide-overlay {
@@ -159,5 +158,185 @@
         padding: 0.7rem 1.5rem;
         font-size: 1rem;
         min-width: 160px;
+    }
+}
+
+.leaders-guide-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leaders-guide-modal,
+.leaders-guide-modal-content {
+    direction: ltr !important;
+}
+
+.leaders-guide-modal {
+    background: #fff;
+    border-radius: 1.5rem;
+    max-width: 900px;
+    width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(32, 45, 97, 0.18);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+}
+
+.leaders-guide-modal-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #202d61;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+
+.leaders-guide-modal-close:hover {
+    opacity: 0.8;
+}
+
+.leaders-guide-modal-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 400px;
+}
+
+.leaders-guide-modal-image {
+    width: 50%;
+    min-width: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    overflow: hidden;
+    background: #f5f7fa;
+}
+
+.leaders-guide-modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.leaders-guide-modal-text {
+    width: 50%;
+    padding: 2.5rem 2rem 2rem 2rem;
+    color: #202d61;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: inherit;
+    text-align: right;
+}
+
+.leaders-guide-modal-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    color: #202d61;
+    text-align: right;
+}
+
+.leaders-guide-modal-desc {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #202d61;
+    text-align: right;
+}
+
+.leaders-guide-modal-section {
+    margin-bottom: 1.2rem;
+}
+
+.leaders-guide-modal-subtitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #202d61;
+    text-align: right;
+}
+
+.leaders-guide-modal-list {
+    list-style: disc inside;
+    padding-right: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #202d61;
+    text-align: right;
+}
+
+.leaders-guide-modal-list li {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: #202d61;
+    line-height: 1.7;
+}
+
+.leaders-guide-english {
+    font-weight: bold;
+    color: #EE161F;
+    font-family: inherit;
+    direction: ltr;
+    display: inline;
+}
+
+@media (max-width: 900px) {
+    .leaders-guide-modal {
+        flex-direction: column;
+        max-width: 98vw;
+        min-width: 0;
+    }
+
+    .leaders-guide-modal-content {
+        flex-direction: column;
+    }
+
+    .leaders-guide-modal-image,
+    .leaders-guide-modal-text {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .leaders-guide-modal-image {
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        border-bottom-left-radius: 0;
+        height: 220px;
+        min-height: 180px;
+    }
+
+    .leaders-guide-modal-text {
+        padding: 1.5rem 1rem 1rem 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .leaders-guide-modal-title {
+        font-size: 1.3rem;
+    }
+
+    .leaders-guide-modal-text {
+        padding: 1rem 0.5rem 0.5rem 0.5rem;
+    }
+
+    .leaders-guide-modal-image {
+        height: 120px;
+        min-height: 80px;
     }
 }
