@@ -12,7 +12,7 @@
 .about-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgb(32, 45, 97, 0.7);
 }
 
 .about-container {
@@ -37,12 +37,12 @@
 
 .about-box {
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     border-radius: 1rem;
     padding: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     transition: box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -232,9 +232,11 @@
 }
 
 .about-additional {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     padding: 2rem;
     margin-bottom: 4rem;
 }
