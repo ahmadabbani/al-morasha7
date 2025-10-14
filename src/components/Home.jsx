@@ -25,7 +25,7 @@ const Home = () => {
           >
             <h1 className="home-title">
               <span className="home-highlight">برنامج Al Mourachah </span>
-              الشريك االستراتيجي للمرشحين إلى االنتخابات النيابية 2026
+              الشريك الاستراتيجي للمرشحين إلى الانتخابات النيابية 2026
             </h1>
             <p className="home-description">
               برنامج المرشح/ة يشكل المنصّة المتكاملة المصمّمة خصيصًا لدعم
