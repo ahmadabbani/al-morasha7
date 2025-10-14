@@ -9,6 +9,7 @@ import Blogs from "./Blogs";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import WeAre from "./WeAre";
+import Team from "./Team";
 
 const Home = () => {
   return (
@@ -23,16 +24,14 @@ const Home = () => {
             className="home-content"
           >
             <h1 className="home-title">
-              <span className="home-highlight">المرشح/ة</span> البرنامج الشامل
-              لتحضيركم للإنتخابات البلدية والاختيارية
+              <span className="home-highlight">برنامج Al Mourachah </span>
+              الشريك االستراتيجي للمرشحين إلى االنتخابات النيابية 2026
             </h1>
             <p className="home-description">
-              هل تفكّرون في الترشّح للانتخابات البلدية والاختيارية؟
-              <br />
-              هل تبحثون عن برنامج شامل يزوّدكم بكل ما تحتاجونه على مستوى المعرفة
-              القانونية، القيادة السياسية، التخطيط السياسي والإستراتيجي؟ <br />{" "}
-              برنامج "المرشّح/ة" هو المرجع الذي يضمن لكم الجهوزية الكاملة لخوض
-              الانتخابات بثقة وقوّة.
+              برنامج المرشح/ة يشكل المنصّة المتكاملة المصمّمة خصيصًا لدعم
+              المرشحين إلى الانتخابات النيابية ٢٠٢٦ في لبنان. هدفنا ليس فقط أن
+              نخوض معكم حملة انتخابية ناجحة، بل أن نبني معًا مسيرة قيادية طويلة
+              الأمد تضعكم في الصفوف الأولى للعمل السياسي.
             </p>
             <Link to="/register">
               <button className="home-button">سجل/ي الآن</button>
@@ -45,8 +44,10 @@ const Home = () => {
       <HomeBoxes />
       <About />
       <WeAre />
-      <LeadersGuide />
-      <Blogs />
+      {/*<LeadersGuide />*/}
+
+      {/*<Blogs />*/}
+      <Team />
       <ContactUs />
       <Footer />
     </div>

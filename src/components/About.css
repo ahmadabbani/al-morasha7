@@ -283,6 +283,7 @@
 }
 
 .about-cta-link {
+    display: inline-block;
     background: #1ea81e;
     color: white;
     border: 2px solid #1ea81e;
@@ -305,6 +306,12 @@
 .check-icon {
     margin-left: 8px;
     color: #FFFFFF;
+}
+
+@media (max-width: 992px) {
+    .about-cta-link {
+        margin-top: 0.65rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -333,10 +340,9 @@
 @media (max-width: 440px) {
     .about-cta-link {
         display: block;
-        margin-top: 0.7rem;
-        padding: 4px 16px;
+        padding: 6px 16px;
         font-size: 1rem;
-        width: 50%;
+        width: 70%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -344,6 +350,6 @@
 
 @media (max-width: 385px) {
     .about-cta-link {
-        width: 65%;
+        width: 85%;
     }
 }

@@ -95,6 +95,23 @@ const Footer = () => {
               <li>
                 {location.pathname === "/" ? (
                   <ScrollLink
+                    to="team"
+                    smooth={true}
+                    duration={0}
+                    offset={-70}
+                    className="footer-link"
+                  >
+                    فريق العمل
+                  </ScrollLink>
+                ) : (
+                  <Link to="/" className="footer-link">
+                    فريق العمل
+                  </Link>
+                )}
+              </li>
+              {/* <li>
+                {location.pathname === "/" ? (
+                  <ScrollLink
                     to="blogs"
                     smooth={true}
                     duration={0}
@@ -108,7 +125,7 @@ const Footer = () => {
                     المدوّنات
                   </Link>
                 )}
-              </li>
+              </li>*/}
               <li>
                 <Link to="/register" className="footer-link footer-register">
                   تسجيل جديد

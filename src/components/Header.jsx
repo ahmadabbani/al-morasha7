@@ -145,7 +145,7 @@ const Header = () => {
               >
                 من نحن
               </ScrollLink>
-              <ScrollLink
+              {/* <ScrollLink
                 to="leaders-guide"
                 offset={-70}
                 smooth={true}
@@ -154,8 +154,18 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 قادة البلديات
-              </ScrollLink>
+              </ScrollLink>*/}
               <ScrollLink
+                to="team"
+                offset={-70}
+                smooth={true}
+                duration={0}
+                className="header-nav-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                فريق العمل{" "}
+              </ScrollLink>
+              {/* <ScrollLink
                 to="blogs"
                 offset={-70}
                 smooth={true}
@@ -164,7 +174,7 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 المدوّنات
-              </ScrollLink>
+              </ScrollLink> */}
               <ScrollLink
                 to="contact"
                 offset={-70}

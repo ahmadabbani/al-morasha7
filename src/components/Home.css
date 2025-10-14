@@ -28,11 +28,11 @@
 }
 
 .home-title {
-    color: white;
+    color: #e0e0e0;
     font-size: 2.8rem;
     width: 100%;
     margin-bottom: 1.5rem;
-    line-height: 1.2;
+    line-height: 1.4;
 }
 
 .home-highlight {
@@ -41,7 +41,8 @@
     font-weight: 900;
     display: block;
     margin-bottom: 0.75rem;
-    color: #e0e0e0;
+    color: white;
+    line-height: 1.4;
 }
 
 .home-description {
@@ -98,6 +99,12 @@
     .home-button {
         padding: 8px 20px;
         font-size: 1rem;
+    }
+}
+
+@media (max-width: 580px) {
+    .home-highlight {
+        line-height: 1.15;
     }
 }
 
