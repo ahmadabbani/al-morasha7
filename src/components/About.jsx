@@ -353,7 +353,7 @@ const About = () => {
                     اللازمة للنجاح.
                   </p>
                   <img
-                    src="/images/political-leadership.JPG"
+                    src="/images/political-l.jpg"
                     alt="Political Leadership"
                     className="about-modal-image"
                   />
