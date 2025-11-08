@@ -324,8 +324,8 @@
 
 @media (max-width: 580px) {
     .team-card-description-wrapper {
-        flex-direction: column;
-        gap: 0;
+        flex-direction: column-reverse;
+        gap: 10px;
     }
 
     .team-card-description:first-child {
